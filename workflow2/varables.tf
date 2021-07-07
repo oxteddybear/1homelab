@@ -47,6 +47,7 @@ variable "mgt_network" {
 variable "vm_names" {
 default = {
   "template-esxi001" = 101
+  "template-esxi002" = 102
   
   
   

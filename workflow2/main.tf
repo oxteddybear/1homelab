@@ -38,16 +38,21 @@ data "vsphere_network" "workload_network" {
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
 
-data "vsphere_virtual_machine" "source_template" {
-  name          = var.guest_template
+
+
+
+resource "vsphere_virtual_machine" "vesxi" {
+
+  for_each = var.vm_names
+  name = each.key
+
+  data "vsphere_virtual_machine" "source_template" {
+  name          = each.key
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
 
 
 
-resource "vsphere_virtual_machine" "vesxi" {
-  for_each = var.vm_names
-  name = each.key
   datastore_id     = data.vsphere_datastore.target_datastore.id
   folder           = var.vsphere_folder
   resource_pool_id = data.vsphere_compute_cluster.target_cluster.resource_pool_id
@@ -61,41 +66,15 @@ resource "vsphere_virtual_machine" "vesxi" {
   scsi_type = data.vsphere_virtual_machine.source_template.scsi_type
 
 
-  # First interface will be in MGMT port group
-  network_interface {
-    network_id   = data.vsphere_network.mgt_network.id
-    
-  }
-  
- network_interface {
-    network_id   = data.vsphere_network.mgt_network.id
-    
-  }
-  network_interface {
-    network_id   = data.vsphere_network.iscsi_network1.id
-    
-  }
-  network_interface {
-    network_id   = data.vsphere_network.iscsi_network2.id
-    
-  }
-    network_interface {
-    network_id   = data.vsphere_network.workload_network.id
-    
-  }
-  network_interface {
-    network_id   = data.vsphere_network.workload_network.id
-    
-  }
  
- network_interface {
-    network_id   = data.vsphere_network.workload_network.id
-    
-  }
-  network_interface {
-    network_id   = data.vsphere_network.workload_network.id
-    
-  }
+  network_interface {    network_id   = data.vsphere_network.mgt_network.id       }
+  network_interface {    network_id   = data.vsphere_network.mgt_network.id       }
+  network_interface {    network_id   = data.vsphere_network.iscsi_network1.id    }
+  network_interface {    network_id   = data.vsphere_network.iscsi_network2.id    }
+  network_interface {    network_id   = data.vsphere_network.workload_network.id  }
+  network_interface {    network_id   = data.vsphere_network.workload_network.id  }
+  network_interface {    network_id   = data.vsphere_network.workload_network.id  }
+  network_interface {    network_id   = data.vsphere_network.workload_network.id  }
  
   disk {
     label            = "disk0"
