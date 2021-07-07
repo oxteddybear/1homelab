@@ -38,18 +38,31 @@ data "vsphere_network" "workload_network" {
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
 
-data "vsphere_virtual_machine" "source_template" {
-  name          = var.guest_template
+data "vsphere_virtual_machine" "source_template1" {
+  name          = var.guest_template1
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
 
-variable "template_uuid1" { description = "a"}
-variable "template_uuid2" { description = "b"}
-variable "template_uuid3" { description = "v"}
+data "vsphere_virtual_machine" "source_template2" {
+  name          = var.guest_template2
+  datacenter_id = data.vsphere_datacenter.target_dc.id
+}
+data "vsphere_virtual_machine" "source_template3" {
+  name          = var.guest_template3
+  datacenter_id = data.vsphere_datacenter.target_dc.id
+}
 
-var.template_uuid1 = data.vsphere_virtual_machine.source_template1.id
-var.template_uuid2 = data.vsphere_virtual_machine.source_template2.id
-var.template_uuid3 = data.vsphere_virtual_machine.source_template3.id
+variable "template_uuid1" {
+  default = data.vsphere_virtual_machine.source_template1.id
+}
+
+variable "template_uuid2" {
+  default = data.vsphere_virtual_machine.source_template2.id
+}
+
+variable "template_uuid3" {
+  default = data.vsphere_virtual_machine.source_template3.id
+}
 
 
 
@@ -84,7 +97,7 @@ resource "vsphere_virtual_machine" "vesxi" {
   }
   
   clone {
-    template_uuid = data.vsphere_virtual_machine.source_template.id
+    template_uuid = var.template_uuid1
     timeout = 120     
   
   }
