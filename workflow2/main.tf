@@ -114,8 +114,30 @@ provisioner "remote-exec" {
     inline = ["esxcli system hostname set -H=${each.key} -d=${var.guest_domain}",
     "esxcli network ip dns server add --server=${var.guest_dns}",
     "echo server ${var.guest_ntp} > /etc/ntp.conf && /etc/init.d/ntpd start",
-    "esxcli network vswitch standard uplink add --uplink-name=vmnic1 --vswitch-name=vSwitch0",
-    "esxcli network ip interface ipv4 set -i vmk0 -t static -g ${var.guest_gateway} -I ${var.guest_start_ip}${each.value} -N ${var.guest_netmask} ",
+    "esxcli network vswitch standard add -v vSwitch1",
+    "esxcli network vswitch standard uplink add --uplink-name=vmnic2 --vswitch-name=vSwitch1",
+    "esxcli network vswitch standard set -m 9000 -v vSwitch1",
+
+    "esxcli network vswitch standard add -v vSwitch2",
+    "esxcli network vswitch standard uplink add --uplink-name=vmnic3 --vswitch-name=vSwitch2",
+    "esxcli network vswitch standard set -m 9000 -v vSwitch2",
+    
+    "esxcli network vswitch standard portgroup add --portgroup-name=iscsi1 --vswitch-name=vSwitch1",
+    "esxcli network vswitch standard portgroup set --portgroup-name=iscsi1 --vlan-id=0",
+    "esxcli network ip interface add -p iscsi1 -i vmk1 -m 9000",
+
+    "esxcli network vswitch standard portgroup add --portgroup-name=iscsi2 --vswitch-name=vSwitch2",
+    "esxcli network vswitch standard portgroup set --portgroup-name=iscsi2 --vlan-id=0",
+    "esxcli network ip interface add -p iscsi2 -i vmk1 -m 9000",
+
+    "esxcli network ip interface ipv4 set -i vmk0 -t static -g ${var.guest_gateway} -I ${var.guest_start_ip}${each.value} -N ${var.guest_netmask}",
+
+    "esxcli iscsi software set --enabled=true",
+
+    "esxcli iscsi networkportal add -n vmk1 -A vmhba65",
+    "esxcli iscsi networkportal add -n vmk2 -A vmhba65",
+    "esxcli iscsi adapter discovery sendtarget add -a 10.10.8.176:3260 -A vmhba65 | esxcli iscsi adapter discovery sendtarget add -a 10.10.9.177:3260 -A vmhba65",
+    "esxcli iscsi adapter discovery rediscover"
     ]
 }
 
