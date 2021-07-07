@@ -38,21 +38,16 @@ data "vsphere_network" "workload_network" {
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
 
-
-
-
-resource "vsphere_virtual_machine" "vesxi" {
-
-  for_each = var.vm_names
-  name = each.key
-
-  data "vsphere_virtual_machine" "source_template" {
-  name          = each.key
+data "vsphere_virtual_machine" "source_template" {
+  name          = var.guest_template
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
 
 
 
+resource "vsphere_virtual_machine" "vesxi" {
+  for_each = var.vm_names
+  name = each.key
   datastore_id     = data.vsphere_datastore.target_datastore.id
   folder           = var.vsphere_folder
   resource_pool_id = data.vsphere_compute_cluster.target_cluster.resource_pool_id
@@ -60,12 +55,10 @@ resource "vsphere_virtual_machine" "vesxi" {
   memory   = var.guest_memory
   nested_hv_enabled = "true"
   wait_for_guest_net_routable ="false"
-  guest_id = data.vsphere_virtual_machine.source_template.guest_id
+  #guest_id = data.vsphere_virtual_machine.source_template.guest_id
   wait_for_guest_net_timeout = 35
   wait_for_guest_ip_timeout = 35
   scsi_type = data.vsphere_virtual_machine.source_template.scsi_type
-
-
  
   network_interface {    network_id   = data.vsphere_network.mgt_network.id       }
   network_interface {    network_id   = data.vsphere_network.mgt_network.id       }
@@ -82,12 +75,11 @@ resource "vsphere_virtual_machine" "vesxi" {
     thin_provisioned = true
   }
   
-
-  # clone {
-  #   template_uuid = data.vsphere_virtual_machine.source_template.id
-  #   timeout = 120     
+  clone {
+    template_uuid = data.vsphere_virtual_machine.source_template.id
+    timeout = 120     
   
-  # }
+  }
 
 provisioner "remote-exec" {
     inline = ["esxcli system hostname set -H=${each.key} -d=${var.guest_domain}",
