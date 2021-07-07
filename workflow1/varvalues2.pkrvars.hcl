@@ -21,6 +21,6 @@ guest_password          = "VMware1!"
 ssh_timeout             = "15m"
 nfs_server_path         = "192.168.254.123/ks/ks.cfg"
 iso_file_path           = "7.02a.iso"
-
+vm_disk_controller      = "pvscsi"
 
 
