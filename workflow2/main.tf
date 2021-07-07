@@ -104,11 +104,11 @@ resource "vsphere_virtual_machine" "vesxi" {
   }
   
 
-  # clone {
-  #   template_uuid = data.vsphere_virtual_machine.source_template.id
-  #   timeout = 120     
+  clone {
+    template_uuid = data.vsphere_virtual_machine.source_template.id
+    timeout = 120     
   
-  # }
+  }
 
 provisioner "remote-exec" {
     inline = ["esxcli system hostname set -H=${each.key} -d=${var.guest_domain}",
