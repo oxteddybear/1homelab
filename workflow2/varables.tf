@@ -3,10 +3,21 @@ variable "vsphere_server" {
   description = "vCenter FQDN/IP "
 }
 
-variable "guest_template" {
+
+variable "template1" {
   description = "vsphere template"
   default = "template-esxi001"
 }
+
+variable "template2" {
+  default = "template-esxi002"
+}
+variable "template3" {
+  default = "template-esxi003"
+}
+
+
+
 variable "vsphere_user" {
   description = "vSphere username"
 }

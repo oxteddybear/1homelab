@@ -38,31 +38,23 @@ data "vsphere_network" "workload_network" {
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
 
-data "vsphere_virtual_machine" "source_template1" {
-  name          = var.guest_template1
+#update the below data sources for as many as you need. 
+data "vsphere_virtual_machine" "template1" {
+  name          = var.template1
+  datacenter_id = data.vsphere_datacenter.target_dc.id
+}
+data "vsphere_virtual_machine" "template2" {
+  name          = var.template2
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
 
-data "vsphere_virtual_machine" "source_template2" {
-  name          = var.guest_template2
-  datacenter_id = data.vsphere_datacenter.target_dc.id
-}
-data "vsphere_virtual_machine" "source_template3" {
-  name          = var.guest_template3
+
+data "vsphere_virtual_machine" "template3" {
+  name          = var.template3
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
 
-variable "template_uuid1" {
-  default = data.vsphere_virtual_machine.source_template1.id
-}
 
-variable "template_uuid2" {
-  default = data.vsphere_virtual_machine.source_template2.id
-}
-
-variable "template_uuid3" {
-  default = data.vsphere_virtual_machine.source_template3.id
-}
 
 
 
@@ -97,7 +89,7 @@ resource "vsphere_virtual_machine" "vesxi" {
   }
   
   clone {
-    template_uuid = var.template_uuid1
+    template_uuid = data.vsphere_virtual_machine.template1.id
     timeout = 120     
   
   }
