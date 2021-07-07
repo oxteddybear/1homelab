@@ -43,6 +43,10 @@ data "vsphere_virtual_machine" "source_template" {
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
 
+template_uuid1 = data.vsphere_virtual_machine.source_template1.id
+template_uuid2 = data.vsphere_virtual_machine.source_template2.id
+template_uuid3 = data.vsphere_virtual_machine.source_template3.id
+
 
 
 resource "vsphere_virtual_machine" "vesxi" {
@@ -58,7 +62,7 @@ resource "vsphere_virtual_machine" "vesxi" {
   guest_id = "vmkernel7Guest"
   wait_for_guest_net_timeout = 35
   wait_for_guest_ip_timeout = 35
-  scsi_type = data.vsphere_virtual_machine.source_template.scsi_type
+  scsi_type = "pvscsi"
  
   network_interface {    network_id   = data.vsphere_network.mgt_network.id       }
   network_interface {    network_id   = data.vsphere_network.mgt_network.id       }
