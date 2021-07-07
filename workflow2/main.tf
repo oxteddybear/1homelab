@@ -104,11 +104,11 @@ resource "vsphere_virtual_machine" "vesxi" {
   }
   
 
-  clone {
-    template_uuid = data.vsphere_virtual_machine.source_template.id
-    timeout = 120     
+  # clone {
+  #   template_uuid = data.vsphere_virtual_machine.source_template.id
+  #   timeout = 120     
   
-  }
+  # }
 
 provisioner "remote-exec" {
     inline = ["esxcli system hostname set -H=${each.key} -d=${var.guest_domain}",
@@ -137,7 +137,7 @@ provisioner "remote-exec" {
     "esxcli iscsi networkportal add -n vmk1 -A vmhba65",
     "esxcli iscsi networkportal add -n vmk2 -A vmhba65",
     "esxcli iscsi adapter discovery sendtarget add -a 10.10.8.176:3260 -A vmhba65 | esxcli iscsi adapter discovery sendtarget add -a 10.10.9.177:3260 -A vmhba65",
-    #"esxcli iscsi adapter discovery rediscover"
+    "esxcli iscsi adapter discovery rediscover"
     ]
 }
 

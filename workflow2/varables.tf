@@ -47,8 +47,8 @@ variable "mgt_network" {
 variable "vm_names" {
 default = {
   "cpf-esxi7.02a-101" = 101
-  "cpf-esxi7.02a-102" = 102
-  "cpf-esxi7.02a-103" = 103
+  
+  
   
 
 }
