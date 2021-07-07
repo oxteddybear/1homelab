@@ -47,7 +47,7 @@ resource "vsphere_virtual_machine" "vesxi" {
   name = each.key
 
   data "vsphere_virtual_machine" "source_template" {
-  name          = ${each.key}
+  name          = each.key
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
 
