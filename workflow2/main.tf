@@ -64,37 +64,37 @@ resource "vsphere_virtual_machine" "vesxi" {
   # First interface will be in MGMT port group
   network_interface {
     network_id   = data.vsphere_network.mgt_network.id
-    adapter_type = data.vsphere_virtual_machine.source_template.network_interface_types[0]
+    
   }
   
  network_interface {
     network_id   = data.vsphere_network.mgt_network.id
-    adapter_type = data.vsphere_virtual_machine.source_template.network_interface_types[0]
+    
   }
   network_interface {
     network_id   = data.vsphere_network.iscsi_network1.id
-    adapter_type = data.vsphere_virtual_machine.source_template.network_interface_types[0]
+    
   }
   network_interface {
     network_id   = data.vsphere_network.iscsi_network2.id
-    adapter_type = data.vsphere_virtual_machine.source_template.network_interface_types[0]
+    
   }
     network_interface {
     network_id   = data.vsphere_network.workload_network.id
-    adapter_type = data.vsphere_virtual_machine.source_template.network_interface_types[0]
+    
   }
   network_interface {
     network_id   = data.vsphere_network.workload_network.id
-    adapter_type = data.vsphere_virtual_machine.source_template.network_interface_types[0]
+    
   }
  
  network_interface {
     network_id   = data.vsphere_network.workload_network.id
-    adapter_type = data.vsphere_virtual_machine.source_template.network_interface_types[0]
+    
   }
   network_interface {
     network_id   = data.vsphere_network.workload_network.id
-    adapter_type = data.vsphere_virtual_machine.source_template.network_interface_types[0]
+    
   }
  
   disk {
