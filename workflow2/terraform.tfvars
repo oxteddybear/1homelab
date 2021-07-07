@@ -8,10 +8,7 @@ vsphere_datacenter = "dc1"
 vsphere_cluster = "NSXT-EDGECLUSTER"
 vsphere_datastore = "iscsi108"
 vsphere_folder = "/"
-guest_template1 = "template-esxi001"
-guest_template2 = "template-esxi002"
-guest_template3 = "template-esxi003"
-guest_template4 = "template-esxi004"
+guest_template = "template-esxi001"
 # MGMT network to connect first network adapter of the VM
 mgt_network = "VM Network"
 # Network to connect rest of the adapters. By default it will be trunked port group
