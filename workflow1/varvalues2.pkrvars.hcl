@@ -24,3 +24,4 @@ iso_file_path           = "7.02a.iso"
 vm_disk_controller      = "pvscsi"
 
 
+guest_template          = "template-esxi001"
