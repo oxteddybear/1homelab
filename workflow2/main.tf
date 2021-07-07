@@ -43,9 +43,9 @@ data "vsphere_virtual_machine" "source_template" {
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
 
-variable "template_uuid1" { description = ""}
-variable "template_uuid2" { description = ""}
-variable "template_uuid3" { description = ""}
+variable "template_uuid1" { description = "a"}
+variable "template_uuid2" { description = "b"}
+variable "template_uuid3" { description = "v"}
 
 var.template_uuid1 = data.vsphere_virtual_machine.source_template1.id
 var.template_uuid2 = data.vsphere_virtual_machine.source_template2.id
