@@ -38,7 +38,7 @@ data "vsphere_network" "workload_network" {
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
 
-#query the below data sources for as many as templates as you needj
+##001add to below data resource for as many as templates have defined in var.template
 data "vsphere_virtual_machine" "template0" {
   name          = var.template.name[0]
   datacenter_id = data.vsphere_datacenter.target_dc.id
@@ -48,19 +48,7 @@ data "vsphere_virtual_machine" "template1" {
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
 
-# data "vsphere_virtual_machine" "template3" {
-#   name          = var.template3
-#   datacenter_id = data.vsphere_datacenter.target_dc.id
-# }
-  # variable "template" {
-  #   type               = list (string)
-  #   default = ["template-esxi001", "template-esxi002"]
-  # }
-
-  # data "vsphere_virtual_machine" "template" {
-  #   count = lengthe(var.template)
-  # }
-
+#then add all the data resources from ##001 to the local variable
 locals {
   uuids = [
     data.vsphere_virtual_machine.template0.id,
@@ -130,10 +118,6 @@ provisioner "remote-exec" {
 
     "esxcli iscsi software set --enabled=true",
 
-    "esxcli iscsi networkportal add -n vmk1 -A vmhba65",
-    "esxcli iscsi networkportal add -n vmk2 -A vmhba65",
-    "esxcli iscsi adapter discovery sendtarget add -a 10.10.8.176:3260 -A vmhba65 | esxcli iscsi adapter discovery sendtarget add -a 10.10.9.177:3260 -A vmhba65",
-    "esxcli iscsi adapter discovery rediscover"
     ]
 }
 
