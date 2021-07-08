@@ -64,7 +64,7 @@ data "vsphere_virtual_machine" "template1" {
 locals {
   uuids = [
     data.vsphere_virtual_machine.template0.id,
-    data.vsphere.virtual_machine.template1.id
+    data.vsphere_virtual_machine.template1.id
   ]
 
   }
