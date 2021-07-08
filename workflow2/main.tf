@@ -62,7 +62,7 @@ data "vsphere_virtual_machine" "template0" {
 
 resource "vsphere_virtual_machine" "vesxi" {
   count = length(var.template)
-  name = split("-",var.template[count.index]) #take a subset of the template name as new vm name
+  name = substr(var.template[count.index],9,6) #take a subset of the template name as new vm name## substr(string, offset, length)
   datastore_id     = data.vsphere_datastore.target_datastore.id
   folder           = var.vsphere_folder
   resource_pool_id = data.vsphere_compute_cluster.target_cluster.resource_pool_id
