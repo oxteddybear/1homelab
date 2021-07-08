@@ -106,15 +106,16 @@ provisioner "remote-exec" {
     "esxcli network vswitch standard set -m 9000 -v vSwitch2",
     
     "esxcli network vswitch standard portgroup add --portgroup-name=iscsi1 --vswitch-name=vSwitch1",
-    "esxcli network vswitch standard portgroup set --portgroup-name=iscsi1 --vlan-id=0",
+    #"esxcli network vswitch standard portgroup set --portgroup-name=iscsi1 --vlan-id=0",
     "esxcli network ip interface add -p iscsi1 -i vmk1 -m 9000",
 
     "esxcli network vswitch standard portgroup add --portgroup-name=iscsi2 --vswitch-name=vSwitch2",
-    "esxcli network vswitch standard portgroup set --portgroup-name=iscsi2 --vlan-id=0",
-    "esxcli network ip interface add -p iscsi2 -i vmk1 -m 9000",
+    #"esxcli network vswitch standard portgroup set --portgroup-name=iscsi2 --vlan-id=0",
+    "esxcli network ip interface add -p iscsi2 -i vmk2 -m 9000",
 
     "esxcli network ip interface ipv4 set -i vmk0 -t static -g ${var.guest_gateway} -I ${var.guest_start_ip}${var.template.octet[count.index]} -N ${var.guest_netmask}",
-
+    "esxcli network ip interface ipv4 set -i vmk1 -t static -I ${var.guest_start_ip1}${var.template.octet[count.index]} -N ${var.guest_netmask}",
+    "esxcli network ip interface ipv4 set -i vmk2 -t static -I ${var.guest_start_ip2}${var.template.octet[count.index]} -N ${var.guest_netmask}",
     "esxcli iscsi software set --enabled=true",
 
     "esxcli iscsi networkportal add -n vmk1 -A vmhba65",
