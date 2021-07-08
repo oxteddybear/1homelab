@@ -136,5 +136,7 @@ connection  {
 
    }
 
-output created_vm = {vsphere_virtual_machine.vesxi[*]}
+output created_vm = {
+  value = vsphere_virtual_machine.vesxi[*]
+  }
   
