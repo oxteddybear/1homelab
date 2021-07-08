@@ -44,6 +44,7 @@ variable "mgt_network" {
 variable "template" {
 default = {
   #the type is a map of lists take note of the brackets []=list {}=map=key/value pairs
+  #to access the values: var.variablename.key[index] eg. var.template.octet[0] give you 101
   "name" = [
   "template-esxi001", 
   "template-esxi002"

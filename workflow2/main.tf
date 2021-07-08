@@ -38,7 +38,7 @@ data "vsphere_network" "workload_network" {
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
 
-#update the below data sources for as many as you need. 
+#query the below data sources for as many as templates as you needj
 data "vsphere_virtual_machine" "template0" {
   name          = var.template.name[0]
   datacenter_id = data.vsphere_datacenter.target_dc.id
@@ -136,5 +136,5 @@ connection  {
 
    }
 
-
+output created_vm = {vsphere_virtual_machine.vesxi[*]}
   
