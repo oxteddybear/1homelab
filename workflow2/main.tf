@@ -39,14 +39,10 @@ data "vsphere_network" "workload_network" {
 }
 
 #update the below data sources for as many as you need. 
-data "vsphere_virtual_machine" "template1" {
-  name          = var.template1
-  datacenter_id = data.vsphere_datacenter.target_dc.id
-}
-data "vsphere_virtual_machine" "template2" {
-  name          = var.template2
-  datacenter_id = data.vsphere_datacenter.target_dc.id
-}
+# data "vsphere_virtual_machine" "template" {
+#   name          = var.template[0]
+#   datacenter_id = data.vsphere_datacenter.target_dc.id
+# }
 
 # data "vsphere_virtual_machine" "template3" {
 #   name          = var.template3
