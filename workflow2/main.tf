@@ -61,9 +61,9 @@ data "vsphere_virtual_machine" "template1" {
   #   count = lengthe(var.template)
   # }
 
-variable "test" {
+locals {
   uuids = [
-    data.vsphere_virtual_machine.template0.id,
+    data.vsphere_virtual_machine.template0.id
     data.vsphere.virtual_machine.template1.id
   ]
 
