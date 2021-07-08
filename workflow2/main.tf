@@ -40,7 +40,7 @@ data "vsphere_network" "workload_network" {
 
 #update the below data sources for as many as you need. 
 data "vsphere_virtual_machine" "template0" {
-  name          = var.template[0].key
+  name          = var.template.name[0]
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
 
