@@ -56,7 +56,7 @@ variable "mgt_network" {
 }
 
 # Indicate VM names and value of IP address last octet . By default it will create 5 VMs 
-variable "vm_names" {
+variable "template" {
 default = {
   "template-esxi001" = 101
   "template-esxi002" = 102

@@ -48,19 +48,25 @@ data "vsphere_virtual_machine" "template2" {
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
 
-
 data "vsphere_virtual_machine" "template3" {
   name          = var.template3
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
+  # variable "template" {
+  #   type               = list (string)
+  #   default = ["template-esxi001", "template-esxi002"]
+  # }
 
+  # data "vsphere_virtual_machine" "template" {
+  #   count = lengthe(var.template)
+  # }
 
 
 
 
 resource "vsphere_virtual_machine" "vesxi" {
-  for_each = var.vm_names
-  name = each.key
+  count = length(var.template)
+  name = split("-",var.template[count.index]) #take a subset of the template name as new vm name
   datastore_id     = data.vsphere_datastore.target_datastore.id
   folder           = var.vsphere_folder
   resource_pool_id = data.vsphere_compute_cluster.target_cluster.resource_pool_id
@@ -87,7 +93,7 @@ resource "vsphere_virtual_machine" "vesxi" {
     size             = var.guest_disk0_size
     thin_provisioned = true
   }
-  
+  #figure the below out later
   clone {
     template_uuid = data.vsphere_virtual_machine.template1.id
     timeout = 120     
@@ -95,7 +101,7 @@ resource "vsphere_virtual_machine" "vesxi" {
   }
 
 provisioner "remote-exec" {
-    inline = ["esxcli system hostname set -H=${each.key} -d=${var.guest_domain}",
+    inline = ["esxcli system hostname set -H=${var.template[count.index].key} -d=${var.guest_domain}",
     "esxcli network ip dns server add --server=${var.guest_dns}",
     "echo server ${var.guest_ntp} > /etc/ntp.conf && /etc/init.d/ntpd start",
     "esxcli network vswitch standard add -v vSwitch1",
@@ -114,7 +120,7 @@ provisioner "remote-exec" {
     "esxcli network vswitch standard portgroup set --portgroup-name=iscsi2 --vlan-id=0",
     "esxcli network ip interface add -p iscsi2 -i vmk1 -m 9000",
 
-    "esxcli network ip interface ipv4 set -i vmk0 -t static -g ${var.guest_gateway} -I ${var.guest_start_ip}${each.value} -N ${var.guest_netmask}",
+    "esxcli network ip interface ipv4 set -i vmk0 -t static -g ${var.guest_gateway} -I ${var.guest_start_ip}${var.template[count.index]}.value -N ${var.guest_netmask}",
 
     "esxcli iscsi software set --enabled=true",
 
