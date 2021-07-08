@@ -62,13 +62,13 @@ data "vsphere_virtual_machine" "template1" {
   # }
 
 variable "test" {
-  default = {
-    "uuids" = [
-        data.vsphere_virtual_machine.template0.id,
-        data.vsphere.virtual_machine.template1.id
-          ]
-    }
+  uuids = [
+    data.vsphere_virtual_machine.template0.id,
+    data.vsphere.virtual_machine.template1.id
+  ]
+
   }
+
 
 resource "vsphere_virtual_machine" "vesxi" {
   count = length(var.template)
