@@ -39,10 +39,10 @@ data "vsphere_network" "workload_network" {
 }
 
 #update the below data sources for as many as you need. 
-# data "vsphere_virtual_machine" "template" {
-#   name          = var.template[0]
-#   datacenter_id = data.vsphere_datacenter.target_dc.id
-# }
+data "vsphere_virtual_machine" "template0" {
+  name          = var.template[0].key
+  datacenter_id = data.vsphere_datacenter.target_dc.id
+}
 
 # data "vsphere_virtual_machine" "template3" {
 #   name          = var.template3
@@ -91,7 +91,7 @@ resource "vsphere_virtual_machine" "vesxi" {
   }
   #figure the below out later
   clone {
-    template_uuid = data.vsphere_virtual_machine.template1.id
+    template_uuid = data.vsphere_virtual_machine.template0.id
     timeout = 120     
   
   }
