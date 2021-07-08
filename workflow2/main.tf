@@ -107,7 +107,7 @@ resource "vsphere_virtual_machine" "vesxi" {
   }
 
 provisioner "remote-exec" {
-    inline = ["esxcli system hostname set -H=${var.template[count.index].key} -d=${var.guest_domain}",
+    inline = ["esxcli system hostname set -H=${var.template.octet[count.index]} -d=${var.guest_domain}",
     "esxcli network ip dns server add --server=${var.guest_dns}",
     "echo server ${var.guest_ntp} > /etc/ntp.conf && /etc/init.d/ntpd start",
     "esxcli network vswitch standard add -v vSwitch1",
@@ -126,7 +126,7 @@ provisioner "remote-exec" {
     "esxcli network vswitch standard portgroup set --portgroup-name=iscsi2 --vlan-id=0",
     "esxcli network ip interface add -p iscsi2 -i vmk1 -m 9000",
 
-    "esxcli network ip interface ipv4 set -i vmk0 -t static -g ${var.guest_gateway} -I ${var.guest_start_ip}${var.template[count.index]}.value -N ${var.guest_netmask}",
+    "esxcli network ip interface ipv4 set -i vmk0 -t static -g ${var.guest_gateway} -I ${var.guest_start_ip}${var.template.octet[count.index]} -N ${var.guest_netmask}",
 
     "esxcli iscsi software set --enabled=true",
 
