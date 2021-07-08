@@ -43,6 +43,10 @@ data "vsphere_virtual_machine" "template0" {
   name          = var.template.name[0]
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
+data "vsphere_virtual_machine" "template1" {
+  name          = var.template.name[1]
+  datacenter_id = data.vsphere_datacenter.target_dc.id
+}
 
 # data "vsphere_virtual_machine" "template3" {
 #   name          = var.template3
@@ -57,7 +61,13 @@ data "vsphere_virtual_machine" "template0" {
   #   count = lengthe(var.template)
   # }
 
+locals {
+  uuids = [
+    data.vsphere_virtual_machine.template0.id
+    data.vsphere.virtual_machine.template1.id
+  ]
 
+  }
 
 
 resource "vsphere_virtual_machine" "vesxi" {
