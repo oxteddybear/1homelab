@@ -101,7 +101,7 @@ resource "vsphere_virtual_machine" "vesxi" {
   }
   #figure the below out later
   clone {
-    template_uuid = data.vsphere_virtual_machine.template0.id
+    template_uuid = local.uuids[count.index]
     timeout = 120     
   
   }
