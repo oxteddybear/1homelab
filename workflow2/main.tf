@@ -86,8 +86,9 @@ resource "vsphere_virtual_machine" "vesxi" {
     size             = var.guest_disk0_size
     thin_provisioned = true
   }
-  #figure the below out later
-  clone {
+  #figure the below out later! 
+  #haha figured it out. use the locals block to index the data resouce as an map of list. ie. an array
+    clone {
     template_uuid = local.uuids[count.index]
     timeout = 120     
   
@@ -112,6 +113,7 @@ provisioner "remote-exec" {
     "esxcli network vswitch standard portgroup add --portgroup-name=iscsi2 --vswitch-name=vSwitch2",
     #"esxcli network vswitch standard portgroup set --portgroup-name=iscsi2 --vlan-id=0",
     "esxcli network ip interface add -p iscsi2 -i vmk2 -m 9000",
+    "esxcli network ip interface tag add -i vmk2 -t VMotion",
 
     "esxcli network ip interface ipv4 set -i vmk0 -t static -g ${var.guest_gateway} -I ${var.guest_start_ip}${var.template.octet[count.index]} -N ${var.guest_netmask}",
     "esxcli network ip interface ipv4 set -i vmk1 -t static -I ${var.guest_start_ip1}${var.template.octet[count.index]} -N ${var.guest_netmask}",
