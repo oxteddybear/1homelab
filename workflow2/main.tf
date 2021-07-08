@@ -133,11 +133,12 @@ connection  {
       timeout = 15
       host  = self.guest_ip_addresses[0]
     }  
-  output created_vm = {
-  value = vsphere_virtual_machine.vesxi[*]
-  }
-  
+
 
 }
 
 
+  output created_vm  {
+  value = vsphere_virtual_machine.vesxi[*]
+  }
+  
