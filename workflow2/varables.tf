@@ -43,11 +43,15 @@ variable "mgt_network" {
 # Indicate VM names and value of IP address last octet . By default it will create 5 VMs 
 variable "template" {
 default = {
-"name" = [
+  #the type is a map of lists take note of the brackets []=list {}=map=key/value pairs
+  "name" = [
   "template-esxi001", 
   "template-esxi002"
   ]
-  "octet"=[101,102]
+  "octet"=[ 
+    101,
+    102
+    ]
   
   
   
