@@ -48,10 +48,10 @@ data "vsphere_virtual_machine" "template2" {
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
 
-data "vsphere_virtual_machine" "template3" {
-  name          = var.template3
-  datacenter_id = data.vsphere_datacenter.target_dc.id
-}
+# data "vsphere_virtual_machine" "template3" {
+#   name          = var.template3
+#   datacenter_id = data.vsphere_datacenter.target_dc.id
+# }
   # variable "template" {
   #   type               = list (string)
   #   default = ["template-esxi001", "template-esxi002"]
