@@ -148,6 +148,3 @@ connection  {
     }  
 
 }
-output created_vm  {
-value = vsphere_virtual_machine.vesxi.name[*]
-}
