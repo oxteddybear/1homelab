@@ -51,7 +51,7 @@ resource "vsphere_host" "hostmember" {
   hostname = var.addhost.name[count.index]
   username = var.esxi_user
   password = var.esxi_password
-  #thumbprint = local.fingerprint[count.index]
+  thumbprint = local.fingerprint[count.index]
   cluster = vsphere_compute_cluster.c1.id
   depends_on = [vsphere_compute_cluster.c1]
 }
