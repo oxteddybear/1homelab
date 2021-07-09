@@ -49,10 +49,15 @@ default = {
   "name" = [
   "template-esxi001", 
   "template-esxi002"
+  "template-esxi003", 
+  "template-esxi004"
+  
   ]
   "octet"=[ 
     101,
-    102
+    102,
+    103,
+    104
     ]
   
   

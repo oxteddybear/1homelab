@@ -47,11 +47,22 @@ data "vsphere_virtual_machine" "template1" {
   name          = var.template.name[1]
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
+data "vsphere_virtual_machine" "template2" {
+  name          = var.template.name[2]
+  datacenter_id = data.vsphere_datacenter.target_dc.id
+}
+data "vsphere_virtual_machine" "template3" {
+  name          = var.template.name[3]
+  datacenter_id = data.vsphere_datacenter.target_dc.id
+}
 
+# increase the number of data resource queries in locals block below to match the templates you need
 locals {
   uuids = [
     data.vsphere_virtual_machine.template0.id,
-    data.vsphere_virtual_machine.template1.id
+    data.vsphere_virtual_machine.template1.id,
+    data.vsphere_virtual_machine.template2.id,
+    data.vsphere_virtual_machine.template3.id
   ]
 
 }
@@ -67,7 +78,7 @@ resource "vsphere_virtual_machine" "vesxi" {
   memory   = var.guest_memory
   nested_hv_enabled = "true"
   wait_for_guest_net_routable ="false"
-  guest_id = "vmkernel7Guest"
+  guest_id = "vmkernel7Guest" #i hardcoded this, although you can query this from the data resource of the template
   wait_for_guest_net_timeout = 35
   wait_for_guest_ip_timeout = 35
   scsi_type = "pvscsi"
@@ -81,6 +92,7 @@ resource "vsphere_virtual_machine" "vesxi" {
   network_interface {    network_id   = data.vsphere_network.workload_network.id  }
   network_interface {    network_id   = data.vsphere_network.workload_network.id  }
  
+ ##to add more disks copy paste the disk block
   disk {
     label            = "disk0"
     size             = var.guest_disk0_size
@@ -140,5 +152,5 @@ connection  {
 
 
   output created_vm  {
-  value = vsphere_virtual_machine.vesxi[*]
+  value = vsphere_virtual_machine.vesxi.name
   }
