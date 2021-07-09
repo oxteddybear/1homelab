@@ -93,6 +93,70 @@ source "vsphere-iso" "esxi2" {
   vcenter_server = "${var.vsphere_vcenter}"
   vm_name        = "${var.vm_name2}"
 }
+###2nd source is the 2nd esxi to build...copy paste the source block to make as many esxi as you want, then update the build block, example further on in this script 
+source "vsphere-iso" "esxi3" {
+  CPUs                 = "${var.vm_cpu_size}"
+  RAM                  = "${var.vm_ram_size}"
+  boot_command         = ["<enter>", "<SHIFT+O>", " ks=nfs://${var.nfs_server_path}", "<enter>", ""]
+  cluster              = "${var.vsphere_cluster}"
+  communicator         = "ssh"
+  convert_to_template  = "true"
+  datacenter           = "${var.vsphere_datacenter}"
+  datastore            = "${var.vsphere_datastore}"
+  folder               = "${var.vsphere_template_folder}"
+  guest_os_type        = "${var.vm_guestos}"
+  host                 = "${var.parent_host}"
+  insecure_connection  = true
+  iso_paths            = ["[${var.vsphere_datastore}] ${var.iso_file_path}"]
+  disk_controller_type    = ["${var.vm_disk_controller}"]
+  network_adapters {
+    network      = "${var.vnic_network}"
+    network_card = "vmxnet3"
+  }
+  password     = "${var.vsphere_password}"
+  ssh_password = "${var.guest_password}"
+  ssh_timeout  = "${var.ssh_timeout}"
+  ssh_username = "${var.guest_username}"
+  storage {
+    disk_size             = "${var.vm_disk_size}"
+    disk_thin_provisioned = true
+  }
+  username       = "${var.vsphere_username}"
+  vcenter_server = "${var.vsphere_vcenter}"
+  vm_name        = "${var.vm_name3}"
+}
+###2nd source is the 2nd esxi to build...copy paste the source block to make as many esxi as you want, then update the build block, example further on in this script 
+source "vsphere-iso" "esxi4" {
+  CPUs                 = "${var.vm_cpu_size}"
+  RAM                  = "${var.vm_ram_size}"
+  boot_command         = ["<enter>", "<SHIFT+O>", " ks=nfs://${var.nfs_server_path}", "<enter>", ""]
+  cluster              = "${var.vsphere_cluster}"
+  communicator         = "ssh"
+  convert_to_template  = "true"
+  datacenter           = "${var.vsphere_datacenter}"
+  datastore            = "${var.vsphere_datastore}"
+  folder               = "${var.vsphere_template_folder}"
+  guest_os_type        = "${var.vm_guestos}"
+  host                 = "${var.parent_host}"
+  insecure_connection  = true
+  iso_paths            = ["[${var.vsphere_datastore}] ${var.iso_file_path}"]
+  disk_controller_type    = ["${var.vm_disk_controller}"]
+  network_adapters {
+    network      = "${var.vnic_network}"
+    network_card = "vmxnet3"
+  }
+  password     = "${var.vsphere_password}"
+  ssh_password = "${var.guest_password}"
+  ssh_timeout  = "${var.ssh_timeout}"
+  ssh_username = "${var.guest_username}"
+  storage {
+    disk_size             = "${var.vm_disk_size}"
+    disk_thin_provisioned = true
+  }
+  username       = "${var.vsphere_username}"
+  vcenter_server = "${var.vsphere_vcenter}"
+  vm_name        = "${var.vm_name4}"
+}
 
 build {
   sources = [
