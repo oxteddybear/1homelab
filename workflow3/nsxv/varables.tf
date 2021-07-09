@@ -15,10 +15,6 @@ variable "vsphere_datacenter" {
   description = "vSphere datacenter"
 }
 
-variable "mgmt_cluster" {
-  description = "MGMT cluster name"
-}
-
 variable "compute_cluster" {
   description = "Compute cluster name"
 }
@@ -26,41 +22,43 @@ variable "compute_cluster" {
 # Indicate all hosts to be added to vCenter. FQDN or IP 
 
 variable "all_hosts" {
-  default =["vesxi101.home.lab","vesxi102.home.lab","vesxi103.home.lab","vesxi104.home.lab","vesxi105.home.lab"]
+  default =["192.168.8.101","192.168.8.102"]
 }
 
 # Indicate hosts in MGMT cluster. FQDN or IP
-variable "host_names_mgmt" {
-default = {
-  "vesxi101.home.lab" = 1
-  "vesxi102.home.lab" = 2
-  }
+# variable "host_names_comp" {
+# default = {
+#   "192.168.8.101" = 1
+#   "192.168.8.102" = 2
+#   }
+# }
+
+variable "addhost" {
+  name = [
+    "192.168.8.101",
+    "192.168.8.102"
+  ]
 }
 
-# Indicate hosts in Compute cluster. FQDN or IP
-variable "host_names_comp" {
-default = {
-  "vesxi103.home.lab" = 3
-  "vesxi104.home.lab" = 4
-  "vesxi105.home.lab" = 5
-  }
-}
 
 # Indicate Distributed Port Group names and their respective VLAN IDs. 
 
-variable "pg" {
+variable "pg1" {
   default = {
-   "dvs-mgmt" = 10
-   "dvs-vmotion" = 20
-   "dvs-vsan" = 25
-   "dvs-nsx-edge-uplink1" = 30
-   "dvs-nsx-edge-uplink2" = 40
+   "pg-vdsmgt-mgt" = 0
+  }
+}
+variable "pg2" {
+  default = {
+   "dpg-vdsdata-" = 4096
   }
 }
 
-# Indicate Network Interfaces of the hosts to be added to VDS . By default only vmnic2 & vmnic3 will be added.
-variable "network_interfaces" {
-    default = ["vmnic2","vmnic3"]
+variable "mgt_vmnic" {
+    default = ["vmnic1"]
+}
+variable "data_vmnic" {
+    default = ["vmnic4"]
 }
 
 variable "esxi_user" {
@@ -70,12 +68,20 @@ variable "esxi_user" {
 variable "esxi_password" {
   description = "esxi root password"
 }
-variable "vds_name" {
+variable "vds1_name" {
   description = "VDS Name"
 }
-variable "vds_mtu" {
+variable "vds1_mtu" {
   description = "VDS MTU"
 }
+
+variable "vd2s_name" {
+  description = "VDS Name"
+}
+variable "vds2_mtu" {
+  description = "VDS MTU"
+}
+
 variable "vlan_range_min" {
   description = "VLAN Starting Range"
 }
