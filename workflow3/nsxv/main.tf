@@ -36,8 +36,8 @@ data "vsphere_host_thumbprint" "finger1" {
 
 locals {
   fingerprint= [
-    data.vsphere_host_thumbprint.finger0,
-    data.vsphere_host_thumbprint.finger1
+    data.vsphere_host_thumbprint.finger0.id,
+    data.vsphere_host_thumbprint.finger1.id
   ]
 }
 
