@@ -48,7 +48,7 @@ default = {
   #name = contains the template names that exists on vcente, octet is the last octet of the ip addresses it will have
   "name" = [
   "template-esxi001", 
-  "template-esxi002"
+  "template-esxi002",
   "template-esxi003", 
   "template-esxi004"
   
