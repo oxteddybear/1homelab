@@ -86,24 +86,24 @@ resource "vsphere_distributed_virtual_switch" "vds1" {
 resource "vsphere_distributed_port_group" "pg1" {
   for_each = var.pg1
   name = each.key
-  distributed_virtual_switch_uuid = vsphere_distributed_virtual_switch.mgtvds.id
+  distributed_virtual_switch_uuid = vsphere_distributed_virtual_switch.vds1.id
   vlan_id = each.value
 }
 
 #############################2nd vds
 #create data vds
 resource "vsphere_distributed_virtual_switch" "vds2" {
-  name          = var.vds2_name
+  name          = var.vds1_name
   datacenter_id = vsphere_datacenter.target_dc.moid
   max_mtu = var.vds2_mtu
   depends_on = [vsphere_host.hostmember]
   uplinks         = ["uplink1", "uplink2"]
   
-  dynamic "vds_member" {
+  dynamic "host" {
     for_each = var.all_hosts
-    host {
+    content {
       host_system_id = vsphere_host.hostmember[each.key].id
-      devices        = var.data_vmnic
+      devices        = var.mgt_vmnic
     }
   }
  
