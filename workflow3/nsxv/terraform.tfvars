@@ -1,7 +1,7 @@
 
 # Provider
 vsphere_user = "administrator@vsphere.local"
-vsphere_password = "VMware1!VMware1!"
+vsphere_password = "VMware1!"
 vsphere_server = "192.168.254.108"
 
 # Infrastructure
