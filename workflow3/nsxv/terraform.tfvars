@@ -6,7 +6,7 @@ vsphere_server = "192.168.254.108"
 
 # Infrastructure
 vsphere_datacenter = "nsxv-dc"
-mgmt_cluster = "management"
+
 compute_cluster = "compute-cluster"
 esxi_user = "root"
 esxi_password = "VMware1!"
