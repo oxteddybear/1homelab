@@ -26,10 +26,12 @@ resource "vsphere_datacenter" "target_dc" {
 #for x number of host, duplicate the below to get their thumbprint
 data "vsphere_host_thumbprint" "finger0" {
   address = var.all_hosts[0]
+  insecure = true
 }
 
 data "vsphere_host_thumbprint" "finger1" {
   address = var.all_hosts[1]
+  insecure = true
 }
 
 locals {
