@@ -162,6 +162,8 @@ build {
   sources = [
     "source.vsphere-iso.esxi1",
     "source.vsphere-iso.esxi2",
+    "source.vsphere-iso.esxi3",
+    "source.vsphere-iso.esxi4"
     ]
   
 
