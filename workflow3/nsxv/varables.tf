@@ -77,7 +77,7 @@ variable "vds1_mtu" {
   description = "VDS MTU"
 }
 
-variable "vd2s_name" {
+variable "vd2_name" {
   description = "VDS Name"
 }
 variable "vds2_mtu" {
