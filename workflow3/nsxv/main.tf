@@ -72,7 +72,7 @@ resource "vsphere_distributed_virtual_switch" "vds1" {
   dynamic "host" {
     for_each = vsphere_host.hostmember
     content {
-      host_system_id = vsphere_host.hostmember[count.index].id
+      host_system_id = vsphere_host.hostmember[0].id
       devices        = var.mgt_vmnic
     }
   }
