@@ -22,7 +22,9 @@ variable "compute_cluster" {
 # Indicate all hosts to be added to vCenter. FQDN or IP 
 
 variable "all_hosts" {
-  default =["192.168.8.101","192.168.8.102"]
+  default =[
+    "192.168.8.101",
+    "192.168.8.102"]
 }
 
 # Indicate hosts in MGMT cluster. FQDN or IP
