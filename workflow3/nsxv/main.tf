@@ -95,27 +95,27 @@ resource "vsphere_distributed_port_group" "pg1" {
 
 #############################2nd vds
 #create data vds
-# resource "vsphere_distributed_virtual_switch" "vds2" {
-#   name          = var.vds1_name
-#   datacenter_id = vsphere_datacenter.target_dc.moid
-#   max_mtu = var.vds2_mtu
-#   depends_on = [vsphere_host.hostmember]
-#   uplinks         = ["uplink1", "uplink2"]
+resource "vsphere_distributed_virtual_switch" "vds2" {
+  name          = var.vds1_name
+  datacenter_id = vsphere_datacenter.target_dc.moid
+  max_mtu = var.vds2_mtu
+  depends_on = [vsphere_host.hostmember]
+  uplinks         = ["uplink1", "uplink2"]
   
-#   dynamic "host" {
-#     for_each = var.all_hosts
-#     content {
-#       host_system_id = vsphere_host.hostmember[each.key].id
-#       devices        = var.mgt_vmnic
-#     }
-#   }
+  dynamic "host" {
+    for_each = var.all_hosts
+    content {
+      host_system_id = vsphere_host.hostmember[each.key].id
+      devices        = var.mgt_vmnic
+    }
+  }
  
-#   #  host {
-#   #   host_system_id = vsphere_host.h1["vesxi102.home.lab"].id
-#   #   devices        = var.mgt_vmnic
-#   # }
+  #  host {
+  #   host_system_id = vsphere_host.h1["vesxi102.home.lab"].id
+  #   devices        = var.mgt_vmnic
+  # }
 
-# }
+}
 #create pg on second vds
 resource "vsphere_distributed_port_group" "pg2" {
   name                            = "var.pg2"
