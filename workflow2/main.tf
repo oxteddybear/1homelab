@@ -56,13 +56,18 @@ data "vsphere_virtual_machine" "template3" {
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
 
+data "vsphere_virtual_machine" "template4" {
+  name          = var.template.name[4]
+  datacenter_id = data.vsphere_datacenter.target_dc.id
+}
 # increase the number of data resource queries in locals block below to match the templates you need
 locals {
   uuids = [
     data.vsphere_virtual_machine.template0.id,
     data.vsphere_virtual_machine.template1.id,
     data.vsphere_virtual_machine.template2.id,
-    data.vsphere_virtual_machine.template3.id
+    data.vsphere_virtual_machine.template3.id,
+    data.vsphere_virtual_machine.template4.id
   ]
 
 }

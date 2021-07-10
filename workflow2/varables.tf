@@ -46,18 +46,21 @@ default = {
   #the type is a map of lists take note of the brackets []=list {}=map=key/value pairs
   #to access the values: var.variablename.key[index] eg. var.template.octet[0] give you 101
   #name = contains the template names that exists on vcente, octet is the last octet of the ip addresses it will have
-  "name" = [
+  
+  "name" = [ #put the names of the templates you have in vcenter under Packer_vms
   "template-esxi001", 
   "template-esxi002",
   "template-esxi003", 
-  "template-esxi004"
+  "template-esxi004",
+  "template-esxi005"
   
   ]
-  "octet"=[ 
+  "octet"=[  #put the last octet of the esxi here
     101,
     102,
     103,
-    104
+    104,
+    105
     ]
   
   
