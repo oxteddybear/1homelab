@@ -21,7 +21,7 @@ data "vsphere_host_thumbprint" "finger1" { #compute host
 }
 
 data "vsphere_host_thumbprint" "finger2" { #edge host
-  address = var.addhost1.name[1]
+  address = var.addhost1.name[0]
   insecure = true
 }
 
