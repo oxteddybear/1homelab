@@ -24,7 +24,8 @@ variable "compute_cluster" {
 variable "all_hosts" {
   default =[
     "192.168.8.101",
-    "192.168.8.102"]
+    "192.168.8.102"
+    ]
 }
 
 # Indicate hosts in MGMT cluster. FQDN or IP
@@ -38,8 +39,8 @@ variable "all_hosts" {
 variable "addhost" {
   default = {
    name = [
-              {"192.168.8.101"},
-              {"192.168.8.102"}
+              "192.168.8.101",
+              "192.168.8.102"
     ]
   }
 }
