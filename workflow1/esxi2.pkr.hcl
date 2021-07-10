@@ -197,8 +197,7 @@ build {
     "source.vsphere-iso.esxi3",
     "source.vsphere-iso.esxi4",
     "source.vsphere-iso.esxi5"
-    
-    ]
+  ]
   
 
 }
