@@ -97,7 +97,7 @@ resource "vsphere_distributed_port_group" "pg1" {
 
 # #create pg on second vds - here i'm hardcoding since it makes no sense to create just 1 variable for this custom trunk
 resource "vsphere_distributed_port_group" "pg2" {
-  name     = dpg-vdsdata-edgeuplink1
+  name     = "dpg-vdsdata-edgeuplink1"
   distributed_virtual_switch_uuid = vsphere_distributed_virtual_switch.vds2.id
 
     vlan_range { #got this of the state file
