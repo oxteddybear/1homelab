@@ -12,29 +12,30 @@ resource "vsphere_datacenter" "target_dc" {
 
 ######update this fingerprint block for as many 
 data "vsphere_host_thumbprint" "finger0" {
-  address = var.all_hosts[0]
+  address = var.addhost.name[0]
   insecure = true
 }
 
 data "vsphere_host_thumbprint" "finger1" {
-  address = var.all_hosts[1]
+  address = var.addhost.name[1]
   insecure = true
-}
-
-locals {
-  fingerprint= [
-    data.vsphere_host_thumbprint.finger0.id,
-    data.vsphere_host_thumbprint.finger1.id
-  ]
-
 }
 
 resource "vsphere_compute_cluster" "c1" {
   name            = var.compute_cluster
   datacenter_id   = vsphere_datacenter.target_dc.moid
-  #depends_on = [vsphere_datacenter.target_dc,]
+  
 
 }
+
+locals {
+  fingerprint = [
+    data.vsphere_host_thumbprint.finger0.id,
+    data.vsphere_host_thumbprint.finger1.id
+  ]
+  hostnames    = var.addhost.name
+}
+
 
 resource "vsphere_host" "hostmember" {
   count = length(var.addhost.name)
@@ -43,7 +44,7 @@ resource "vsphere_host" "hostmember" {
   password = var.esxi_password
   thumbprint = local.fingerprint[count.index]
   cluster = vsphere_compute_cluster.c1.id
-  #depends_on = [vsphere_compute_cluster.c1]
+  
 }
 
 
