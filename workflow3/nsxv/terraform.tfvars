@@ -10,6 +10,8 @@ vsphere_datacenter = "nsxv-dc"
 compute_cluster = "compute-cluster"
 esxi_user = "root"
 esxi_password = "VMware1!"
+
+####vds stuff
 vds1_name = "vdsmgt"
 vds2_name = "vdsdata"
 
