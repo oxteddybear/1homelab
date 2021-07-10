@@ -39,6 +39,7 @@ locals {
     data.vsphere_host_thumbprint.finger0.id,
     data.vsphere_host_thumbprint.finger1.id
   ]
+
 }
 
 resource "vsphere_compute_cluster" "c1" {
@@ -69,12 +70,10 @@ resource "vsphere_distributed_virtual_switch" "vds1" {
   uplinks         = ["uplink1", "uplink2"]
   
   dynamic "host" {
-    for_each = vsphere_host.hostmember.id
+    for_each = var.all_hosts
     content {
-      host {
         host_system_id = vsphere_host.hostmember[each.key].id
         devices        = var.mgt_vmnic
-      }
     }
   }
  
