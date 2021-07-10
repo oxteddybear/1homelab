@@ -70,12 +70,13 @@ resource "vsphere_distributed_virtual_switch" "vds1" {
   uplinks         = ["uplink1", "uplink2"]
   
   dynamic "host" {
-    for_each = var.all_hosts
+    for_each = var.addhost
     content {
-        host_system_id = vsphere_host.hostmember[each.key].id
-        devices        = var.mgt_vmnic
+      host_system_id = vsphere_host.hostmember[each.value].id
+      devices        = var.mgt_vmnic
     }
   }
+ 
  
   #  host {
   #   host_system_id = vsphere_host.h1["vesxi102.home.lab"].id
@@ -103,9 +104,9 @@ resource "vsphere_distributed_virtual_switch" "vds2" {
   uplinks         = ["uplink1", "uplink2"]
   
   dynamic "host" {
-    for_each = var.all_hosts
+    for_each = var.addhost
     content {
-      host_system_id = vsphere_host.hostmember[each.key].id
+      host_system_id = vsphere_host.hostmember[each.value].id
       devices        = var.mgt_vmnic
     }
   }
