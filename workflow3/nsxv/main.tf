@@ -101,5 +101,4 @@ resource "vsphere_distributed_port_group" "pg2" {
   name     = each.key
   distributed_virtual_switch_uuid = vsphere_distributed_virtual_switch.vds2.id
   vlan_id = each.value
-  }
 }
