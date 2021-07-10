@@ -95,10 +95,13 @@ resource "vsphere_distributed_port_group" "pg1" {
 #############################2nd vds
 #create data vds
 
-# #create pg on second vds
+# #create pg on second vds - here i'm hardcoding since it makes no sense to create just 1 variable for this custom trunk
 resource "vsphere_distributed_port_group" "pg2" {
-  for_each = var.pg2
-  name     = each.key
+  name     = dpg-vdsdata-edgeuplink1
   distributed_virtual_switch_uuid = vsphere_distributed_virtual_switch.vds2.id
-  vlan_id = each.value
+
+    vlan_range { #got this of the state file
+        max_vlan = 4094
+        min_vlan = 0
+    }
 }
