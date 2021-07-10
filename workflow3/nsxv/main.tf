@@ -37,7 +37,7 @@ resource "vsphere_compute_cluster" "c1" {
 }
 
 resource "vsphere_host" "hostmember" {
-  count = length(var.addhost)
+  count = length(var.addhost.name)
   hostname = var.addhost.name[count.index]
   username = var.esxi_user
   password = var.esxi_password
