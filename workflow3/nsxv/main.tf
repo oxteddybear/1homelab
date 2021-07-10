@@ -97,11 +97,9 @@ resource "vsphere_distributed_port_group" "pg1" {
 
 # #create pg on second vds
 resource "vsphere_distributed_port_group" "pg2" {
-  name                            = var.pg2
+  for_each = var.pg2
+  name     - each.key
   distributed_virtual_switch_uuid = vsphere_distributed_virtual_switch.vds2.id
-
-  vlan_range {
-    min_vlan = var.vlan_range_min
-    max_vlan = var.vlan_range_max
+  vlan_id = each.value
   }
 }
