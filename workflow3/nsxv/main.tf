@@ -10,20 +10,7 @@ resource "vsphere_datacenter" "target_dc" {
   name = var.vsphere_datacenter
 }
 
-# This is Python script that will get ESXi hosts thumbprints.
-# Passing username,password and list of hosts to connect as variables. 
-
-# data "external" "get_thumbprint" {
-#    program = ["python", "Esxi-connect.py"]
-
-#   query = {
-#     username = var.esxi_user
-#     password = var.esxi_password
-#     hosts = "${join(" ",var.all_hosts)}"
-#   }
-# }
-
-#for x number of host, duplicate the below to get their thumbprint
+######update this fingerprint block for as many 
 data "vsphere_host_thumbprint" "finger0" {
   address = var.all_hosts[0]
   insecure = true
@@ -45,7 +32,7 @@ locals {
 resource "vsphere_compute_cluster" "c1" {
   name            = var.compute_cluster
   datacenter_id   = vsphere_datacenter.target_dc.moid
-  depends_on = [vsphere_datacenter.target_dc,]
+  #depends_on = [vsphere_datacenter.target_dc,]
 
 }
 
@@ -56,7 +43,7 @@ resource "vsphere_host" "hostmember" {
   password = var.esxi_password
   thumbprint = local.fingerprint[count.index]
   cluster = vsphere_compute_cluster.c1.id
-  depends_on = [vsphere_compute_cluster.c1]
+  #depends_on = [vsphere_compute_cluster.c1]
 }
 
 
@@ -65,24 +52,35 @@ resource "vsphere_host" "hostmember" {
 resource "vsphere_distributed_virtual_switch" "vds1" {
   name          = var.vds1_name
   datacenter_id = vsphere_datacenter.target_dc.moid
-  max_mtu = var.vds1_mtu
-  depends_on = [vsphere_host.hostmember]
-  uplinks         = ["uplink1", "uplink2"]
+  max_mtu       = var.vds1_mtu
+  #depends_on = [vsphere_host.hostmember] this is needed if nothing in this resource accesses the hostmember resource. https://www.terraform.io/docs/language/meta-arguments/depends_on.html
+  uplinks        = ["uplink1", "uplink2"]
   
   dynamic "host" {
     for_each = vsphere_host.hostmember
     content {
-      host_system_id = host.value.id
+      host_system_id = host.value.id #here host.value.id = <dynamic "host">."value" <==tis is a keyword to get the value id.<attribute> you can view the attribute in the state
       devices        = var.mgt_vmnic
     }
   }
  
- 
-  #  host {
-  #   host_system_id = vsphere_host.h1["vesxi102.home.lab"].id
-  #   devices        = var.mgt_vmnic
-  # }
+}
 
+#create data vds
+resource "vsphere_distributed_virtual_switch" "vds2" {
+  name          = var.vds2_name
+  datacenter_id = vsphere_datacenter.target_dc.moid
+  max_mtu       = var.vds2_mtu
+  uplinks       = ["uplink1", "uplink2"]
+  
+  dynamic "host" {
+    for_each = vsphere_host.hostmember
+    content {
+      host_system_id = host.value.id #here host.value.id = <dynamic "host">."value" <==tis is a keyword to get the value id.<attribute> you can view the attribute in the state
+      devices        = var.mgt_vmnic
+    }
+  }
+ 
 }
 
 # Creating distributed port groups
@@ -96,34 +94,14 @@ resource "vsphere_distributed_port_group" "pg1" {
 
 #############################2nd vds
 #create data vds
-# resource "vsphere_distributed_virtual_switch" "vds2" {
-#   name          = var.vds1_name
-#   datacenter_id = vsphere_datacenter.target_dc.moid
-#   max_mtu = var.vds2_mtu
-#   depends_on = [vsphere_host.hostmember]
-#   uplinks         = ["uplink1", "uplink2"]
-  
-#   dynamic "host" {
-#     for_each = var.addhost
-#     content {
-#       host_system_id = vsphere_host.hostmember[each.value].id
-#       devices        = var.mgt_vmnic
-#     }
-#   }
- 
-#   #  host {
-#   #   host_system_id = vsphere_host.h1["vesxi102.home.lab"].id
-#   #   devices        = var.mgt_vmnic
-#   # }
 
-# }
 # #create pg on second vds
-# resource "vsphere_distributed_port_group" "pg2" {
-#   name                            = "var.pg2"
-#   distributed_virtual_switch_uuid = vsphere_distributed_virtual_switch.vds2.id
+resource "vsphere_distributed_port_group" "pg2" {
+  name                            = "var.pg2"
+  distributed_virtual_switch_uuid = vsphere_distributed_virtual_switch.vds2.id
 
-#   vlan_range {
-#     min_vlan = var.vlan_range_min
-#     max_vlan = var.vlan_range_max
-#   }
-# }
+  vlan_range {
+    min_vlan = var.vlan_range_min
+    max_vlan = var.vlan_range_max
+  }
+}
