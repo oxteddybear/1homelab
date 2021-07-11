@@ -63,7 +63,7 @@ data "vsphere_virtual_machine" "template4" {
 
 data "vsphere_host" "host" {
   name          = var.host_to_installon
-  datacenter_id = data.vsphere_datacenter.dc.id
+  datacenter_id = data.vsphere_datacenter.target_dc.id
 }
 
 # increase the number of data resource queries in locals block below to match the templates you need
