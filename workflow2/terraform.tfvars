@@ -2,7 +2,7 @@
 vsphere_user = "administrator@vsphere.local"
 vsphere_password = "VMware1!"
 vsphere_server = "192.168.254.133"
-
+host_to_installon = "192.168.254.108"
 # Infrastructure
 vsphere_datacenter = "dc1"
 vsphere_cluster = "NSXT-EDGECLUSTER"
