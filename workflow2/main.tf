@@ -84,6 +84,7 @@ resource "vsphere_virtual_machine" "vesxi" {
   name = substr(var.template.name[count.index],9,7) #take a subset of the template name as new vm name## substr(string, offset, length) eg. substr("template-esxi001",9,7) = esxi001
   datastore_id     = data.vsphere_datastore.target_datastore.id
   folder           = var.vsphere_folder
+  resource_pool_id = data.vsphere_compute_cluster.target_cluster.resource_pool_id
   host_system_id = data.vsphere_host.host.id
   num_cpus = var.guest_vcpu
   memory   = var.guest_memory
