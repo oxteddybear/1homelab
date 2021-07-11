@@ -60,6 +60,12 @@ data "vsphere_virtual_machine" "template4" {
   name          = var.template.name[4]
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
+
+data "vsphere_host" "host" {
+  name          = var.host_to_installon
+  datacenter_id = data.vsphere_datacenter.dc.id
+}
+
 # increase the number of data resource queries in locals block below to match the templates you need
 locals {
   uuids = [
@@ -78,7 +84,7 @@ resource "vsphere_virtual_machine" "vesxi" {
   name = substr(var.template.name[count.index],9,7) #take a subset of the template name as new vm name## substr(string, offset, length) eg. substr("template-esxi001",9,7) = esxi001
   datastore_id     = data.vsphere_datastore.target_datastore.id
   folder           = var.vsphere_folder
-  resource_pool_id = data.vsphere_compute_cluster.target_cluster.resource_pool_id
+  host_system_id = data.vsphere_host.host.id
   num_cpus = var.guest_vcpu
   memory   = var.guest_memory
   nested_hv_enabled = "true"
