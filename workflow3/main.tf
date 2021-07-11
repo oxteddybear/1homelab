@@ -1,4 +1,4 @@
-module "nsxt" {
+module "nsxv" {
     source = "./nsxv"
     # Provider
     vsphere_user = "administrator@vsphere.local"
