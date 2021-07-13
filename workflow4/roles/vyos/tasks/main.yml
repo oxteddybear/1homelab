@@ -29,18 +29,15 @@
       delegate_to: localhost
       register: vm_info
 
-    # - debug:
-        # register:  "{{ item.ip_address }}"
-    #   with_items:
-    #     - "{{ vm_info.virtual_machines | json_query(query) }}"
-    #   vars:
-    #     query: "[?guest_name=='0rtr1']"
+    - debug:
+        msg:  "{{ item.ip_address }}"
+      with_items:
+        - "{{ vm_info.virtual_machines | json_query(query) }}"
+      vars:
+        query: "[?guest_name=='0rtr1']"
+      register: echo
     
 - name: configure 0rtr1
   vyos.vyos.vyos_config:
-    host: "{{item.ip_address}}"
+    host: "{{ echo }}"
     
-    with_items:
-      - "{{ vm_info.virtual_machines | json_query(query) }}"
-    vars:
-          query: "[?guest_name=='0rtr1']"
