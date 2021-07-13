@@ -1,10 +1,13 @@
 ---
-- hosts: edges
+- hosts: nsxtedges
   roles:
      - nsxtedge
-- hosts: managers
+- hosts: nsxtmgr
   roles:
      - nsxtmgr
 - hosts: ext_net
   roles:
     - vyos
+- hosts: nsxvmgr
+  roles:
+    - nsxvmgr
