@@ -1,9 +1,4 @@
 ---
-# - hosts: vyos
-#   roles:
-#     - vyos
-# - hosts: 
-
 - hosts: external_net
   roles:
     - vyos

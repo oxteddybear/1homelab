@@ -1,7 +1,10 @@
 ---
 - hosts: edges
   roles:
-     - deploy-edges
+     - nsxtedge
 - hosts: managers
   roles:
-     - deploy-managers
+     - nsxtmgr
+- hosts: ext_net
+  roles:
+    - vyos
