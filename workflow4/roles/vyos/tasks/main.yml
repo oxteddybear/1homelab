@@ -37,7 +37,12 @@
         query: "[?guest_name=='0rtr1']"
       register: echo
     
-# - name: configure 0rtr1
-  # vyos.vyos.vyos_config:
-  #   host: "{{item.ip_address}}"
+- name: configure 0rtr1
+  vyos.vyos.vyos_config:
+    host: "{{ echo }}"
+    username: "vyos"
+    password: "vyos"
+    lines: 
+      - "set system host-name abc"
+      - "commit"
     
