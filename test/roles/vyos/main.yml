@@ -1,0 +1,20 @@
+---
+- name: installvyos
+  vmware_deploy_ovf:
+        vmware_deploy_ovf:
+        hostname: '192.168.254.133'
+        username: 'administrator@vsphere.local'
+        password: 'VMware1!'
+        datacenter : 'dc1'
+        validate_certs: no
+        datastore : 'iscsi108'
+        cluster: 'NSXT-EDGECLUSTER'
+        name : '{{ inventory_hostname_short }}'
+        disk_provisioning: thin
+        wait : false
+        networks: 
+          'internal': 'VM Network'
+          'public': 'isolated-trunk'
+        ovf: 'vyos-1.1.8-amd64.ova'
+        wait_for_ip_address: false
+    delegate_to : localhost
