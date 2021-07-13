@@ -1,8 +1,5 @@
-variable "nsx_manager" { default = "192.168.254.61"}
-variable "nsx_password" { default = "VMware1!VMware1!"}
-variable "license_keys" { description "add license keys at the prompt"}
-  
-}
+variable "nsx_ip" { default = "192.168."}
+
 
 # variable "vsphere_server"     {  description = "Standalone --not the parent--- vCenter FQDN/IP " }
 # variable "vsphere_user"       {  description = "vSphere username" }
