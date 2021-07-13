@@ -30,7 +30,7 @@
       register: vm_info
 
     # - debug:
-    #     msg: "{{ item.ip_address }}"
+        # register:  "{{ item.ip_address }}"
     #   with_items:
     #     - "{{ vm_info.virtual_machines | json_query(query) }}"
     #   vars:
@@ -39,8 +39,8 @@
 - name: configure 0rtr1
   vyos.vyos.vyos_config:
     host: "{{item.ip_address}}"
-    vars:
-      query: "[?guest_name=='0rtr1']"
+    
     with_items:
       - "{{ vm_info.virtual_machines | json_query(query) }}"
-    
+    vars:
+          query: "[?guest_name=='0rtr1']"
