@@ -16,7 +16,7 @@
     netmask: "{{ nsx_netmask_0 }}"
     admin_password: "{{ nsx_passwd_0 }}"
     cli_password: "{{ nsx_passwd_0 }}"
-    path_to_ova: "{{ nsx_ova_path }}"
+    path_to_ova: "{{ path_to_ova }}"
     ova_file: "{{ manager_ova }}"
     vcenter: "{{ vcenter }}"
     vcenter_user: "{{ vcenter_user }}"
