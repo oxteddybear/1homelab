@@ -45,5 +45,5 @@
     lines: 
       - "set system host-name abc"
       - "commit"
-    - debug:
-      msg: "{{echo}}"
+- debug:
+  msg: "{{echo}}"
