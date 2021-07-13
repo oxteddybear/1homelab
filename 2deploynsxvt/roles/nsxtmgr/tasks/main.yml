@@ -24,10 +24,10 @@
     deployment_size: "small"
     role: "nsx-manager nsx-controller"
   
-- name: Check manager status
-  nsxt_manager_status:
-      hostname: "{{ nsx_mgr_ip }}"
-      username: "admin"
-      password: "{{ nsx_passwd_0 }}"
-      validate_certs: "False"
-      wait_time: 50
+# - name: Check manager status
+#   nsxt_manager_status:
+#       hostname: "{{ nsx_mgr_ip }}"
+#       username: "admin"
+#       password: "{{ nsx_passwd_0 }}"
+#       validate_certs: "False"
+#       wait_time: 50
