@@ -29,12 +29,12 @@
       delegate_to: localhost
       register: vm_info
 
-    - debug:
-        msg: "{{ item.ip_address }}"
-      with_items:
-        - "{{ vm_info.virtual_machines | json_query(query) }}"
-      vars:
-        query: "[?guest_name=='0rtr1']"
+    # - debug:
+    #     msg: "{{ item.ip_address }}"
+    #   with_items:
+    #     - "{{ vm_info.virtual_machines | json_query(query) }}"
+    #   vars:
+    #     query: "[?guest_name=='0rtr1']"
     
 - name: configure 0rtr1
   vyos.vyos.vyos_config:
