@@ -35,8 +35,8 @@
         hostname: '192.168.254.61'
         username: "admin"
         password: "VMware1!VMware1!"
-        validate_certs: false
+        validate_certs: "false"
         wait_time: 50
-    # delegate_to : localhost
+    delegate_to : localhost
 
 
