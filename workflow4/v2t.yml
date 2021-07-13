@@ -2,7 +2,7 @@
 - hosts: nsxtedges
   roles:
      - nsxtedge
-- hosts: nsxtmgr
+- hosts: nsxtmgrs
   roles:
      - nsxtmgr
 - hosts: ext_net
