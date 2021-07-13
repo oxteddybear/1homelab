@@ -30,7 +30,7 @@
       register: vm_info
 
     - name: Register loop output as a variable
-      ansible.builtin.shell: "echo {{ item.ip_address }}"
+      msg:  "{{ item.ip_address }}"
       with_items:
         - "{{ vm_info.virtual_machines | json_query(query) }}"
       vars:
@@ -40,4 +40,9 @@
 - name: configure 0rtr1
   vyos.vyos.vyos_config:
     host: "{{ echo }}"
+    username: "vyos"
+    password: "vyos"
+    lines: 
+      - "set system host-name abc"
+      - "commit"
     
