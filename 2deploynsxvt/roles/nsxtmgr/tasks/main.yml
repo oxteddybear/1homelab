@@ -32,11 +32,11 @@
 
   - name: Check manager status
       nsxt_manager_status:
-        hostname: "{{ nsx_mgr_ip}}"
+        hostname: '192.168.254.61'
         username: "admin"
-        password: "{{ nsx_passwd_0 }}"
-        validate_certs: False
+        password: "VMware1!VMware1!"
+        validate_certs: false
         wait_time: 50
-    delegate_to : localhost
+    # delegate_to : localhost
 
 
