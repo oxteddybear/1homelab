@@ -35,11 +35,7 @@
         - "{{ vm_info.virtual_machines | json_query(query) }}"
       vars:
         query: "[?guest_name=='0rtr1']"
-      register: myip
-
-    - debug:
-        msg: "{{ myip.ip_address }}"
-
+    
 
     
 
