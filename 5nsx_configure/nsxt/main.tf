@@ -1,9 +1,26 @@
+terraform {
+  required_providers {
+    nsxt = {
+      source = "vmware/nsxt"
+    }
+  }
+}
 provider "nsxt" {
-    host = "${var.nsx_ip}"
+    host = "${var.nsx_manager}"
     username = "admin"
     password = "${var.nsx_password}"
     allow_unverified_ssl = true
+    max_retries           = 10
+    retry_min_delay       = 500
+    retry_max_delay       = 5000
+    retry_on_status_codes = [429]
+    license_keys = [var.license_keys]
 }
+
+#  data "nsxt_transport_zone" "overlay_tz" {
+#    display_name = "tz1"  }
+
+
 resource "vsphere_datacenter" "target_dc" {
   name = var.vsphere_datacenter
 }
