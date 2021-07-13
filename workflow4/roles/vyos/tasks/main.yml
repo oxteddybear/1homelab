@@ -38,12 +38,9 @@
     
 - name: configure 0rtr1
   vyos.vyos.vyos_config:
-  block:
-    - name: settle the host first
-      host: 
-        "{{item.ip_address}}"
-      with_items:
-        - "{{ vm_info.virtual_machines | json_query(query) }}"
-      vars:
-        query: "[?guest_name=='0rtr1']"
-
+    host: "{{item.ip_address}}"
+    vars:
+      query: "[?guest_name=='0rtr1']"
+    with_items:
+      - "{{ vm_info.virtual_machines | json_query(query) }}"
+    
