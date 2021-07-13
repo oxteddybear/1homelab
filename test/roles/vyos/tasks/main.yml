@@ -16,4 +16,4 @@
             'internal': 'VM Network'
             'public': 'isolated-trunk'
           ovf: 'vyos-1.1.8-amd64.ova'
-  delegate_to : localhost
+    delegate_to : localhost
