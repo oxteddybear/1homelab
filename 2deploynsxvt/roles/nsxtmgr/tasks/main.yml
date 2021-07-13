@@ -30,6 +30,6 @@
       hostname: "{{ nsx_mgr_ip }}"
       username: "admin"
       password: "{{ nsx_passwd_0 }}"
-      validate_certs: "False"
+      validate_certs: False
       wait_time: 50
   delegate_to: localhost
