@@ -14,7 +14,7 @@
       networks: 
         Management_Network: 'VM Network'
 
-      ovf: '/ks/iso/ VMware-NSX-Manager-6.4.10-17626462.ova'
+      ovf: "/ks/iso/VMware-NSX-Manager-6.4.10-17626462.ova"
       properties:
         vsm_cli_passwd_0    : 'VMware1!VMware1!'
         vsm_cli_en_passwd_0 : 'VMware1!VMware1!'
