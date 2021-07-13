@@ -11,7 +11,7 @@
         name : '{{ inventory_hostname_short }}'
         disk_provisioning: thin
         wait: false
-        networks: 
+        networks:
           "Network 1": '{{ nsx_mgmt }}'
         ovf: '{{ manager_ova }}'
         wait_for_ip_address: false
