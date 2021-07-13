@@ -11,7 +11,7 @@
     dns_server: "{{ nsx_dns1_0 }}"
     dns_domain: "{{ nsx_domain_0 }}"
     ntp_server: "{{ nsx_ntp_0 }}"
-    gateway: "{{ gateway }}"
+    gateway: "{{ nsx_gateway_0 }}"
     ip_address: "{{ nsx_mgr_ip }}"
     netmask: "{{ nsx_netmask_0 }}"
     admin_password: "{{ nsx_passwd_0 }}"
