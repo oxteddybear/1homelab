@@ -28,15 +28,13 @@
           nsx_domain_0 : '{{ nsx_domain_0 }}'
           nsx_ntp_0 : '{{ nsx_ntp_0 }}'
           nsx_isSSHEnabled : '{{ nsx_isSSHEnabled }}'
-  delegate_to : localhost
+  
 
-- name: Check manager status
-    nsxt_manager_status:
-      hostname: '192.168.254.61'
+- name: Shows status of nsxt manager
+  nsxt_manager_status:
+      hostname: "10.192.167.137"
       username: "admin"
-      password: "VMware1!VMware1!"
-      validate_certs: false
+      password: "Admin!23Admin"
+      validate_certs: False
       wait_time: 50
-  delegate_to : localhost
-
 
