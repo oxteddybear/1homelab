@@ -17,7 +17,7 @@
   #     ovf: '/ks/iso/vyos-1.1.8-amd64.ova'
   #   delegate_to : localhost
 
-- name: Get Tags from given VM Name
+- name: Get IP of the router
   block:
     - name: Get virtual machine info
       community.vmware.vmware_vm_info:
@@ -36,6 +36,14 @@
       vars:
         query: "[?guest_name=='0rtr1']"
     
-
-    
+- name: configure 0rtr1
+  vyos.vyos.vyos_config:
+  block:
+    - name: settle the host first
+      host: 
+        "{{item.ip_address}}"
+      with_items:
+        - "{{ vm_info.virtual_machines | json_query(query) }}"
+      vars:
+        query: "[?guest_name=='0rtr1']"
 
