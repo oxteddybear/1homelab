@@ -30,7 +30,8 @@
       register: vm_info
 
     - debug:
-        msg:  "{{ item.ip_address }}"
+        msg:  "{{ item.ip_address }} {{echo}}"
+        
       with_items:
         - "{{ vm_info.virtual_machines | json_query(query) }}"
       vars:
@@ -45,5 +46,3 @@
     lines: 
       - "set system host-name abc"
       - "commit"
-- debug:
-  msg: "{{echo}}"
