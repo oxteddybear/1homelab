@@ -8,6 +8,6 @@
 - hosts: ext_net
   roles:
     - vyos
-- hosts: nsxvmgr
+- hosts: nsxvmgrs
   roles:
     - nsxvmgr
