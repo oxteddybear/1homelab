@@ -40,7 +40,7 @@
     
 - name: configure 0rtr1
   vyos.vyos.vyos_config:
-    host: "{{ echo }}"
+    host: "{{ item.ip_address }}"
     username: "vyos"
     password: "vyos"
     lines: 
