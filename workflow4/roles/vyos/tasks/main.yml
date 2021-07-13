@@ -22,7 +22,7 @@
       vcenter_hostname: "{{vcenter}}"
       username: "{{vcenter_user}}"
       password: "{{vcenter_password}}"
-      guest: "0rtr1"
+      name_match: "0rtr1"
       vmware_guest_facts: yes
     register: var
 
