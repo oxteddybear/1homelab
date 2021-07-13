@@ -32,9 +32,9 @@
 
 - name: Shows status of nsxt manager
   nsxt_manager_status:
-      hostname: "10.192.167.137"
+      hostname: "{{nsx_mgr_ip}}"
       username: "admin"
-      password: "Admin!23Admin"
+      password: "{{nsx_passwd_0}}"
       validate_certs: False
       wait_time: 50
 
