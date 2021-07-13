@@ -29,8 +29,8 @@
       delegate_to: localhost
       register: vm_info
 
-    - name: Register 
-        # :  "{{ item.ip_address }}"
+    - name: Register loop output as a variable
+      ansible.builtin.shell: "echo {{ item.ip_address }}"
       with_items:
         - "{{ vm_info.virtual_machines | json_query(query) }}"
       vars:
