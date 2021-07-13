@@ -17,14 +17,21 @@
   #     ovf: '/ks/iso/vyos-1.1.8-amd64.ova'
   #   delegate_to : localhost
 
-  - name: Gathering Vm info.
-    gather_facts: yes
-    vmware_guest :
-      vcenter_hostname: "{{vcenter}}"
-      username: "{{vcenter_user}}"
-      password: "{{vcenter_password}}"
-      name: "0rtr1"
-      vmware_guest_facts: yes
-    register: var
+- name: Get Tags from given VM Name
+  block:
+    - name: Get virtual machine info
+      community.vmware.vmware_vm_info:
+        hostname: '{{ vcenter }}'
+        username: '{{ vcenter_user }}'
+        password: '{{ vcenter_password }}'
 
-  - debug: msg="{{var.ansible_facts.hw_eth0.ipaddresses[0]}}"
+      delegate_to: localhost
+      register: vm_info
+
+    - debug:
+        msg: "{{ item.tags }}"
+      with_items:
+        - "{{ vm_info.virtual_machines | json_query(query) }}"
+      vars:
+        query: "[?guest_name=='0rtr1']"
+
