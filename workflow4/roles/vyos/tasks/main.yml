@@ -29,7 +29,7 @@
       register: vm_info
 
     - debug:
-        msg: "{{ item.ip_address }}"
+        ip: "{{ item.ip_address }}"
       # with_items:
       #   - "{{ vm_info.virtual_machines | json_query(query) }}"
       # vars:
