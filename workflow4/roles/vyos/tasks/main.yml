@@ -18,7 +18,7 @@
   #   delegate_to : localhost
 
   - name: Gathering Vm info.
-    vsphere_guest:
+    vmware_guest :
       vcenter_hostname: "{{vcenter}}"
       username: "{{vcenter_user}}"
       password: "{{vcenter_password}}"
