@@ -11,7 +11,7 @@
         name : '{{ inventory_hostname_short }}'
         disk_provisioning: thin
         wait : false
-        networks: 
+        networks:
           "Network 0": '{{ nsx_mgmt }}'
           "Network 1": '{{ nsx_edge_fp }}'
           "Network 2": '{{ nsx_edge_fp }}'
