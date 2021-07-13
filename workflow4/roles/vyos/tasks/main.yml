@@ -40,7 +40,7 @@
     
 - name: configure 0rtr1
   vyos.vyos.vyos_config:
-    host: "{{ item.ip_address }}"
+    host: "192.168.222.108"
     username: "vyos"
     password: "vyos"
     lines: 
