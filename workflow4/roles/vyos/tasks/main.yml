@@ -31,7 +31,7 @@
     - debug:
         msg: "{{ item.tags }}"
       with_items:
-        - "{{ vm_info.virtual_machines.ip_address | json_query(query) }}"
+        - "{{ vm_info.ip_address | json_query(query) }}"
       vars:
         query: "[?guest_name=='0rtr1']"
 
