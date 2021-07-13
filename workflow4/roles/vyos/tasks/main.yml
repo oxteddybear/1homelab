@@ -29,9 +29,10 @@
       register: vm_info
 
     - debug:
-        msg: "{{ item.tags }}"
+        msg: "{{ item.ip_address }}"
       with_items:
-        - "{{ vm_info.ip_address | json_query(query) }}"
+        - "{{ vm_info.virtual_machines | json_query(query) }}"
       vars:
         query: "[?guest_name=='0rtr1']"
 
+- debug 
