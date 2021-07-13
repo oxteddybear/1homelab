@@ -24,10 +24,12 @@
     deployment_size: "small"
     role: "NSX Manager"
   delegate_to: localhost
-# - name: Check manager status
-#   nsxt_manager_status:
-#       hostname: "{{ nsx_mgr_ip }}"
-#       username: "admin"
-#       password: "{{ nsx_passwd_0 }}"
-#       validate_certs: "False"
-#       wait_time: 50
+
+- name: Check manager status
+  nsxt_manager_status:
+      hostname: "{{ nsx_mgr_ip }}"
+      username: "admin"
+      password: "{{ nsx_passwd_0 }}"
+      validate_certs: "False"
+      wait_time: 50
+  delegate_to: localhost
