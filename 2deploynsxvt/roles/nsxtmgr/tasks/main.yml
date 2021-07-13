@@ -22,7 +22,7 @@
     vcenter_user: "{{ vcenter_user }}"
     vcenter_passwd: "{{ vcenter_password }}"
     deployment_size: "small"
-    role: "nsx-manager"
+    role: "NSX Manager"
   delegate_to: localhost
 # - name: Check manager status
 #   nsxt_manager_status:
