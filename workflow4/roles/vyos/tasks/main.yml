@@ -17,26 +17,26 @@
   #     ovf: '/ks/iso/vyos-1.1.8-amd64.ova'
   #   delegate_to : localhost
 
-- name: Get IP of the router
-  block:
-    - name: Get virtual machine info
-      community.vmware.vmware_vm_info:
-        hostname: '{{ vcenter }}'
-        username: '{{ vcenter_user }}'
-        password: '{{ vcenter_password }}'
-        validate_certs : no
-        vm_type: vm
-      delegate_to: localhost
-      register: vm_info
+# - name: Get IP of the router
+#   block:
+#     - name: Get virtual machine info
+#       community.vmware.vmware_vm_info:
+#         hostname: '{{ vcenter }}'
+#         username: '{{ vcenter_user }}'
+#         password: '{{ vcenter_password }}'
+#         validate_certs : no
+#         vm_type: vm
+#       delegate_to: localhost
+#       register: vm_info
 
-    - debug:
-        msg:  "{{ item.ip_address }}"
+#     - debug:
+#         msg:  "{{ item.ip_address }}"
         
-      with_items:
-        - "{{ vm_info.virtual_machines | json_query(query) }}"
-      vars:
-        query: "[?guest_name=='0rtr1']"
-      register: echo
+#       with_items:
+#         - "{{ vm_info.virtual_machines | json_query(query) }}"
+#       vars:
+#         query: "[?guest_name=='0rtr1']"
+#       register: echo
     
 - name: configure 0rtr1
   vyos.vyos.vyos_config:
@@ -46,7 +46,4 @@
     lines: 
       - "set system host-name abc"
       - "commit"
-  with_items:
-    - "{{ vm_info.virtual_machines | json_query(query) }}"
-  vars:
-    query: "[?guest_name=='0rtr1']"
+ 
