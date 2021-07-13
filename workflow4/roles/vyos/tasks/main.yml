@@ -35,4 +35,3 @@
       vars:
         query: "[?guest_name=='0rtr1']"
 
-- debug 
