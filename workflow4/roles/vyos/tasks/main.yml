@@ -38,7 +38,7 @@
       register: myip
 
     - debug:
-        msg: "{{ myip }}"
+        msg: "{{ myip.ip_address }}"
 
 
     
