@@ -30,7 +30,7 @@
       register: vm_info
 
     - debug:
-        msg:  "{{ item.ip_address }} {{echo}}"
+        msg:  "{{ item.ip_address }}"
         
       with_items:
         - "{{ vm_info.virtual_machines | json_query(query) }}"
@@ -38,11 +38,14 @@
         query: "[?guest_name=='0rtr1']"
       register: echo
     
-- name: configure 0rtr1
-  vyos.vyos.vyos_config:
-    host: "{{ echo }}"
-    username: "vyos"
-    password: "vyos"
-    lines: 
-      - "set system host-name abc"
-      - "commit"
+    
+    - debug:
+        msg:  "{{ echo }}"
+# - name: configure 0rtr1
+#   vyos.vyos.vyos_config:
+#     host: "{{ echo }}"
+#     username: "vyos"
+#     password: "vyos"
+#     lines: 
+#       - "set system host-name abc"
+#       - "commit"
