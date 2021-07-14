@@ -1,6 +1,6 @@
 ---
 - name : Deploy NSX Manager OVA
-  vmware_deploy_ovf:
+  community.vmware.vmware_deploy_ovf:
       hostname: '{{ vcenter }}'
       username: '{{ vcenter_user }}'
       password: '{{ vcenter_password }}'
