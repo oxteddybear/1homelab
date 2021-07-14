@@ -34,7 +34,7 @@ source "vsphere-iso" "esxi1" {
   CPUs                 = "${var.vm_cpu_size}"
   RAM                  = "${var.vm_ram_size}"
   boot_command         = ["<enter>", "<SHIFT+O>", " ks=nfs://${var.nfs_server_path}", "<enter>", ""]
-  cluster              = "${var.vsphere_cluster}"
+  # cluster              = "${var.vsphere_cluster}"
   communicator         = "ssh"
   convert_to_template  = "true"
   datacenter           = "${var.vsphere_datacenter}"
@@ -67,7 +67,7 @@ source "vsphere-iso" "esxi2" {
   CPUs                 = "${var.vm_cpu_size}"
   RAM                  = "${var.vm_ram_size}"
   boot_command         = ["<enter>", "<SHIFT+O>", " ks=nfs://${var.nfs_server_path}", "<enter>", ""]
-  cluster              = "${var.vsphere_cluster}"
+  # cluster              = "${var.vsphere_cluster}"
   communicator         = "ssh"
   convert_to_template  = "true"
   datacenter           = "${var.vsphere_datacenter}"
@@ -99,7 +99,7 @@ source "vsphere-iso" "esxi3" {
   CPUs                 = "${var.vm_cpu_size}"
   RAM                  = "${var.vm_ram_size}"
   boot_command         = ["<enter>", "<SHIFT+O>", " ks=nfs://${var.nfs_server_path}", "<enter>", ""]
-  cluster              = "${var.vsphere_cluster}"
+  # cluster              = "${var.vsphere_cluster}"
   communicator         = "ssh"
   convert_to_template  = "true"
   datacenter           = "${var.vsphere_datacenter}"
@@ -131,7 +131,7 @@ source "vsphere-iso" "esxi4" {
   CPUs                 = "${var.vm_cpu_size}"
   RAM                  = "${var.vm_ram_size}"
   boot_command         = ["<enter>", "<SHIFT+O>", " ks=nfs://${var.nfs_server_path}", "<enter>", ""]
-  cluster              = "${var.vsphere_cluster}"
+  # cluster              = "${var.vsphere_cluster}"
   communicator         = "ssh"
   convert_to_template  = "true"
   datacenter           = "${var.vsphere_datacenter}"
@@ -163,7 +163,7 @@ source "vsphere-iso" "esxi5" {
   CPUs                 = "${var.vm_cpu_size}"
   RAM                  = "${var.vm_ram_size}"
   boot_command         = ["<enter>", "<SHIFT+O>", " ks=nfs://${var.nfs_server_path}", "<enter>", ""]
-  cluster              = "${var.vsphere_cluster}"
+  # cluster              = "${var.vsphere_cluster}"
   communicator         = "ssh"
   convert_to_template  = "true"
   datacenter           = "${var.vsphere_datacenter}"
