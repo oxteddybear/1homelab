@@ -15,10 +15,10 @@ data "vsphere_datastore" "target_datastore" {
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
 
-data "vsphere_compute_cluster" "target_cluster" {
-  name          = var.vsphere_cluster
-  datacenter_id = data.vsphere_datacenter.target_dc.id
-}
+# data "vsphere_compute_cluster" "target_cluster" {
+#   name          = var.vsphere_cluster
+#   datacenter_id = data.vsphere_datacenter.target_dc.id
+# }
 
 data "vsphere_network" "mgt_network" {
   name          = var.mgt_network
@@ -28,10 +28,10 @@ data "vsphere_network" "iscsi_network1" {
   name          = var.iscsi_network1
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
-data "vsphere_network" "iscsi_network2" {
-  name          = var.iscsi_network2
-  datacenter_id = data.vsphere_datacenter.target_dc.id
-}
+# data "vsphere_network" "iscsi_network2" {
+#   name          = var.iscsi_network2
+#   datacenter_id = data.vsphere_datacenter.target_dc.id
+# }
 
 data "vsphere_network" "workload_network" {
   name          = var.workload_network
@@ -99,6 +99,7 @@ resource "vsphere_virtual_machine" "vesxi" {
   network_interface {    network_id   = data.vsphere_network.mgt_network.id       }
   network_interface {    network_id   = data.vsphere_network.iscsi_network1.id    }
   # network_interface {    network_id   = data.vsphere_network.iscsi_network2.id    }
+  network_interface {    network_id   = data.vsphere_network.workload_network.id  }
   network_interface {    network_id   = data.vsphere_network.workload_network.id  }
   network_interface {    network_id   = data.vsphere_network.workload_network.id  }
   network_interface {    network_id   = data.vsphere_network.workload_network.id  }
