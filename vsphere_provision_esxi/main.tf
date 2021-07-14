@@ -85,6 +85,7 @@ resource "vsphere_virtual_machine" "vesxi" {
   datastore_id     = data.vsphere_datastore.target_datastore.id
   folder           = var.vsphere_folder
   # resource_pool_id = data.vsphere_compute_cluster.target_cluster.resource_pool_id
+  resource_pool_id = data.vsphere_datacenter.target_dc.id
   host_system_id = data.vsphere_host.host.id
   num_cpus = var.guest_vcpu
   memory   = var.guest_memory
