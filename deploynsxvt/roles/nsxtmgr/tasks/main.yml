@@ -7,6 +7,7 @@
       datacenter : '{{ vcenter_datacenter }}'
       validate_certs: no
       datastore : '{{ vcenter_datastore }}'
+      esxi_hostname : '{{ esxi_hostname }}'
       # cluster: '{{ vcenter_cluster }}'
       name : '{{ inventory_hostname_short }}'
       disk_provisioning: thin
