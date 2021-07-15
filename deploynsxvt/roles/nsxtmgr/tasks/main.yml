@@ -40,23 +40,18 @@
 #       wait_time: 50
 #   delegate_to: localhost
 
-- hosts: 127.0.0.1
-  connection: local
-  become: yes
-  tasks:
-    - name: Register compute manager
+- name: Register compute manager
       nsxt_fabric_compute_managers:
-          hostname: "{{ nsx_mgr_ip }}"
-          username: "admin"
-          password: "VMware1!VMware1!"
-          validate_certs: "false"
-          display_name: "{{ vcenter }}"
-          server: "{{ vcenter }}"
-          origin_type: "vCenter"
-          credential:
-            credential_type: "{{ vcenter_user }}"
-            username: "{{ vcenter_user }}"
-            password: "{{ vcenter_password }}"
-          state: present
-      with_items:
-        - "{{vcenter}}"
+        hostname: "{{ nsx_mgr_ip }}"
+        username: "admin"
+        password: "VMware1!VMware1!"
+        validate_certs: "false"
+        display_name: "{{ vcenter }}"
+        server: "{{ vcenter }}"
+        origin_type: "vCenter"
+        credential:
+          credential_type: "{{ vcenter_user }}"
+          username: "{{ vcenter_user }}"
+          password: "{{ vcenter_password }}"
+        state: present
+  delegate_to: localhost
