@@ -127,7 +127,9 @@ provisioner "remote-exec" {
     "esxcli network vswitch standard add -v vSwitch1",
     "esxcli network vswitch standard uplink add --uplink-name=vmnic2 --vswitch-name=vSwitch1",
     "esxcli network vswitch standard set -m 9000 -v vSwitch1",
-
+    ##set promicouse, forged, mac-changes to true
+    "esxcli network vswitch standard policy security set -m true -p true -f true -v vSwitch0",
+    "esxcli network vswitch standard policy security set -m true -p true -f true -v vSwitch1",
     # "esxcli network vswitch standard add -v vSwitch2",
     # "esxcli network vswitch standard uplink add --uplink-name=vmnic3 --vswitch-name=vSwitch2",
     # "esxcli network vswitch standard set -m 9000 -v vSwitch2",
