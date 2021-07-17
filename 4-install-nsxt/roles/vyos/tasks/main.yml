@@ -1,0 +1,49 @@
+---
+  - name: installvyos
+    vmware_deploy_ovf:
+      hostname: '192.168.254.133'
+      username: 'administrator@vsphere.local'
+      password: 'VMware1!'
+      datacenter : 'dc1'
+      validate_certs: no
+      datastore : 'iscsi108'
+      cluster: 'NSXT-EDGECLUSTER'
+      name : '{{ inventory_hostname_short }}'
+      disk_provisioning: thin
+      wait : false
+      networks: 
+        internal: 'VM Network'
+        public: 'isolated-trunk'
+      ovf: '/ks/iso/vyos-1.1.8-amd64.ova'
+    delegate_to : localhost
+
+# - name: Get IP of the router
+#   block:
+#     - name: Get virtual machine info
+#       community.vmware.vmware_vm_info:
+#         hostname: '{{ vcenter }}'
+#         username: '{{ vcenter_user }}'
+#         password: '{{ vcenter_password }}'
+#         validate_certs : no
+#         vm_type: vm
+#       delegate_to: localhost
+#       register: vm_info
+
+#     - debug:
+#         msg:  "{{ item.ip_address }}"
+        
+#       with_items:
+#         - "{{ vm_info.virtual_machines | json_query(query) }}"
+#       vars:
+#         query: "[?guest_name=='0rtr1']"
+#       register: echo
+    
+# - name: configure 0rtr1
+#   vyos.vyos.vyos_config:
+#     host: "192.168.222.108"
+#     username: "vyos"
+#     password: "vyos"
+#     lines: 
+#       - "set system host-name abc"
+#       - "commit"
+ 
