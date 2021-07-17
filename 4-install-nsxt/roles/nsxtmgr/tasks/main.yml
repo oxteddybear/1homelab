@@ -31,27 +31,27 @@
 #           nsx_isSSHEnabled : '{{ nsx_isSSHEnabled }}'
 #   delegate_to : localhost
 
-# - name: Check manager status
-#   nsxt_manager_status:
-#       hostname: "{{ nsx_mgr_ip }}"
-#       username: "admin"
-#       password: "{{ nsx_passwd_0 }}"
-#       validate_certs: "false"
-#       wait_time: 50
-#   delegate_to: localhost
-
-- name: Register compute manager
-  nsxt_fabric_compute_managers:
-    hostname: "{{ nsx_mgr_ip }}"
-    username: "admin"
-    password: "VMware1!VMware1!"
-    validate_certs: "false"
-    display_name: "{{ vcenter }}"
-    server: "{{ vcenter }}"
-    origin_type: "vCenter"
-    credential:
-      credential_type: "{{ vcenter_user }}"
-      username: "{{ vcenter_user }}"
-      password: "{{ vcenter_password }}"
-    state: present
+- name: Check manager status
+  nsxt_manager_status:
+      hostname: "{{ nsx_mgr_ip }}"
+      username: "admin"
+      password: "{{ nsx_passwd_0 }}"
+      validate_certs: "false"
+      wait_time: 50
   delegate_to: localhost
+
+# - name: Register compute manager
+#   nsxt_fabric_compute_managers:
+#     hostname: "{{ nsx_mgr_ip }}"
+#     username: "admin"
+#     password: "VMware1!VMware1!"
+#     validate_certs: "false"
+#     display_name: "{{ vcenter }}"
+#     server: "{{ vcenter }}"
+#     origin_type: "vCenter"
+#     credential:
+#       credential_type: "{{ vcenter_user }}"
+#       username: "{{ vcenter_user }}"
+#       password: "{{ vcenter_password }}"
+#     state: present
+#   delegate_to: localhost
