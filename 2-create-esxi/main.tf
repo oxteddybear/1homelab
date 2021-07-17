@@ -121,7 +121,8 @@ resource "vsphere_virtual_machine" "vesxi" {
   }
 
 provisioner "remote-exec" {
-    inline = ["esxcli system hostname set -H=esxi-${var.template.octet[count.index]} -d=${var.guest_domain}",
+    #inline = ["esxcli system hostname set -H=esxi-${var.template.octet[count.index]} -d=${var.guest_domain}",
+    inline = ["esxcli system hostname set -H=1esxi-${var.template.octet[count.index]} -d=${var.guest_domain}",
     "esxcli network ip dns server add --server=${var.guest_dns}",
     "echo server ${var.guest_ntp} > /etc/ntp.conf && /etc/init.d/ntpd start",
     "esxcli network vswitch standard add -v vSwitch1",
