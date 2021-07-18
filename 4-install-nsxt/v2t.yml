@@ -1,7 +1,7 @@
 ---
-- hosts: nsxtedges
-  roles:
-     - nsxtedge
+# - hosts: nsxtedges
+#   roles:
+#      - nsxtedge
 - hosts: nsxtmgrs
   roles:
      - nsxtmgr
