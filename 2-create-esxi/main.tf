@@ -15,10 +15,10 @@ data "vsphere_datastore" "target_datastore" {
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
 
-# data "vsphere_compute_cluster" "target_cluster" {
-#   name          = var.vsphere_cluster
-#   datacenter_id = data.vsphere_datacenter.target_dc.id
-# }
+data "vsphere_compute_cluster" "target_cluster" {
+  name          = var.vsphere_cluster
+  datacenter_id = data.vsphere_datacenter.target_dc.id
+}
 
 data "vsphere_network" "mgt_network" {
   name          = var.mgt_network
@@ -28,10 +28,6 @@ data "vsphere_network" "iscsi_network1" {
   name          = var.iscsi_network1
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
-# data "vsphere_network" "iscsi_network2" {
-#   name          = var.iscsi_network2
-#   datacenter_id = data.vsphere_datacenter.target_dc.id
-# }
 
 data "vsphere_network" "workload_network" {
   name          = var.workload_network
@@ -91,7 +87,7 @@ resource "vsphere_virtual_machine" "vesxi" {
   memory   = var.guest_memory
   nested_hv_enabled = "true"
   wait_for_guest_net_routable ="false"
-  guest_id = "vmkernel7Guest" #i hardcoded this, although you can query this from the data resource of the template
+  guest_id = "vmkernel6Guest" #i hardcoded this, although you can query this from the data resource of the template
   wait_for_guest_net_timeout = 35
   wait_for_guest_ip_timeout = 35
   scsi_type = "pvscsi"
@@ -99,7 +95,6 @@ resource "vsphere_virtual_machine" "vesxi" {
   network_interface {    network_id   = data.vsphere_network.mgt_network.id       }
   network_interface {    network_id   = data.vsphere_network.mgt_network.id       }
   network_interface {    network_id   = data.vsphere_network.iscsi_network1.id    }
-  # network_interface {    network_id   = data.vsphere_network.iscsi_network2.id    }
   network_interface {    network_id   = data.vsphere_network.workload_network.id  }
   network_interface {    network_id   = data.vsphere_network.workload_network.id  }
   network_interface {    network_id   = data.vsphere_network.workload_network.id  }
@@ -131,27 +126,18 @@ provisioner "remote-exec" {
     ##set promicouse, forged, mac-changes to true
     "esxcli network vswitch standard policy security set -m true -p true -f true -v vSwitch0",
     "esxcli network vswitch standard policy security set -m true -p true -f true -v vSwitch1",
-    # "esxcli network vswitch standard add -v vSwitch2",
-    # "esxcli network vswitch standard uplink add --uplink-name=vmnic3 --vswitch-name=vSwitch2",
-    # "esxcli network vswitch standard set -m 9000 -v vSwitch2",
+ 
     
     "esxcli network vswitch standard portgroup add --portgroup-name=iscsi1 --vswitch-name=vSwitch1",
     #"esxcli network vswitch standard portgroup set --portgroup-name=iscsi1 --vlan-id=0",
     "esxcli network ip interface add -p iscsi1 -i vmk1 -m 9000",
-
-    # "esxcli network vswitch standard portgroup add --portgroup-name=iscsi2 --vswitch-name=vSwitch2",
-    #"esxcli network vswitch standard portgroup set --portgroup-name=iscsi2 --vlan-id=0",
-    # "esxcli network ip interface add -p iscsi2 -i vmk2 -m 9000",
-    # "esxcli network ip interface tag add -i vmk2 -t VMotion",
+    "esxcli network ip interface tag add -i vmk1 -t VMotion",
 
     "esxcli network ip interface ipv4 set -i vmk0 -t static -g ${var.guest_gateway} -I ${var.guest_start_ip}${var.template.octet[count.index]} -N ${var.guest_netmask}",
     "esxcli network ip interface ipv4 set -i vmk1 -t static -I ${var.guest_start_ip1}${var.template.octet[count.index]} -N ${var.guest_netmask1}",
-    # "esxcli network ip interface ipv4 set -i vmk2 -t static -I ${var.guest_start_ip2}${var.template.octet[count.index]} -N ${var.guest_netmask}",
     "esxcli iscsi software set --enabled=true",
 
     "esxcli iscsi networkportal add -n vmk1 -A vmhba65",
-    # "esxcli iscsi networkportal add -n vmk2 -A vmhba65",
-    "esxcli iscsi adapter discovery sendtarget add -a 10.10.9.176:3260 -A vmhba65",  
     "esxcli iscsi adapter discovery sendtarget add -a 10.10.9.177:3260 -A vmhba65",
     "esxcli iscsi adapter discovery rediscover -A vmhba65"
     ]

@@ -28,7 +28,7 @@ variable "guest_netmask1" {  description = "Netmask for the guest vmk1 interface
 # variable "guest_netmask2" {  description = "Netmask for the guest vmk2 interface"}
 variable "guest_gateway" {  description = "Gateway for the guest vmk0 interface" }
 
-# Indicate VM names and value of IP address last octet . By default it will create 5 VMs 
+
 # variable "template" {
 # default = {
 #   #the type is a map of lists take note of the brackets []=list {}=map=key/value pairs
@@ -36,11 +36,11 @@ variable "guest_gateway" {  description = "Gateway for the guest vmk0 interface"
 #   #name = contains the template names that exists on vcente, octet is the last octet of the ip addresses it will have
   
 #   "name" = [ #put the names of the templates you have in vcenter under Packer_vms
-#   "template-esxi001", 
-#   "template-esxi002",
-#   "template-esxi003", 
-#   "template-esxi004",
-#   "template-esxi005"
+#   "1template-esxi001", 
+#   "1template-esxi002",
+#   "1template-esxi003", 
+#   "1template-esxi004",
+#   "1template-esxi005"
   
 #   ]
 #   "octet"=[  #put the last octet of the esxi here
@@ -52,7 +52,6 @@ variable "guest_gateway" {  description = "Gateway for the guest vmk0 interface"
 #     ]
 #   }
 # }
-
 variable "template" {
 default = {
   #the type is a map of lists take note of the brackets []=list {}=map=key/value pairs
@@ -60,11 +59,11 @@ default = {
   #name = contains the template names that exists on vcente, octet is the last octet of the ip addresses it will have
   
   "name" = [ #put the names of the templates you have in vcenter under Packer_vms
-  "1template-esxi001", 
-  "1template-esxi002",
-  "1template-esxi003", 
-  "1template-esxi004",
-  "1template-esxi005"
+  "2template-esxi001", 
+  "2template-esxi002",
+  "2template-esxi003", 
+  "2template-esxi004",
+  "2template-esxi005"
   
   ]
   "octet"=[  #put the last octet of the esxi here
