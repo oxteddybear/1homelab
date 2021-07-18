@@ -14,8 +14,8 @@ variable "vds2_mtu"           {  description = "VDS MTU"}
 variable "addhost" { ### how many nested esxi you want? put here
   default = {
    name = [
-      "192.168.8.101",
-      "192.168.8.102"
+      "192.168.8.111",
+      "192.168.8.112"
     ]
   }
 }
