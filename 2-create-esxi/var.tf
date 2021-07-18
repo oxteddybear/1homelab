@@ -23,9 +23,11 @@ variable "guest_ntp" {  description = "NTP server for the guest." }
 variable "guest_domain" {  description = "Domain for the guest." }
 variable "guest_start_ip" {  description = "Starting IP address for the guest vmk0 interface"  }
 variable "guest_start_ip1" {  description = "Starting IP address for the guest vmk1 interface" }
+variable "guest_start_ip2" {  description = "Starting IP address for the guest vmk1 interface" }
 # variable "guest_start_ip2" {  description = "Starting IP address for the guest vmk2 interface"}
 variable "guest_netmask" {  description = "Netmask for the guest vmk0 interface"   }
 variable "guest_netmask1" {  description = "Netmask for the guest vmk1 interface"}
+variable "guest_netmask2" {  description = "Netmask for the guest vmk1 interface"}
 # variable "guest_netmask2" {  description = "Netmask for the guest vmk2 interface"}
 variable "guest_gateway" {  description = "Gateway for the guest vmk0 interface" }
 
