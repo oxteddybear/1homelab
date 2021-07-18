@@ -69,12 +69,12 @@ default = {
   "2template-esxi005"
   
   ]
-  "octet"=[  #put the last octet of the esxi here
-    106,
-    107,
-    108,
-    109,
-    110
+  "octet"=[  #put the last octet of the esxi here, do not use 108 and 109 as the parent uses them
+    111,
+    112,
+    113,
+    114,
+    115
     ]
   }
 }
