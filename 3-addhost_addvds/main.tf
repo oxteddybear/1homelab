@@ -1,9 +1,9 @@
 module "nsxv" {
-    source = "./nsxv"
+    source = "./nsxv" #directory! 
     # Provider
     vsphere_user = "administrator@vsphere.local"
     vsphere_password = "VMware1!"
-    vsphere_server = "192.168.254.133"
+    vsphere_server = "192.168.254.131"
 
     # Infrastructure
     vsphere_datacenter = "nsxv-dc"
