@@ -148,9 +148,15 @@ provisioner "remote-exec" {
  
     
     "esxcli network vswitch standard portgroup add --portgroup-name=iscsi1 --vswitch-name=vSwitch1",
+    "esxcli network vswitch standard portgroup add --portgroup-name=vmotion --vswitch-name=vSwitch2",
+    
+
     #"esxcli network vswitch standard portgroup set --portgroup-name=iscsi1 --vlan-id=0",
     ## NEEDS TO MATCH TRUENAS MTU SIZE OR IT WILL KEEP DROPPING
     "esxcli network ip interface add -p iscsi1 -i vmk1 -m 1500",
+    "esxcli network ip interface add -p vmotion -i vmk2 -m 9000",
+    
+
     "esxcli network ip interface tag add -i vmk2 -t VMotion",
 
     "esxcli network ip interface ipv4 set -i vmk0 -t static -I ${var.guest_start_ip}${var.template.octet[count.index]} -N ${var.guest_netmask} -g ${var.guest_gateway} ",
