@@ -55,6 +55,29 @@ variable "guest_gateway" {  description = "Gateway for the guest vmk0 interface"
 #     ]
 #   }
 # }
+# variable "template" {
+# default = {
+#   #the type is a map of lists take note of the brackets []=list {}=map=key/value pairs
+#   #to access the values: var.variablename.key[index] eg. var.template.octet[0] give you 101
+#   #name = contains the template names that exists on vcente, octet is the last octet of the ip addresses it will have
+  
+#   "name" = [ #put the names of the templates you have in vcenter under Packer_vms
+#   "2template-esxi001", 
+#   "2template-esxi002",
+#   "2template-esxi003", 
+#   "2template-esxi004",
+#   "2template-esxi005"
+  
+#   ]
+#   "octet"=[  #put the last octet of the esxi here
+#     106,
+#     107,
+#     108,
+#     109,
+#     110
+#     ]
+#   }
+# }
 variable "template" {
 default = {
   #the type is a map of lists take note of the brackets []=list {}=map=key/value pairs
@@ -62,18 +85,12 @@ default = {
   #name = contains the template names that exists on vcente, octet is the last octet of the ip addresses it will have
   
   "name" = [ #put the names of the templates you have in vcenter under Packer_vms
-  "2template-esxi001", 
-  "2template-esxi002",
-  "2template-esxi003", 
-  "2template-esxi004",
+
   "2template-esxi005"
   
   ]
   "octet"=[  #put the last octet of the esxi here
-    106,
-    107,
-    108,
-    109,
+
     110
     ]
   }
