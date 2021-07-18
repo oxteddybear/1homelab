@@ -7,9 +7,10 @@ variable "vsphere_datacenter" {  description = "vSphere datacenter"}
 variable "vsphere_cluster" {  description = "vSphere cluster"}
 variable "vsphere_datastore" {  description = "Datastore where VMs will be deployed."}
 variable "vsphere_folder" {  description = "vSphere folder to store VMs"}
+
 variable "workload_network" {  description = "Porgroup to which the virtual machine will be connected."}
 variable "iscsi_network1" {  description = "Porgroup to which the virtual machine will be connected."}
-# variable "iscsi_network2" {  description = "Porgroup to which the virtual machine will be connected."}
+variable "vmotion_network" {  description = "Porgroup to which the virtual machine will be connected."}
 variable "mgt_network" {  description = "Porgroup to which the virtual machine management will be connected."}
 
 variable "guest_vcpu" {  description = "Guest VM vCPU amount"}
