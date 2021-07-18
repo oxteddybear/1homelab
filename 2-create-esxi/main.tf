@@ -34,6 +34,11 @@ data "vsphere_network" "workload_network" {
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
 
+data "vsphere_network" "vmotion_network" {
+  name          = var.vmotion_network
+  datacenter_id = data.vsphere_datacenter.target_dc.id
+}
+
 #query the below data sources for as many as templates as you needj
 data "vsphere_virtual_machine" "template0" {
   name          = var.template.name[0]
@@ -95,6 +100,8 @@ resource "vsphere_virtual_machine" "vesxi" {
   network_interface {    network_id   = data.vsphere_network.mgt_network.id       }
   network_interface {    network_id   = data.vsphere_network.mgt_network.id       }
   network_interface {    network_id   = data.vsphere_network.iscsi_network1.id    }
+  network_interface {    network_id   = data.vsphere_network.vmotion_network.id   }
+  network_interface {    network_id   = data.vsphere_network.workload_network.id  }
   network_interface {    network_id   = data.vsphere_network.workload_network.id  }
   network_interface {    network_id   = data.vsphere_network.workload_network.id  }
   network_interface {    network_id   = data.vsphere_network.workload_network.id  }
@@ -120,21 +127,35 @@ provisioner "remote-exec" {
     inline = ["esxcli system hostname set -H=1esxi-${var.template.octet[count.index]} -d=${var.guest_domain}",
     "esxcli network ip dns server add --server=${var.guest_dns}",
     "echo server ${var.guest_ntp} > /etc/ntp.conf && /etc/init.d/ntpd start",
+
+
+    #ISCSI
     "esxcli network vswitch standard add -v vSwitch1",
     "esxcli network vswitch standard uplink add --uplink-name=vmnic2 --vswitch-name=vSwitch1",
-    "esxcli network vswitch standard set -m 9000 -v vSwitch1",
-    ##set promicouse, forged, mac-changes to true
+    "esxcli network vswitch standard set -m 1500 -v vSwitch1",
+    
+
+    #VMOTION
+    "esxcli network vswitch standard add -v vSwitch2",
+    "esxcli network vswitch standard uplink add --uplink-name=vmnic3 --vswitch-name=vSwitch2",
+    "esxcli network vswitch standard set -m 9000 -v vSwitch2",
+    
+    
+    ##set promicouse, forged, mac-changes to true 
     "esxcli network vswitch standard policy security set -m true -p true -f true -v vSwitch0",
-    "esxcli network vswitch standard policy security set -m true -p true -f true -v vSwitch1",
+    #"esxcli network vswitch standard policy security set -m true -p true -f true -v vSwitch1",
  
     
     "esxcli network vswitch standard portgroup add --portgroup-name=iscsi1 --vswitch-name=vSwitch1",
     #"esxcli network vswitch standard portgroup set --portgroup-name=iscsi1 --vlan-id=0",
-    "esxcli network ip interface add -p iscsi1 -i vmk1 -m 9000",
-    "esxcli network ip interface tag add -i vmk1 -t VMotion",
+    ## NEEDS TO MATCH TRUENAS MTU SIZE OR IT WILL KEEP DROPPING
+    "esxcli network ip interface add -p iscsi1 -i vmk1 -m 1500",
+    "esxcli network ip interface tag add -i vmk2 -t VMotion",
 
-    "esxcli network ip interface ipv4 set -i vmk0 -t static -g ${var.guest_gateway} -I ${var.guest_start_ip}${var.template.octet[count.index]} -N ${var.guest_netmask}",
+    "esxcli network ip interface ipv4 set -i vmk0 -t static -I ${var.guest_start_ip}${var.template.octet[count.index]} -N ${var.guest_netmask} -g ${var.guest_gateway} ",
     "esxcli network ip interface ipv4 set -i vmk1 -t static -I ${var.guest_start_ip1}${var.template.octet[count.index]} -N ${var.guest_netmask1}",
+    "esxcli network ip interface ipv4 set -i vmk2 -t static -I ${var.guest_start_ip2}${var.template.octet[count.index]} -N ${var.guest_netmask2}",
+
     "esxcli iscsi software set --enabled=true",
 
     "esxcli iscsi networkportal add -n vmk1 -A vmhba65",
