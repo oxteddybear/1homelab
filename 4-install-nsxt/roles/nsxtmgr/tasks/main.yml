@@ -8,10 +8,7 @@
       validate_certs: no
       datastore : '{{ vcenter_datastore }}'
       folder : '{{ vcenter_folder }}'
-#The ESXi hostname where the virtual machine will run.
-# This is a required parameter, if cluster is not set and hostname is set to the vCenter server.
-# esxi_hostname and cluster are mutually exclusive parameters.
-      esxi_hostname : '{{ esxi_ip }}' #also must specify inventory file to work ansible-playbook -i hosts.yml
+      # esxi_hostname and cluster are mutually exclusive parameters.    esxi_hostname : '{{ esxi_ip }}' #also must specify inventory file to work ansible-playbook -i hosts.yml
       #cluster: '{{ vcenter_cluster }}'
       name : '{{ inventory_hostname_short }}'
       disk_provisioning: thin
