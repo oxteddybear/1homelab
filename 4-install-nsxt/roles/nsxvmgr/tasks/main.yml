@@ -1,31 +1,31 @@
 ---
-  - name: install NSX-V managers
-    community.vmware.vmware_deploy_ovf:
-      hostname: '192.168.254.133'
-      username: 'administrator@vsphere.local'
-      password: 'VMware1!'
-      datacenter : 'dc1'
-      validate_certs: no
-      datastore : 'iscsi108'
-      #cluster: 'NSXT-EDGECLUSTER'
-      esxi_hostname : '{{ esxi_ip }}'      
-      name : '{{ inventory_hostname_short }}'
-      disk_provisioning: thin
-      wait : false
-      networks: 
-        Management_Network: 'VM Network'
+- name: install NSX-V managers
+  community.vmware.vmware_deploy_ovf:
+    hostname: '{{ vcenter }}'
+    username: '{{ vcenter_user }}'
+    password: '{{ vcenter_password }}'
+    datacenter : '{{ vcenter_datacenter }}'
+    validate_certs: no
+    datastore : '{{ vcenter_datastore }}'
+    folder : '{{ vcenter_folder }}'
+    esxi_hostname : '{{ esxi_ip }}' #also must specify inventory file to work ansible-playbook -i hosts.yml
+    name : '{{ inventory_hostname_short }}'
+    disk_provisioning: thin
+    wait: false
+    networks: 
+    Management_Network: 'VM Network'
 
-      ovf: "/ks/iso/VMware-NSX-Manager-6.4.10-17626462.ova"
-      properties:
-        vsm_cli_passwd_0    : 'VMware1!VMware1!'
-        vsm_cli_en_passwd_0 : 'VMware1!VMware1!'
-        vsm_hostname        : 'nsxvmgr01.rubber.ducky'
-        vsm_ip_0            : '192.168.8.141'
-        vsm_netmask_0       : '255.255.0.0'
-        vsm_gateway_0       : '192.168.254.254'
-        vsm_dns1_0          : '192.168.254.123'
-        vsm_domain_0        : 'rubber.ducky'
-        vsm_ntp_0           : 'time.google.com'
-        vsm_isSSHEnabled    : true
-        vsm_isCEIPEnabled   : false
+    ovf: "/ks/iso/VMware-NSX-Manager-6.4.10-17626462.ova"
+    properties:
+      vsm_cli_passwd_0    : 'VMware1!VMware1!'
+      vsm_cli_en_passwd_0 : 'VMware1!VMware1!'
+      vsm_hostname        : 'nsxvmgr01.rubber.ducky'
+      vsm_ip_0            : '192.168.8.141'
+      vsm_netmask_0       : '255.255.0.0'
+      vsm_gateway_0       : '192.168.254.254'
+      vsm_dns1_0          : '192.168.254.123'
+      vsm_domain_0        : 'rubber.ducky'
+      vsm_ntp_0           : 'time.google.com'
+      vsm_isSSHEnabled    : true
+      vsm_isCEIPEnabled   : false
     delegate_to : localhost
