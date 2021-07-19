@@ -1,13 +1,13 @@
 ---
-# - hosts: nsxtedges
-#   roles:
-#      - nsxtedge
-- hosts: nsxtmgrs
+- hosts: nsxtedges
   roles:
-     - nsxtmgr
+     - nsxtedge
+# - hosts: nsxtmgrs
+#   roles:
+#      - nsxtmgr
 # - hosts: ext_net
 #   roles:
 #     - vyos
-# - hosts: nsxvmgrs
-#   roles:
-#     - nsxvmgr
+- hosts: nsxvmgrs
+  roles:
+    - nsxvmgr
