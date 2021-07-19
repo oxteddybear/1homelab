@@ -7,8 +7,11 @@
       datacenter : '{{ vcenter_datacenter }}'
       validate_certs: no
       datastore : '{{ vcenter_datastore }}'
+#The ESXi hostname where the virtual machine will run.
+# This is a required parameter, if cluster is not set and hostname is set to the vCenter server.
+# esxi_hostname and cluster are mutually exclusive parameters.
       esxi_hostname : '{{ esxi_ip }}'
-      cluster: '{{ vcenter_cluster }}'
+      #cluster: '{{ vcenter_cluster }}'
       name : '{{ inventory_hostname_short }}'
       disk_provisioning: thin
       wait: false
