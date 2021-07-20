@@ -5,6 +5,6 @@
 # - hosts: nsxtmgrs
 #   roles:
 #      - nsxtmgr
-- hosts: nsxvmgrs
+- hosts: 0nsxvmgr01
   roles:
     - nsxvmgr
