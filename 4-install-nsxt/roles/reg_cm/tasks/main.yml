@@ -51,19 +51,24 @@
   ignore_errors: yes
 
 
-- name: Create IP Pools
-  nsxt_ip_pools:
+
+- name: Create NSX-T IP Pools using Polcy API
+  nsxt_policy_ip_pool:
     hostname: "{{ nsx_mgr_ip }}"
     username: "admin"
     password: "{{ nsx_cli_passwd_0 }}"
     validate_certs: False
     display_name: "ippool1"
-    subnets:
-    - allocation_ranges:
-      - start: "10.112.201.1"
-        end: "10.112.201.29"
-      cidr: "10.112.201.0/24"
-    state: "present"
+    pool_static_subnets:
+      - display_name: test-ip-static-subnet-2
+        state: present
+        allocation_ranges:
+          - start: '10.116.1.10'
+            end: '10.116.1.20'
+          - start: '10.116.1.30'
+            end: '10.116.1.40'
+        cidr: '10.116.1.0/26'
+    state: present
   ignore_errors: yes
 
 - name: Create Edge Cluster
