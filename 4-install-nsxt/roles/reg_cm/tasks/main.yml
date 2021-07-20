@@ -20,7 +20,7 @@
     password: "{{nsx_cli_passwd_0}}"
     validate_certs: False
     display_name: "vCenter"
-    server: "{{vcenter}}"
+    server: "{{compute_mgr}}"
     description: "Description of the resource"
     origin_type: vCenter
     credential:
@@ -28,4 +28,23 @@
       username: "administrator@vsphere.local"
       password: "VMware1!"
     state: present
+
+# - name: Create NSX-T transport zones
+#       nsxt_transport_zones:
+#         hostname: "{{ nsx_mgr_ip }}"
+#         username: "admin"
+#         password: "{{ nsx_cli_passwd_0 }}"
+#         validate_certs: False
+#         resource_type: "TransportZone"
+#         display_name: "overlah tz"
+#         is_default: "true"
+#         transport_type: "OVERLAY"
+#         host_switch_name: ""
+#         host_switch_mode: "STANDARD"
+#         state: "present"
+#       register: result
+#       loop: "{{ Nested_NSXT.System.Fabric.TransportZone | dict2items }}"
+#       when:
+#         - Deploy.Product.NSXT.LocalManager == true
+
 
