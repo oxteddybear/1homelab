@@ -28,8 +28,8 @@
       password: "VMware1!"
     state: present
   loop:
-    - { display_name: 'vCenter131', server: '192.168.254.131' }
-    - { display_name: 'vCenter132', server: '192.168.254.132' }
+    - { display_name: 'NSXV-vCenter131', server: '192.168.254.131' }
+    - { display_name: 'NSXT-vCenter132', server: '192.168.254.132' }
   ignore_errors: yes  
 
 - name: Create NSX-T transport zones
