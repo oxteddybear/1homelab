@@ -1,5 +1,8 @@
 ---
-
+#before you can do all this, you need to make sure the following:
+# 1. nsxt mgr services is up and running
+# 2. st en, vi /etc/ssh/sshd_config, PermitRootLogin yes, systemctl restart sshd
+# 3. to understand all the options available, look at the corrosponding .py files in modules
 - name: Install All NSX-T Licenses
   nsxt_licenses:
     hostname: "{{ nsx_mgr_ip }}"
@@ -24,5 +27,5 @@
       credential_type: "UsernamePasswordLoginCredential"
       username: "administrator@vsphere.local"
       password: "VMware1!"
-    # thumbprint: "36:43:34:D9:C2:06:27:4B:EE:C3:4A:AE:23:BF:76:A0:0C:4D:D6:8A:D3:16:55:97:62:07:C2:84:0C:D8:BA:66"
     state: present
+
