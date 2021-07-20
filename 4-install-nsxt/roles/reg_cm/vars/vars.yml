@@ -2,7 +2,7 @@ edge_transport_nodes:
 - display_name: TN1
   host_switches:
   - host_switch_profiles:
-    - name: uplinkProfile1
+    - name: edge_uplink_profile
       type: UplinkHostSwitchProfile
     host_switch_name: hostswitch1
     host_switch_mode: STANDARD
@@ -13,9 +13,11 @@ edge_transport_nodes:
       resource_type: StaticIpPoolSpec
       ip_pool_name: "ippool1"
     transport_zone_endpoints:
-    - transport_zone_name: "TZ1"
+    - transport_zone_name: "overlayTZ"
+    - transport_zone_name: "vlanTZ"
   transport_zone_endpoints:
-  - transport_zone_name: "TZ1"
+  - transport_zone_name: "overlayTZ"
+  - transport_zone_name: "vlanTZ"
   node_deployment_info:
     resource_type: "EdgeNode"
     display_name: "EdegeNode1"
@@ -24,21 +26,21 @@ edge_transport_nodes:
     deployment_config:
       form_factor: "SMALL"
       node_user_settings:
-        cli_password: "Admin!23Admin"
-        root_password: "Admin!23Admin"
+        cli_password: "{{nsx_cli_passwd_0}}"
+        root_password: "{{nsx_cli_passwd_0}}"
       vm_deployment_config:
         placement_type: VsphereDeploymentConfig
-        vc_name: "VC2"
+        vc_name: "NSXT-vCenter132"
         vc_username: "administrator@vsphere.local"
-        vc_password:  "XYZ#@!"
+        vc_password:  "VMware1!"
         data_network:
-        - VM Network
-        - VM Network
-        - VM Network
+        - 'VM Network'
+        - dpg-vdsdata-edgeuplink1
+        - dpg-vdsdata-edgeuplink2 
         management_network: "VM Network"
         hostname: "EdgeVM1"
-        compute: "Cluster1"
-        storage: "Datastore1"
+        compute: "edge-cluster "
+        storage: "iscsi108"
         host: "MyHost"
-        default_gateway_addresses: X.Y.Z.A
-        management_port_subnets: P.Q.R.s/S
+        default_gateway_addresses: 192.168.254.254
+        management_port_subnets: 192.168.8.251/16
