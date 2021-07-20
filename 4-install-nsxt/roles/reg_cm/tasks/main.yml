@@ -50,7 +50,27 @@
     - { display_name: 'vlan tz', host_switch_name: 'vdsdata', transport_type: 'VLAN' }
   ignore_errors: yes
 
-
+- name: Create Uplink Profiles
+  nsxt_uplink_profiles:
+    hostname: "{{ nsx_mgr_ip }}"
+    username: "admin"
+    password: "{{ nsx_cli_passwd_0 }}"
+    validate_certs: False
+    resource_type: UplinkHostSwitchProfile
+    send_enabled: true
+    display_name: "{{ item.display_name }}"
+    mtu: 1600
+    transport_vlan: "1234"                        # Overlay Transport VLAN
+    teaming:
+      active_list:
+      - uplink_name: "uplink-1"
+        uplink_type: PNIC
+      policy: FAILOVER_ORDER                                     # Default NIC Teaming
+    state: "present"
+  loop:
+    - { display_name: 'esxi_uplink_profile'}
+    - { display_name: 'edge_uplink_profile'}
+  ignore_errors: yes
 
 - name: Create NSX-T IP Pools using Polcy API
   nsxt_policy_ip_pool:
