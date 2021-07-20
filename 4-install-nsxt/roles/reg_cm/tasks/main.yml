@@ -42,7 +42,7 @@
     display_name: "{{ item.display_name }}"
     is_default: "true"
     transport_type: "{{item.transport_type}}"
-    host_switch_name: "{{item.host_switch_name}}"
+    #host_switch_name: "{{item.host_switch_name}}"
     host_switch_mode: "STANDARD"
     state: "present"
   loop:
@@ -91,6 +91,8 @@
     state: present
   ignore_errors: yes
 
+
+
 - name: Create Edge Cluster
   nsxt_edge_clusters:
     hostname: "{{ nsx_mgr_ip }}"
@@ -101,3 +103,21 @@
     # members:
     #   - transport_node_name: "TN_1"
     state: present
+
+
+- name: Create edge transport nodes
+  vmware.ansible_for_nsxt.nsxt_transport_nodes:
+    hostname: "{{ nsx_mgr_ip }}"
+    username: "admin"
+    password: "{{ nsx_cli_passwd_0 }}"
+    validate_certs: False
+    display_name: "{{display_name}}"
+    description: "Edge transport node ansible"
+    host_switch_spec:
+      resource_type: StandardHostSwitchSpec
+      host_switches: "{{item.host_switches}}"
+    transport_zone_endpoints: "{{item.transport_zone_endpoints}}"
+    node_deployment_info: "{{item.node_deployment_info}}"
+    state: present
+  with_items:
+    - "{{edge_transport_nodes}}"
