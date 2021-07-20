@@ -91,22 +91,6 @@
     state: present
   ignore_errors: yes
 
-- name: Create edge transport nodes
-  vars_files: vars/vars.yml
-  vmware.ansible_for_nsxt.nsxt_transport_nodes:
-    hostname: "{{ nsx_mgr_ip }}"
-    username: "admin"
-    password: "{{ nsx_cli_passwd_0 }}"
-    validate_certs: False
-    display_name: "EN1"
-    host_switch_spec:
-      resource_type: StandardHostSwitchSpec
-      host_switches: "{{item.host_switches}}"
-    transport_zone_endpoints: "{{item.transport_zone_endpoints}}"
-    node_deployment_info: "{{item.node_deployment_info}}"
-    state: present
-  with_items:
-    - "{{edge_transport_nodes}}"
 
 - name: Create Edge Cluster
   nsxt_edge_clusters:
