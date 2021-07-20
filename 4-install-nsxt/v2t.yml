@@ -1,0 +1,11 @@
+---
+# - hosts: nsxtedges
+#   roles:
+#      - nsxtedge
+# - hosts: nsxtmgrs
+#   roles:
+#     - nsxtmgr
+
+- hosts: nsxvmgrs
+  roles:
+    - nsxvmgr
