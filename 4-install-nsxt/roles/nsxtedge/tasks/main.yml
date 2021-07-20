@@ -40,7 +40,7 @@
     username: "admin"
     password: "VMware1!VMware1!"
     validate_certs: False
-    display_name: "{{display_name}}"
+    display_name: "en1"
     description: "Edge transport node ansible"
     host_switch_spec:
       resource_type: StandardHostSwitchSpec
