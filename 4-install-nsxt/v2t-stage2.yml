@@ -4,7 +4,8 @@
 #      - nsxtedge
 - hosts: nsxtmgrs
   roles:
-     - nsxtmgr
+     - reg_cm
+     
 # - hosts: ext_net
 #   roles:
 #     - vyos

@@ -1,15 +1,5 @@
 ---
 
-# - name: Shows status of nsxt manager
-#   nsxt_manager_status:
-#       hostname: "nsx_mgr_ip"
-#       username: "admin"
-#       password: "nsx_passwd_0"
-#       validate_certs: False
-#       wait_time: 1
-#   delegate_to : localhost
-
-
 - name: Install All NSX-T Licenses
     nsxt_licenses:
       hostname: "{{ nsx_mgr_ip }}"
