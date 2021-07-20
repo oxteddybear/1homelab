@@ -19,7 +19,7 @@
     username: "admin"
     password: "{{nsx_cli_passwd_0}}"
     validate_certs: False
-    display_name: "vCenter"
+    display_name: "vCenter131"
     server: "{{compute_mgr}}"
     description: "Description of the resource"
     origin_type: vCenter
