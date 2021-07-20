@@ -56,5 +56,9 @@
     password: "{{ nsx_cli_passwd_0 }}"
     validate_certs: False
     display_name: "ippool1"
-    subnets: "10.10.10.0/24"
+    subnets:
+    - allocation_ranges:
+      - start: "10.112.201.1"
+        end: "10.112.201.29"
+      cidr: "10.112.201.0/24"
     state: "present"
