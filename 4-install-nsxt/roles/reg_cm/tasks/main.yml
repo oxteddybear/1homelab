@@ -4,9 +4,24 @@
   nsxt_licenses:
     hostname: "{{ nsx_mgr_ip }}"
     username: "admin"
-    password: "VMware1!VMware1!"
+    password: "{{nsx_cli_passwd_0}}"
     validate_certs: no
     license_key: "A56CM-0NM02-883DR-0HNH2-88NM5"
     state: present
-  become: no
-  become_user: admin
+
+- name: Register compute manager with NSX
+  nsxt_fabric_compute_managers:
+    hostname: "{{ nsx_mgr_ip }}"
+    username: "admin"
+    password: "{{nsx_cli_passwd_0}}"
+    validate_certs: False
+    display_name: "vCenter"
+    server: "{{vcenter}}"
+    description: "Description of the resource"
+    origin_type: vCenter
+    credential:
+      credential_type: "UsernamePasswordLoginCredential"
+      username: "administrator@vsphere.local"
+      password: "VMware1!"
+    # thumbprint: "36:43:34:D9:C2:06:27:4B:EE:C3:4A:AE:23:BF:76:A0:0C:4D:D6:8A:D3:16:55:97:62:07:C2:84:0C:D8:BA:66"
+    state: present
