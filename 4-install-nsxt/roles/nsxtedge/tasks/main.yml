@@ -34,68 +34,19 @@
 #           nsx_isSSHEnabled : '{{ nsx_isSSHEnabled }}'
 #   delegate_to : localhost
 
-- hosts: all
-  vars:
-   edge_transport_nodes:
-      - display_name: TN1
-        host_switches:
-        - host_switch_profiles:
-          - name: edge_uplink_profile
-            type: UplinkHostSwitchProfile
-          host_switch_name: hostswitch1
-          host_switch_mode: STANDARD
-          pnics:
-          - device_name: "vmnic1"
-            uplink_name: "uplink-1"
-          ip_assignment_spec:
-            resource_type: StaticIpPoolSpec
-            ip_pool_name: "ippool1"
-          transport_zone_endpoints:
-          - transport_zone_name: "overlayTZ"
-          - transport_zone_name: "vlanTZ"
-        transport_zone_endpoints:
-        - transport_zone_name: "overlayTZ"
-        - transport_zone_name: "vlanTZ"
-        node_deployment_info:
-          resource_type: "EdgeNode"
-          display_name: "EdegeNode1"
-          ip_addresses:
-          deployment_type: "VIRTUAL_MACHINE"
-          deployment_config:
-            form_factor: "SMALL"
-            node_user_settings:
-              cli_password: "{{nsx_cli_passwd_0}}"
-              root_password: "{{nsx_cli_passwd_0}}"
-            vm_deployment_config:
-              placement_type: VsphereDeploymentConfig
-              vc_name: "NSXT-vCenter132"
-              vc_username: "administrator@vsphere.local"
-              vc_password:  "VMware1!"
-              data_network:
-              - 'VM Network'
-              - dpg-vdsdata-edgeuplink1
-              - dpg-vdsdata-edgeuplink2 
-              management_network: "VM Network"
-              hostname: "EdgeVM1"
-              compute: "edge-cluster "
-              storage: "iscsi108"
-              host: "MyHost"
-              default_gateway_addresses: 192.168.254.254
-              management_port_subnets: 192.168.8.251/16
-  tasks:        
-  - name: Create edge transport nodes
-    nsxt_transport_nodes:
-      hostname: "{{ nsx_mgr_ip }}"
-      username: "admin"
-      password: "{{ nsx_cli_passwd_0 }}"
-      validate_certs: False
-      display_name: "{{display_name}}"
-      description: "Edge transport node ansible"
-      host_switch_spec:
-        resource_type: StandardHostSwitchSpec
-        host_switches: "{{item.host_switches}}"
-      transport_zone_endpoints: "{{item.transport_zone_endpoints}}"
-      node_deployment_info: "{{item.node_deployment_info}}"
-      state: present
-    with_items:
-      - "{{edge_transport_nodes}}"
+- name: Create edge transport nodes
+  nsxt_transport_nodes:
+    hostname: "{{ nsx_mgr_ip }}"
+    username: "admin"
+    password: "{{ nsx_cli_passwd_0 }}"
+    validate_certs: False
+    display_name: "{{display_name}}"
+    description: "Edge transport node ansible"
+    host_switch_spec:
+      resource_type: StandardHostSwitchSpec
+      host_switches: "{{item.host_switches}}"
+    transport_zone_endpoints: "{{item.transport_zone_endpoints}}"
+    node_deployment_info: "{{item.node_deployment_info}}"
+    state: present
+  with_items:
+    - "{{edge_transport_nodes}}"
