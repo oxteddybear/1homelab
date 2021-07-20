@@ -102,21 +102,21 @@
     # members:
     #   - transport_node_name: "TN_1"
     state: present
+  ignore_errors: yes
 
-
-- name: Create edge transport nodes
-  nsxt_transport_nodes:
-    hostname: "192.168.254.61"
-    username: "admin"
-    password: "VMware1!VMware1!"
-    validate_certs: False
-    display_name: "en1"
-    description: "Edge transport node ansible"
-    host_switch_spec:
-      resource_type: StandardHostSwitchSpec
-      host_switches: "{{item.host_switches}}"
-    transport_zone_endpoints: "{{item.transport_zone_endpoints}}"
-    node_deployment_info: "{{item.node_deployment_info}}"
-    state: present
-  with_items:
-    - "{{edge_transport_nodes}}"
+# - name: Create edge transport nodes
+#   nsxt_transport_nodes:
+#     hostname: "192.168.254.61"
+#     username: "admin"
+#     password: "VMware1!VMware1!"
+#     validate_certs: False
+#     display_name: "en1"
+#     description: "Edge transport node ansible"
+#     host_switch_spec:
+#       resource_type: StandardHostSwitchSpec
+#       host_switches: "{{item.host_switches}}"
+#     transport_zone_endpoints: "{{item.transport_zone_endpoints}}"
+#     node_deployment_info: "{{item.node_deployment_info}}"
+#     state: present
+#   with_items:
+#     - "{{edge_transport_nodes}}"
