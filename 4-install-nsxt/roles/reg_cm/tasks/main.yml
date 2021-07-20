@@ -44,8 +44,8 @@
     host_switch_mode: "STANDARD"
     state: "present"
   loop:
-    - { display_name: 'overlah tz', host_switch_name: 'vdsdata', transport_type:'OVERLAY' }
-    - { display_name: 'vlan tz', host_switch_name: 'vdsdata', transport_type:'VLAN' }
+    - { display_name: 'overlah tz', host_switch_name: 'vdsdata', transport_type: 'OVERLAY' }
+    - { display_name: 'vlan tz', host_switch_name: 'vdsdata', transport_type: 'VLAN' }
   ignore_errors: yes
 
 
