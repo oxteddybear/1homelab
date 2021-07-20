@@ -57,7 +57,7 @@
     password: "{{ nsx_cli_passwd_0 }}"
     validate_certs: False
     resource_type: UplinkHostSwitchProfile
-    send_enabled: yes
+    # send_enabled: yes
     display_name: "{{ item.display_name }}"
     mtu: 1600
     transport_vlan: "1234"                        # Overlay Transport VLAN
