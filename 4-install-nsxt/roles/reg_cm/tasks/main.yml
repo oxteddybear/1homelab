@@ -28,7 +28,7 @@
       username: "administrator@vsphere.local"
       password: "VMware1!"
     state: present
-  ignore_errors: yes  # If license in already in use or not applicable, it will result in 'failure', so need to ensure we continue by ignoring the error
+  ignore_errors: yes  
 
 - name: Create NSX-T transport zones
   nsxt_transport_zones:
@@ -43,7 +43,7 @@
     host_switch_name: "vdsdata"
     host_switch_mode: "STANDARD"
     state: "present"
-  ignore_errors: yes  # If license in already in use or not applicable, it will result in 'failure', so need to ensure we continue by ignoring the error
+  ignore_errors: yes  
 
 
 
