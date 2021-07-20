@@ -19,15 +19,17 @@
     username: "admin"
     password: "{{nsx_cli_passwd_0}}"
     validate_certs: False
-    display_name: "vCenter131"
-    server: "{{compute_mgr}}"
-    description: "Description of the resource"
+    display_name: "{{item.display_name}}"
+    server: "{{item.server}}"
     origin_type: vCenter
     credential:
       credential_type: "UsernamePasswordLoginCredential"
       username: "administrator@vsphere.local"
       password: "VMware1!"
     state: present
+  loop:
+    - { display_name: 'vCenter131', server: '192.168.254.131' }
+    - { display_name: 'vCenter132', server: '192.168.254.132' }
   ignore_errors: yes  
 
 - name: Create NSX-T transport zones
@@ -62,6 +64,7 @@
         end: "10.112.201.29"
       cidr: "10.112.201.0/24"
     state: "present"
+  ignore_errors: yes
 
 - name: Create Edge Cluster
   nsxt_edge_clusters:
@@ -69,10 +72,7 @@
     username: "admin"
     password: "{{ nsx_cli_passwd_0 }}"
     validate_certs: False
-    display_name: edge-cluster-1  `
-    cluster_profile_bindings:
-      - profile_name: "nsx-default-edge-high-availability-profile"
-        resource_type: EdgeHighAvailabilityProfile
+    display_name: 'edge-cluster-1'
     # members:
     #   - transport_node_name: "TN_1"
     state: present
