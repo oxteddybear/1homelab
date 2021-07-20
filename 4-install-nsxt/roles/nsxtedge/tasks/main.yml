@@ -36,7 +36,8 @@
 
 
 - name: Create edge transport nodes
-  vmware.ansible_for_nsxt.nsxt_transport_nodes:
+  vars_files: vars.yml
+  nsxt_transport_nodes:
     hostname: "{{ nsx_mgr_ip }}"
     username: "admin"
     password: "{{ nsx_cli_passwd_0 }}"
