@@ -49,3 +49,12 @@
   ignore_errors: yes
 
 
+- name: Create IP Pools
+  nsxt_ip_pools:
+    hostname: "{{ nsx_mgr_ip }}"
+    username: "admin"
+    password: "{{ nsx_cli_passwd_0 }}"
+    validate_certs: False
+    display_name: "ippool1"
+    subnets: "10.10.10.0/24"
+    state: "present"
