@@ -1,0 +1,5 @@
+---
+- hosts: external_net
+  roles:
+    - vyos
+  

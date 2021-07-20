@@ -1,0 +1,14 @@
+---
+# - hosts: nsxtedges
+#   roles:
+#      - nsxtedge
+- hosts: nsxtmgrs
+  roles:
+     - reg_cm
+     
+# - hosts: ext_net
+#   roles:
+#     - vyos
+# - hosts: nsxvmgrs
+#   roles:
+#     - nsxvmgr

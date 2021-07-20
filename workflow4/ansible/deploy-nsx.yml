@@ -1,7 +1,0 @@
----
-- hosts: edges
-  roles:
-     - deploy-edges
-- hosts: managers
-  roles:
-     - deploy-managers

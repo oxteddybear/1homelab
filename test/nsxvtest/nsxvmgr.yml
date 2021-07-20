@@ -1,0 +1,5 @@
+---
+- hosts: nsxvmgrs
+  roles:
+    - nsxvmgr
+  
