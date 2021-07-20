@@ -36,9 +36,9 @@
 
 - name: Create edge transport nodes
   nsxt_transport_nodes:
-    hostname: "{{ nsx_mgr_ip }}"
+    hostname: "192.168.254.61"
     username: "admin"
-    password: "{{ nsx_cli_passwd_0 }}"
+    password: "VMware1!VMware1!"
     validate_certs: False
     display_name: "{{display_name}}"
     description: "Edge transport node ansible"
