@@ -8,7 +8,7 @@
     validate_certs: no
     datastore : '{{ vcenter_datastore }}'
     folder : '{{ vcenter_folder }}'
-    esxi_hostname : '{{ esxi_ip }}' #also must specify inventory file to work ansible-playbook -i hosts.yml
+    esxi_hostname : '192.168.254.108' #also must specify inventory file to work ansible-playbook -i hosts.yml
     name : '{{ inventory_hostname_short }}'
     disk_provisioning: thin
     wait: false
