@@ -3,10 +3,10 @@
 - name: Install All NSX-T Licenses
   nsxt_licenses:
     hostname: "{{ nsx_mgr_ip }}"
-    username: "{{nsxt_user}}"
+    username: "admin"
     password: "VMware1!VMware1!"
     validate_certs: no
     license_key: "A56CM-0NM02-883DR-0HNH2-88NM5"
     state: present
-  # become: yes
-  become_user: "admin"
+  become: yes
+  become_user: admin
