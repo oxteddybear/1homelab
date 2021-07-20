@@ -1,103 +1,44 @@
----
-#before you can do all this, you need to make sure the following:
-# 1. nsxt mgr services is up and running
-# 2. st en, vi /etc/ssh/sshd_config, PermitRootLogin yes, systemctl restart sshd
-# 3. to understand all the options available, look at the corrosponding .py files in modules
-- name: Install All NSX-T Licenses
-  nsxt_licenses:
-    hostname: "{{ nsx_mgr_ip }}"
-    username: "admin"
-    password: "{{nsx_cli_passwd_0}}"
-    validate_certs: no
-    license_key: "A56CM-0NM02-883DR-0HNH2-88NM5"
-    state: present
-  ignore_errors: yes  # If license in already in use or not applicable, it will result in 'failure', so need to ensure we continue by ignoring the error
-
-- name: Register compute manager with NSX
-  nsxt_fabric_compute_managers:
-    hostname: "{{ nsx_mgr_ip }}"
-    username: "admin"
-    password: "{{nsx_cli_passwd_0}}"
-    validate_certs: False
-    display_name: "{{item.display_name}}"
-    server: "{{item.server}}"
-    origin_type: vCenter
-    credential:
-      credential_type: "UsernamePasswordLoginCredential"
-      username: "administrator@vsphere.local"
-      password: "VMware1!"
-    state: present
-  loop:
-    - { display_name: 'NSXV-vCenter131', server: '192.168.254.131' }
-    - { display_name: 'NSXT-vCenter132', server: '192.168.254.132' }
-  ignore_errors: yes  
-
-- name: Create NSX-T transport zones
-  nsxt_transport_zones:
-    hostname: "{{ nsx_mgr_ip }}"
-    username: "admin"
-    password: "{{ nsx_cli_passwd_0 }}"
-    validate_certs: False
-    resource_type: "TransportZone"
-    display_name: "{{ item.display_name }}"
-    is_default: "true"
-    transport_type: "{{item.transport_type}}"
-    host_switch_name: "{{item.host_switch_name}}"
-    host_switch_mode: "STANDARD"
-    state: "present"
-  loop:
-    - { display_name: 'overlayTZ', host_switch_name: 'vdsdata', transport_type: 'OVERLAY' }
-    - { display_name: 'vlanTZ', host_switch_name: 'vdsdata', transport_type: 'VLAN' }
-  ignore_errors: yes
-
-- name: Create Uplink Profiles
-  nsxt_uplink_profiles:
-    hostname: "{{ nsx_mgr_ip }}"
-    username: "admin"
-    password: "{{ nsx_cli_passwd_0 }}"
-    validate_certs: False
-    resource_type: UplinkHostSwitchProfile
-    # send_enabled: yes
-    display_name: "{{ item.display_name }}"
-    mtu: 1600
-    transport_vlan: "1234"                        # Overlay Transport VLAN
-    teaming:
-      active_list:
-      - uplink_name: "uplink-1"
-        uplink_type: PNIC
-      policy: FAILOVER_ORDER                                     # Default NIC Teaming
-    state: "present"
-  loop:
-    - { display_name: 'esxi_uplink_profile'}
-    - { display_name: 'edge_uplink_profile'}
-  ignore_errors: yes
-
-- name: Create NSX-T IP Pools using Polcy API
-  nsxt_policy_ip_pool:
-    hostname: "{{ nsx_mgr_ip }}"
-    username: "admin"
-    password: "{{ nsx_cli_passwd_0 }}"
-    validate_certs: False
-    display_name: "ippool1"
-    pool_static_subnets:
-      - display_name: test-ip-static-subnet-2
-        state: present
-        allocation_ranges:
-          - start: '10.116.1.10'
-            end: '10.116.1.20'
-          - start: '10.116.1.30'
-            end: '10.116.1.40'
-        cidr: '10.116.1.0/24'
-    state: present
-  ignore_errors: yes
-
-- name: Create Edge Cluster
-  nsxt_edge_clusters:
-    hostname: "{{ nsx_mgr_ip }}"
-    username: "admin"
-    password: "{{ nsx_cli_passwd_0 }}"
-    validate_certs: False
-    display_name: 'edge-cluster-1'
-    # members:
-    #   - transport_node_name: "TN_1"
-    state: present
+edge_transport_nodes:
+- display_name: TN1
+  host_switches:
+  - host_switch_profiles:
+    - name: uplinkProfile1
+      type: UplinkHostSwitchProfile
+    host_switch_name: hostswitch1
+    host_switch_mode: STANDARD
+    pnics:
+    - device_name: "vmnic1"
+      uplink_name: "uplink-1"
+    ip_assignment_spec:
+      resource_type: StaticIpPoolSpec
+      ip_pool_name: "ippool1"
+    transport_zone_endpoints:
+    - transport_zone_name: "TZ1"
+  transport_zone_endpoints:
+  - transport_zone_name: "TZ1"
+  node_deployment_info:
+    resource_type: "EdgeNode"
+    display_name: "EdegeNode1"
+    ip_addresses:
+    deployment_type: "VIRTUAL_MACHINE"
+    deployment_config:
+      form_factor: "SMALL"
+      node_user_settings:
+        cli_password: "Admin!23Admin"
+        root_password: "Admin!23Admin"
+      vm_deployment_config:
+        placement_type: VsphereDeploymentConfig
+        vc_name: "VC2"
+        vc_username: "administrator@vsphere.local"
+        vc_password:  "XYZ#@!"
+        data_network:
+        - VM Network
+        - VM Network
+        - VM Network
+        management_network: "VM Network"
+        hostname: "EdgeVM1"
+        compute: "Cluster1"
+        storage: "Datastore1"
+        host: "MyHost"
+        default_gateway_addresses: X.Y.Z.A
+        management_port_subnets: P.Q.R.s/S
