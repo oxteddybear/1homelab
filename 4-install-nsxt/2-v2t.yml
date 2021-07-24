@@ -14,8 +14,8 @@
 
 - hosts: nsxtmgrs
   roles:
-    - roles: reg_cm
-    - roles: cpf #to add roles/cpf/vars/main.yml
+    - role: reg_cm
+    - role: cpf #to add roles/cpf/vars/main.yml
      
 # - hosts: ext_net
 #   roles:
