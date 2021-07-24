@@ -1,3 +1,4 @@
       nsx_mgr_ip : '192.168.254.61'
       compute_mgr:  "192.168.254.131"
+      manager_ova: "/ks/iso/nsx-unified-appliance-3.1.2.1.0.17975796.ova"
       ansible_user: 'root' #requires that root be allowed to login, so much junk in this crap module
