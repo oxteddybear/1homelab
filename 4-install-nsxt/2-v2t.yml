@@ -16,6 +16,7 @@
   roles:
     - role: reg_cm
     - role: cpf #to add roles/cpf/vars/main.yml
+      ansible_user: 'root' #requires that root be allowed to login, so much junk in this crap module
      
 # - hosts: ext_net
 #   roles:
