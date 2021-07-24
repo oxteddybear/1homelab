@@ -1,7 +1,15 @@
 ---
+# hosts: <reference the inventory host group you want to run against here>
+# roles:
+#   - <put the directory where you keep the tasks to run>
+
 # - hosts: nsxtedges
 #   roles:
 #      - nsxtedge
+- hosts: nsxtmgrs
+  roles:
+     - nsxtmgr
+
 - hosts: nsxtmgrs
   roles:
      - reg_cm
