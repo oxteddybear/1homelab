@@ -6,13 +6,16 @@
 # - hosts: nsxtedges
 #   roles:
 #      - nsxtedge
-- hosts: nsxtmgrs
-  roles:
-     - nsxtmgr
+# - hosts: nsxtmgrs
+#   roles:
+#     - role: nsxtmgr
+      # vars:
+    
 
 - hosts: nsxtmgrs
   roles:
-     - reg_cm
+    - roles: reg_cm
+    - roles: cpf #to add roles/cpf/vars/main.yml
      
 # - hosts: ext_net
 #   roles:

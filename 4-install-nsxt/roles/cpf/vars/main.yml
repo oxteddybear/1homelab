@@ -1,0 +1,3 @@
+      nsx_mgr_ip : '192.168.254.61'
+      ansible_user: 'root' #requires that root be allowed to login, so much junk in this crap module
+      compute_mgr:  "192.168.254.131"
