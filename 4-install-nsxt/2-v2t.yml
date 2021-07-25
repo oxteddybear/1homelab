@@ -6,18 +6,18 @@
 # - hosts: nsxtedges
 #   roles:
 #      - nsxtedge
-- hosts: nsxtmgrs
-  roles:
-    - role: nsxtmgr
-    - role: cpf
-      # vars:
-    
-
 # - hosts: nsxtmgrs
 #   roles:
-#     - role: reg_cm
-#     - role: cpf #add roles/cpf/vars/main.yml add the persona vars here
-      # ansible_user: 'root' #requires that root be allowed to login, so much junk in this crap module
+#     - role: nsxtmgr
+#     - role: cpf
+#       # vars:
+    
+
+- hosts: nsxtmgrs
+  roles:
+    - role: reg_cm
+    - role: cpf #add roles/cpf/vars/main.yml add the persona vars here
+      ansible_user: 'root' #requires that root be allowed to login, so much junk in this crap module
      
 # - hosts: ext_net
 #   roles:
