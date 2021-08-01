@@ -1,4 +1,4 @@
 ---
 - name: runs some command
-  command: /tmp/test.sh
+  command: "sh {{ cmd }}" #need this for esxi to run 
       
