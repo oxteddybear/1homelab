@@ -1,6 +1,6 @@
 ---
 - hosts: esxi
   tasks: 
-    - include_tasks: copyfile.yml
+    # - include_tasks: copyfile.yml
     - include_tasks: runcmd.yml
 
