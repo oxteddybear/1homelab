@@ -2,4 +2,4 @@
 - hosts: esxi
   tasks:
     - name: copy something
-      copy: src=/home/tyap/test.txt dest=/tmp mode=0777
+      copy: src=/home/tyap/{{ file }} dest=/tmp mode=0777
