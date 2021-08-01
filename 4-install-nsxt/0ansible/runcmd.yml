@@ -1,4 +1,4 @@
 ---
 - name: runs some command
-  command: "{{ cmd }}"
+  command: /tmp/test.sh
       
