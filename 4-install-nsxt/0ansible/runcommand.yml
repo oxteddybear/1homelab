@@ -1,0 +1,6 @@
+---
+- hosts: esxi
+  tasks:
+    - name: runs some command
+      command: /tmp/test.sh
+      
