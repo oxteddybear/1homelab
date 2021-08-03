@@ -1,15 +1,14 @@
 # Copyright 2018 VMware, Inc.
 # SPDX-License-Identifier: BSD-2-Clause OR GPL-3.0-only
 ---
-- hosts: 127.0.0.1
+- hosts: nsxtmgrs
   connection: local
-  become: yes
   vars_files:
     - setup_infra_vars.yml
   tasks:
     - name: Create Transport Nodes
       vmware.ansible_for_nsxt.nsxt_transport_nodes:
-        hostname: "{{ nsx_node1.mgmt_ip }}"
+        hostname: "192.168.254.61"
         username: "{{ nsx_username }}"
         password: "{{ nsx_password }}"
         validate_certs: "{{ validate_certs }}"
