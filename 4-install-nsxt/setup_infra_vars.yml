@@ -81,7 +81,7 @@
       "host_switches": [
         {
 
-          "host_switch_name": ""NSXT-DATA-OVERLAY"",
+          "host_switch_name": "NSXT-DATA-OVERLAY",
           "host_switch_id": "50 3e d3 ea f9 c8 a7 15-a0 84 77 ba 39 56 46 47", #esxcli network vswitch dvs vmware list
           "host_switch_type": "VDS",
           "host_switch_mode": "STANDARD",
