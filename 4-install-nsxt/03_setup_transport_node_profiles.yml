@@ -1,7 +1,7 @@
 # Copyright 2018 VMware, Inc.
 # SPDX-License-Identifier: BSD-2-Clause OR GPL-3.0-only
 ---
-- hosts: 192.168.254.61
+- hosts: nsxtmgrs
   connection: local
   become: yes
   vars_files:
