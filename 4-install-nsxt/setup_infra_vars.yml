@@ -171,7 +171,7 @@
             "vc_password": "VMware1!",
             "storage": "vsanDatastore",
             "compute": "J-Cluster",
-            "host": "192.168.222.126,
+            "host": "192.168.222.126",
             "data_networks": [
               "nsxt-trunk"
             ],
