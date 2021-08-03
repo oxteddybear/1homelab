@@ -8,7 +8,7 @@
     - setup_infra_vars.yml
   tasks:
     - name: Create Transport Node Profiles
-      vmware.ansible_for_nsxt.nsxt_transport_node_profiles:
+      nsxt_transport_node_profiles:
         hostname: "192.168.254.61"
         username: "{{ nsx_username }}"
         password: "{{ nsx_password }}"
