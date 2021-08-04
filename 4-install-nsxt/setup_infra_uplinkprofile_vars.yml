@@ -54,6 +54,7 @@
         ],
         "policy": "LOADBALANCE_SRCID"
       },
+      "named_teamings" : [] #must specify empty list here or will break.
 
       "transport_vlan": 1234
     }
