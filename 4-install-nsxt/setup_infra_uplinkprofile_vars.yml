@@ -4,11 +4,11 @@
       "teaming": {
         "active_list": [
           {
-            "uplink_name": "uplink-1",
+            "uplink_name": "dpg-ovl-edge-uplink1",
             "uplink_type": "PNIC"
           },
           {
-            "uplink_name": "uplink-2",
+            "uplink_name": "dpg-ovl-edge-uplink2",
             "uplink_type": "PNIC"
           }
         ],
@@ -16,27 +16,27 @@
       },
       "named_teamings" : [
         {
-          "name": "uplink-1-only",
+          "name": "dpg-vl-edge-uplink1",
           "active_list": [
             {
-              "uplink_name": "uplink-1",
+              "uplink_name": "dpg-vl-edge-uplink1",
               "uplink_type": "PNIC"
             }
           ],
           "policy": "FAILOVER_ORDER"
         },
         {
-          "name": "uplink-2-only",
+          "name": "dpg-vl-edge-uplink2",
           "active_list": [
             {
-              "uplink_name": "uplink-2",
+              "uplink_name": "dpg-vl-edge-uplink2",
               "uplink_type": "PNIC"
             }
           ],
           "policy": "FAILOVER_ORDER"
         }
       ],
-      "transport_vlan": 0,
+      "transport_vlan": 1234,
     },
 
     {
@@ -44,52 +44,17 @@
       "teaming": {
         "active_list": [
           {
-            "uplink_name": "uplink-1",
+            "uplink_name": "vmnic8",
             "uplink_type": "PNIC"
           },
           {
-            "uplink_name": "uplink-2",
+            "uplink_name": "vmnic9",
             "uplink_type": "PNIC"
           }
         ],
         "policy": "LOADBALANCE_SRCID"
       },
-      "named_teamings" : [
 
-
-        {
-          "name": "uplink-1-active-uplink-2-standby",
-          "active_list": [
-            {
-              "uplink_name": "uplink-1",
-              "uplink_type": "PNIC"
-            }
-          ],
-          "standby_list": [
-            {
-              "uplink_name": "uplink-2",
-              "uplink_type": "PNIC"
-            }
-          ],
-          "policy": "FAILOVER_ORDER"
-        },
-        {
-          "name": "uplink-2-active-uplink-1-standby",
-          "active_list": [
-            {
-              "uplink_name": "uplink-2",
-              "uplink_type": "PNIC"
-            }
-          ],
-          "standby_list": [
-            {
-              "uplink_name": "uplink-1",
-              "uplink_type": "PNIC"
-            }
-          ],
-          "policy": "FAILOVER_ORDER"
-        }
-      ],
       "transport_vlan": 1234
     }
   ]
