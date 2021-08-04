@@ -1,14 +1,14 @@
 # Copyright 2018 VMware, Inc.
 # SPDX-License-Identifier: BSD-2-Clause OR GPL-3.0-only
 ---
-- hosts: 127.0.0.1
+- hosts: nsxtmgrs
   connection: local
   become: yes
   vars_files:
     - setup_infra_vars.yml
   tasks:
     - name: Create transport zone
-      vmware.ansible_for_nsxt.nsxt_transport_zones:
+      nsxt_transport_zones:
         hostname: "{{ nsx_node1.mgmt_ip }}"
         username: "{{ nsx_username }}"
         password: "{{ nsx_password }}"
@@ -18,6 +18,8 @@
         description: "{{ item.description }}"
         transport_type: "{{ item.transport_type }}"
         host_switch_name: "{{ item.host_switch_name }}"
+        uplink_teaming_policy_names: "{{ item.uplink_teaming_policy_names }}"
+
         state: "{{ state }}"
       with_items:
         - "{{ transport_zones }}"
