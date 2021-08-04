@@ -44,7 +44,8 @@
       "display_name": "Overlay-TZ",
       "description": "NSX Configured Overlay Transport Zone",
       "transport_type": "OVERLAY",
-      "host_switch_name": "nvds"
+      "host_switch_name": "nvds",
+      "uplink_teaming_policy_names": []
     },
     {
       "display_name": "VLAN-TZ",
