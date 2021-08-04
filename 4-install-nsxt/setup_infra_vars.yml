@@ -1,16 +1,7 @@
 # Copyright 2018 VMware, Inc.
 # SPDX-License-Identifier: BSD-2-Clause OR GPL-3.0-only
 #
-#
-# Variables file for Day-0/1 setup
-# Creates the following:
-#   - 2 Transport Zones
-#   - 1 IP Pool (used by Edge)
-#   - 1 Transport Node Profile with 2 TZ endpoints
-#   - 2 Edge Transport Nodes
-#   - 2 ESX Host Transport Nodes
-#   - 1 Edge Cluster with the 2 Edge Nodes
-#
+
 {
 
   #
@@ -31,8 +22,8 @@
   # Accepts both IP (IPv4) and FQDN for 'mgmt_ip'
   #
   "nsx_node1": {
-    "hostname": "mynsx-01.mylab.local",
-    "mgmt_ip": "10.114.200.41",
+    "hostname": "0nsxtmgr.rubber.ducky",
+    "mgmt_ip": "192.168.254.61",
     "datacenter": "Datacenter",
     "cluster": "Management",
     "datastore": "datastore36",
@@ -130,7 +121,7 @@
   ],
 
 
-  transport_nodes: [
+  "transport_nodes": [
     {
       "display_name": "EdgeNode-01",
       "description": "NSX Edge Node 01",
@@ -195,8 +186,7 @@
             "cli_password": "VMware1!VMware1!
 ",
             "audit_username": "audit",
-            "audit_password": "VMware1!VMware1!
-"
+            "audit_password": "VMware1!VMware1!"
           }
         },
         "node_settings": {
@@ -208,104 +198,9 @@
         "display_name": "EdgeNode-01"
       }
     },
-    # },
-    # {
-    #   "resource_type": "TransportNode",
-    #   "display_name": "esx7-12",
-    #   "description": "Host Transport Node for ESXi7-12",
-    #   "host_switches": [
-    #     {
-    #       "host_switch_name": "nsxvswitch",
-    #       "host_switch_type": "NVDS",
-    #       "host_switch_mode": "STANDARD",
-    #       "host_switch_profiles": [
-    #         {
-    #           "name": "nsx-default-uplink-hostswitch-profile",
-    #           "type": "UplinkHostSwitchProfile"
-    #         }
-    #       ],
-    #       "pnics": [
-    #         {
-    #           "device_name": "vmnic1",
-    #           "uplink_name": "uplink-1"
-    #         }
-    #       ],
-    #       "ip_assignment_spec": {
-    #         "resource_type": "StaticIpPoolSpec",
-    #         "ip_pool_name": "TEP-IP-Pool"
-    #       },
-    #       "transport_zone_endpoints": [
-    #         {
-    #           "transport_zone_name": "Overlay-TZ"
-    #         }
-    #       ]
-    #     }
-    #   ],
-    #   "transport_zone_endpoints": [ ],
-    #   "node_deployment_info": {
-    #     "resource_type": "HostNode",
-    #     "ip_addresses": ["10.114.200.12"],
-    #     "os_type": "ESXI",
-    #     "host_credential": {
-    #       "username": "root",
-    #       "password": "VMware1!"
-    #     }
-    #   }
-    # },
-    # {
-    #   "resource_type": "TransportNode",
-    #   "display_name": "esx7-c13",
-    #   "description": "Host Transport Node for esxi c13",
-    #   "host_switches": [
-    #     {
-    #       "host_switch_name": "nsxvswitch",
-    #       "host_switch_type": "NVDS",
-    #       "host_switch_mode": "STANDARD",
-    #       "host_switch_profiles": [
-    #         {
-    #           "name": "nsx-default-uplink-hostswitch-profile",
-    #           "type": "UplinkHostSwitchProfile"
-    #         }
-    #       ],
-    #       "pnics": [
-    #         {
-    #           "device_name": "vmnic1",
-    #           "uplink_name": "uplink-1"
-    #         }
-    #       ],
-    #       "ip_assignment_spec": {
-    #         "resource_type": "StaticIpPoolSpec",
-    #         "ip_pool_name": "TEP-IP-Pool"
-    #       },
-    #       "transport_zone_endpoints": [
-    #         {
-    #           "transport_zone_name": "Overlay-TZ"
-    #         }
-    #       ]
-    #     }
-    #   ],
-    #   "transport_zone_endpoints": [ ],
-    #   "node_deployment_info": {
-    #     "resource_type": "HostNode",
-    #     "ip_addresses": ["10.114.200.13"],
-    #     "os_type": "ESXI",
-    #     "host_credential": {
-    #       "username": "root",
-    #       "password": "VMware1!"
-    #     }
-    #   }
-    # }
-  ],
 
-  "edge_clusters": [
-    {
-      "display_name": "Edge-Cluster-01",
-      "cluster_profile_bindings": [
-        { "profile_name": "nsx-default-edge-high-availability-profile" }
-      ],
-      "members": [
-        { "transport_node_name": "EdgeNode-01" }
-      ]
-    }
+    
   ]
+
 }
+

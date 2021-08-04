@@ -1,0 +1,95 @@
+  "uplink_profiles": [
+    {
+      "display_name": "edge-sitea-profile",
+      "teaming": {
+        "active_list": [
+          {
+            "uplink_name": "uplink-1",
+            "uplink_type": "PNIC"
+          },
+          {
+            "uplink_name": "uplink-2",
+            "uplink_type": "PNIC"
+          }
+        ],
+        "policy": "LOADBALANCE_SRCID"
+      },
+      "named_teamings" : [
+        {
+          "name": "uplink-1-only",
+          "active_list": [
+            {
+              "uplink_name": "uplink-1",
+              "uplink_type": "PNIC"
+            }
+          ],
+          "policy": "FAILOVER_ORDER"
+        },
+        {
+          "name": "uplink-2-only",
+          "active_list": [
+            {
+              "uplink_name": "uplink-2",
+              "uplink_type": "PNIC"
+            }
+          ],
+          "policy": "FAILOVER_ORDER"
+        }
+      ],
+      "transport_vlan": 0,
+    },
+
+    {
+      "display_name": "esxi-sitea-profile",
+      "teaming": {
+        "active_list": [
+          {
+            "uplink_name": "uplink-1",
+            "uplink_type": "PNIC"
+          },
+          {
+            "uplink_name": "uplink-2",
+            "uplink_type": "PNIC"
+          }
+        ],
+        "policy": "LOADBALANCE_SRCID"
+      },
+      "named_teamings" : [
+
+
+        {
+          "name": "uplink-1-active-uplink-2-standby",
+          "active_list": [
+            {
+              "uplink_name": "uplink-1",
+              "uplink_type": "PNIC"
+            }
+          ],
+          "standby_list": [
+            {
+              "uplink_name": "uplink-2",
+              "uplink_type": "PNIC"
+            }
+          ],
+          "policy": "FAILOVER_ORDER"
+        },
+        {
+          "name": "uplink-2-active-uplink-1-standby",
+          "active_list": [
+            {
+              "uplink_name": "uplink-2",
+              "uplink_type": "PNIC"
+            }
+          ],
+          "standby_list": [
+            {
+              "uplink_name": "uplink-1",
+              "uplink_type": "PNIC"
+            }
+          ],
+          "policy": "FAILOVER_ORDER"
+        }
+      ],
+      "transport_vlan": 1234
+    }
+  ]
