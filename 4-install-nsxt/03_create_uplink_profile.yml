@@ -4,7 +4,7 @@
 - hosts: nsxtmgrs
   connection: local
   vars_files:
-    - setup_infra_uplinkprofile_vars.yml
+    - setup_infra_vars.yml
     - 03_create_uplink_profile_vars.yml
   tasks:
     - name: Create uplink profile
