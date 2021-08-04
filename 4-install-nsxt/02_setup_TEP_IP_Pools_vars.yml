@@ -1,0 +1,36 @@
+  "ip_pools": [
+    {
+      "display_name": "ippool1",
+      "pool_static_subnets": [
+        {
+          "display_name": "TEP_ip_pool_subnet",
+          "state": "present",
+          "allocation_ranges": [
+            {
+              "start": "172.16.227.50",
+              "end": "172.16.227.59"
+            }
+          ],
+          "gateway_ip": "172.16.227.1",
+          "cidr": "172.16.227.0/24"
+        }
+      ]
+    },
+        {
+      "display_name": "ippool2",
+      "pool_static_subnets": [
+        {
+          "display_name": "edge_TEP_ip_pool_subnet",
+          "state": "present",
+          "allocation_ranges": [
+            {
+              "start": "172.16.227.60",
+              "end": "172.16.227.70"
+            }
+          ],
+          "gateway_ip": "172.16.227.1",
+          "cidr": "172.16.227.0/24"
+        }
+      ]
+    }
+  ]

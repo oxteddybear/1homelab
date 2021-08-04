@@ -3,9 +3,9 @@
 ---
 - hosts: 127.0.0.1
   connection: local
-  become: yes
   vars_files:
     - setup_infra_vars.yml
+    - 02_setup_TEP_IP_Pools_vars.yml
   tasks:
     - name: Create IP Pools
       vmware.ansible_for_nsxt.nsxt_policy_ip_pool:
