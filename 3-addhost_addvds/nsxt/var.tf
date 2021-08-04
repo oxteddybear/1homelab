@@ -11,6 +11,8 @@ variable "vds1_name"          {  description = "VDS Name"}
 variable "vds1_mtu"           {  description = "VDS MTU"}
 variable "vds2_name"          {  description = "VDS Name"}
 variable "vds2_mtu"           {  description = "VDS MTU"}
+variable "vds3_name"          {  description = "VDS Name"}
+variable "vds3_mtu"           {  description = "VDS MTU"}
 
 variable "addhost" { ### compute hosts
   default = {
