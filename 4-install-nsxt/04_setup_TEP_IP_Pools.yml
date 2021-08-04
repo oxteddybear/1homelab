@@ -8,7 +8,7 @@
     - 04_setup_TEP_IP_Pools_vars.yml
   tasks:
     - name: Create IP Pools
-      vmware.ansible_for_nsxt.nsxt_policy_ip_pool:
+      nsxt_policy_ip_pool:
         hostname: "{{ nsx_node1.mgmt_ip }}"
         username: "{{ nsx_username }}"
         password: "{{ nsx_password }}"
