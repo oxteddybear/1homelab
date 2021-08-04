@@ -47,4 +47,4 @@ variable "pg2" { # put all the portgroups for the mgtvds here: <portgroup-name> 
 }
 variable "mgt_vmnic"  {  default = ["vmnic1"] }
 variable "data_vmnic" {  default = ["vmnic4","vmnic5"] }
-
+variable "data_vmnic1" {  default = ["vmnic6", "vmnic7"] }

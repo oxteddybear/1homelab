@@ -13,12 +13,12 @@ module "nsxv" {
 
     ####vds stuff
     vds1_name = "vdsmgt"
-    vds2_name = "vds-edge-data"
-    vds3_name = "vds-esxi-data"
+    vds2_name = "vds-esxi-data"
+    
 
     vds1_mtu = "1500"
     vds2_mtu = "1700"
-    vds3_mtu = "1700"
+    
 
 
 }
@@ -39,10 +39,11 @@ module "nsxt" {
 
     ####vds stuff
     vds1_name = "vdsmgt"
-    vds2_name = "vdsdata"
+    vds2_name = "vds-edge-data"
+    vds3_name = "vds-esxi-data"
 
     vds1_mtu = "1500"
     vds2_mtu = "1700"
-
+    vds3_mtu = "1700"
     
 }
