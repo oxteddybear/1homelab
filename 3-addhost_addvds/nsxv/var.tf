@@ -10,6 +10,8 @@ variable "vds1_name"          {  description = "VDS Name"}
 variable "vds1_mtu"           {  description = "VDS MTU"}
 variable "vds2_name"          {  description = "VDS Name"}
 variable "vds2_mtu"           {  description = "VDS MTU"}
+variable "vds3_name"          {  description = "VDS Name"}
+variable "vds3_mtu"           {  description = "VDS MTU"}
 
 variable "addhost" { ### how many nested esxi you want? put here
   default = {
@@ -27,5 +29,6 @@ variable "pg1" { # put all the portgroups for the mgtvds here: <portgroup-name> 
 }
 
 variable "mgt_vmnic"  {  default = ["vmnic1"] }
-variable "data_vmnic" {  default = ["vmnic4"] }
+variable "data_vmnic" {  default = ["vmnic4", "vmnic5"] }
+variable "data_vmnic1" {  default = ["vmnic6", "vmnic7"] }
 

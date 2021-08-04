@@ -58,7 +58,7 @@ resource "vsphere_distributed_virtual_switch" "vds1" {
   }
 }
 
-#create data vds
+#create data edge-vds
 resource "vsphere_distributed_virtual_switch" "vds2" {
   name          = var.vds2_name
   datacenter_id = vsphere_datacenter.target_dc.moid
@@ -70,6 +70,21 @@ resource "vsphere_distributed_virtual_switch" "vds2" {
     content {
       host_system_id = host.value.id #here host.value.id = <dynamic "host">."value" <==tis is a keyword to get the value id.<attribute> you can view the attribute in the state
       devices        = var.data_vmnic
+    }
+  }
+}
+#create data esxi-vds
+resource "vsphere_distributed_virtual_switch" "vds3" {
+  name          = var.vds3_name
+  datacenter_id = vsphere_datacenter.target_dc.moid
+  max_mtu       = var.vds3_mtu
+  uplinks       = ["uplink1", "uplink2"]
+  
+  dynamic "host" {
+    for_each = vsphere_host.hostmember
+    content {
+      host_system_id = host.value.id #here host.value.id = <dynamic "host">."value" <==tis is a keyword to get the value id.<attribute> you can view the attribute in the state
+      devices        = var.data_vmnic1
     }
   }
 }
