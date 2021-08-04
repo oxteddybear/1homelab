@@ -54,7 +54,7 @@
         ],
         "policy": "LOADBALANCE_SRCID"
       },
-      "named_teamings" :{
+      "named_teamings" : {
         [] #must specify empty list here or will break.
       },
 
