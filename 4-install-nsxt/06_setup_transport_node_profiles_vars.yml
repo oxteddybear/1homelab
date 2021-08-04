@@ -1,0 +1,39 @@
+  "transport_node_profiles": [
+    {
+      "display_name": "TNP-1",
+      "description": "Compute Transport Node Profile",
+      "host_switches": [
+        {
+
+          "host_switch_name": "vds-esxi-data",
+          "host_switch_id": "50 3e d3 ea f9 c8 a7 15-a0 84 77 ba 39 56 46 47", #esxcli network vswitch dvs vmware list
+          "host_switch_type": "VDS",
+          "host_switch_mode": "STANDARD",
+          "host_switch_profiles": [
+            {
+              "name": "esxi_uplink_profile",
+              "type": "UplinkHostSwitchProfile"
+            }
+          ],
+          "pnics": [],
+          "uplinks": [
+            {
+              "vds_uplink_name": "Uplink 1",
+              "uplink_name": "uplink-1"
+            }
+          ],
+          "ip_assignment_spec": {
+              "resource_type": "StaticIpPoolSpec",
+              "ip_pool_name": "ippool1"
+          },
+          "transport_zone_endpoints": [
+            {
+              "transport_zone_name": "overlayTZ"
+            }
+          ]
+        }
+      ],
+      "transport_zone_endpoints": []
+    }
+  ],
+
