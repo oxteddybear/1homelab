@@ -5,7 +5,7 @@
 # 3. to understand all the options available, look at the corrosponding .py files in modules
 - name: Install All NSX-T Licenses
   nsxt_licenses:
-    hostname: "{{ nsx_mgr_ip }}"
+    hostname: "{{ nsx_ip_0 }}"
     username: "admin"
     password: "{{nsx_cli_passwd_0}}"
     validate_certs: no
@@ -15,7 +15,7 @@
 
 - name: Register compute manager with NSX
   nsxt_fabric_compute_managers:
-    hostname: "{{ nsx_mgr_ip }}"
+    hostname: "{{ nsx_ip_0 }}"
     username: "admin"
     password: "{{nsx_cli_passwd_0}}"
     validate_certs: False
@@ -34,75 +34,65 @@
     
   ignore_errors: yes  
 
-- name: Create NSX-T transport zones
-  nsxt_transport_zones:
-    hostname: "{{ nsx_mgr_ip }}"
-    username: "admin"
-    password: "{{ nsx_cli_passwd_0 }}"
-    validate_certs: False
-    resource_type: "TransportZone"
-    display_name: "{{ item.display_name }}"
-    is_default: "true"
-    transport_type: "{{item.transport_type}}"
-    #host_switch_name: "{{item.host_switch_name}}"
-    host_switch_mode: "STANDARD"
-    state: "present"
-  loop:
-    - { display_name: 'overlayTZ', host_switch_name: 'vdsdata', transport_type: 'OVERLAY' }
-    - { display_name: 'vlanTZ', host_switch_name: 'vdsdata', transport_type: 'VLAN' }
-  ignore_errors: yes
+# - name: Create NSX-T transport zones
+#   nsxt_transport_zones:
+#     hostname: "{{ nsx_ip_0 }}"
+#     username: "admin"
+#     password: "{{ nsx_cli_passwd_0 }}"
+#     validate_certs: False
+#     resource_type: "TransportZone"
+#     display_name: "{{ item.display_name }}"
+#     is_default: "true"
+#     transport_type: "{{item.transport_type}}"
+#     #host_switch_name: "{{item.host_switch_name}}"
+#     host_switch_mode: "STANDARD"
+#     state: "present"
+#   loop:
+#     - { display_name: 'overlayTZ', host_switch_name: 'vdsdata', transport_type: 'OVERLAY' }
+#     - { display_name: 'vlanTZ', host_switch_name: 'vdsdata', transport_type: 'VLAN' }
+#   ignore_errors: yes
 
-- name: Create Uplink Profiles
-  nsxt_uplink_profiles:
-    hostname: "{{ nsx_mgr_ip }}"
-    username: "admin"
-    password: "{{ nsx_cli_passwd_0 }}"
-    validate_certs: False
-    resource_type: UplinkHostSwitchProfile
-    # send_enabled: yes
-    display_name: "{{ item.display_name }}"
-    mtu: 1600
-    transport_vlan: "1234"                        # Overlay Transport VLAN
-    teaming:
-      active_list:
-      - uplink_name: "uplink-1"
-        uplink_type: PNIC
-      policy: FAILOVER_ORDER                                     # Default NIC Teaming
-    state: "present"
-  loop:
-    - { display_name: 'esxi_uplink_profile'}
-    - { display_name: 'edge_uplink_profile'}
-  ignore_errors: yes
+# - name: Create Uplink Profiles
+#   nsxt_uplink_profiles:
+#     hostname: "{{ nsx_ip_0 }}"
+#     username: "admin"
+#     password: "{{ nsx_cli_passwd_0 }}"
+#     validate_certs: False
+#     resource_type: UplinkHostSwitchProfile
+#     # send_enabled: yes
+#     display_name: "{{ item.display_name }}"
+#     mtu: 1600
+#     transport_vlan: "1234"                        # Overlay Transport VLAN
+#     teaming:
+#       active_list:
+#       - uplink_name: "uplink-1"
+#         uplink_type: PNIC
+#       policy: FAILOVER_ORDER                                     # Default NIC Teaming
+#     state: "present"
+#   loop:
+#     - { display_name: 'esxi_uplink_profile'}
+#     - { display_name: 'edge_uplink_profile'}
+#   ignore_errors: yes
 
-- name: Create NSX-T IP Pools using Polcy API
-  nsxt_policy_ip_pool:
-    hostname: "{{ nsx_mgr_ip }}"
-    username: "admin"
-    password: "{{ nsx_cli_passwd_0 }}"
-    validate_certs: False
-    display_name: "ippool1"
-    pool_static_subnets:
-      - display_name: test-ip-static-subnet-2
-        state: present
-        allocation_ranges:
-          - start: '10.116.1.10'
-            end: '10.116.1.20'
-          - start: '10.116.1.30'
-            end: '10.116.1.40'
-        cidr: '10.116.1.0/24'
-    state: present
-  ignore_errors: yes
+# - name: Create NSX-T IP Pools using Polcy API
+#   nsxt_policy_ip_pool:
+#     hostname: "{{ nsx_ip_0 }}"
+#     username: "admin"
+#     password: "{{ nsx_cli_passwd_0 }}"
+#     validate_certs: False
+#     display_name: "ippool1"
+#     pool_static_subnets:
+#       - display_name: test-ip-static-subnet-2
+#         state: present
+#         allocation_ranges:
+#           - start: '10.116.1.10'
+#             end: '10.116.1.20'
+#           - start: '10.116.1.30'
+#             end: '10.116.1.40'
+#         cidr: '10.116.1.0/24'
+#     state: present
+#   ignore_errors: yes
 
 
-- name: Create Edge Cluster
-  nsxt_edge_clusters:
-    hostname: "{{ nsx_mgr_ip }}"
-    username: "admin"
-    password: "{{ nsx_cli_passwd_0 }}"
-    validate_certs: False
-    display_name: 'edge-cluster-1'
-    # members:
-    #   - transport_node_name: "TN_1"
-    state: present
-  ignore_errors: yes
+
 
