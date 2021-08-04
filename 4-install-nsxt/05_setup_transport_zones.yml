@@ -3,7 +3,6 @@
 ---
 - hosts: nsxtmgrs
   connection: local
-  become: yes
   vars_files:
     - setup_infra_vars.yml
   tasks:

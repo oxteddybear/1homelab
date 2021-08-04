@@ -1,9 +1,8 @@
 # Copyright 2020 VMware, Inc.
 # SPDX-License-Identifier: BSD-2-Clause OR GPL-3.0-only
 ---
-- hosts: 127.0.0.1
+- hosts: nsxtmgrs
   connection: local
-  become: yes
   vars_files:
     - setup_infra_vars.yml
   tasks:

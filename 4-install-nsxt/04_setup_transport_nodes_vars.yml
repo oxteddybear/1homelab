@@ -5,11 +5,10 @@
   connection: local
   vars_files:
     - setup_infra_vars.yml
-    - 04_setup_transport_nodes_vars.yml
   tasks:
     - name: Create Transport Nodes
       nsxt_transport_nodes:
-        hostname: "{{ nsx_node1.mgmt_ip }}"
+        hostname: "192.168.254.61"
         username: "{{ nsx_username }}"
         password: "{{ nsx_password }}"
         validate_certs: "{{ validate_certs }}"
