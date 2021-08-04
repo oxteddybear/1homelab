@@ -51,7 +51,7 @@
       "description": "NSX Configured VLAN Transport Zone",
       "transport_type": "VLAN",
       "host_switch_name": "nvds",
-      "uplink_teaming_policy_names": "uplink1, "uplink2"
+      "uplink_teaming_policy_names": "uplink1, uplink2"
     }
   ],
 
