@@ -5,7 +5,7 @@
   connection: local
   vars_files:
     - setup_infra_vars.yml
-    - 02_setup_TEP_IP_Pools_vars.yml
+    - 04_setup_TEP_IP_Pools_vars.yml
   tasks:
     - name: Create IP Pools
       vmware.ansible_for_nsxt.nsxt_policy_ip_pool:
