@@ -36,7 +36,6 @@ variable "pg1" { # put all the portgroups for the mgtvds here: <portgroup-name> 
 }
 variable "pg2" { # put all the portgroups for the mgtvds here: <portgroup-name> = <vlanid>
   default = {
-    "dpg-vdsmgt-mgt" = 0,
     "dpg-ovl-edge-uplink1" = "0-4094",
     "dpg-ovl-edge-uplink2" = "0-4094",
     "dpg-vl-edge-uplink1"  = "0-4094",

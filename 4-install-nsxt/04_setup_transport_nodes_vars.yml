@@ -45,8 +45,11 @@
             "compute": "edge-cluster",
             "host": "192.168.8.123",
             "data_networks": [
-              "dpg-vdsdata-edgeuplink1",
-              ""
+              "dpg-ovl-edge-uplink1",
+              "dpg-ovl-edge-uplink2",
+              "dpg-vl-edge-uplink1",
+              "dpg-vl-edge-uplink2"
+              
             ],
             "default_gateway_addresses": [ "192.168.254.254" ],
             "management_network": "VM Network",
