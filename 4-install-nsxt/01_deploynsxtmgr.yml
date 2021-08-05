@@ -1,8 +1,8 @@
-- hosts: 127.0.0.1
+- hosts: nsxtmgrs
   connection: local
-  become: yes
+
   vars_files:
-    - deploy_nsx_cluster_vars.yml
+    - 01_deploynsxtmgr_vars.yml
   tasks:
     - name: deploy NSX Manager OVA
       vmware.ansible_for_nsxt.nsxt_deploy_ova:
