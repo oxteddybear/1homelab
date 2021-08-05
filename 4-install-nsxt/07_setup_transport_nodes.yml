@@ -5,7 +5,7 @@
   connection: local
   vars_files:
     - setup_infra_vars.yml
-    - 04_setup_transport_nodes_vars.yml
+    - 07_setup_transport_nodes_vars.yml
   tasks:
     - name: Create Transport Nodes
       nsxt_transport_nodes:
