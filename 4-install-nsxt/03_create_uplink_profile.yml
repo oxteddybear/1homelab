@@ -15,7 +15,7 @@
         validate_certs: False
         resource_type: UplinkHostSwitchProfile
         display_name: "{{item.display_name}}"
-        mtu: 1700
+        mtu: ""
         teaming: "{{item.teaming}}"
         transport_vlan: "{{item.transport_vlan}}"
         state: "present"
