@@ -5,6 +5,7 @@
   connection: local
   vars_files:
     - setup_infra_vars.yml
+    - 07_setup_edge_cluster_vars.yml
   tasks:
     - name: Add edge cluster
       vmware.ansible_for_nsxt.nsxt_edge_clusters:
