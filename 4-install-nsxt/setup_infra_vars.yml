@@ -1,0 +1,50 @@
+# Copyright 2018 VMware, Inc.
+# SPDX-License-Identifier: BSD-2-Clause OR GPL-3.0-only
+#
+
+{
+
+  #
+  # Flag to create or delete all the objects
+  # Accepts: 'present' to create; 'absent' to delete
+  #
+  "state": "present",
+
+  #
+  # Common NSX Appliance variables
+  #
+  "nsx_username": "admin",
+  "nsx_password": "VMware1!VMware1!",
+  "validate_certs": False,
+
+  #
+  # First NSX appliance node. Defined separate based on the consumption.
+  # Accepts both IP (IPv4) and FQDN for 'mgmt_ip'
+  #
+  "nsx_node1": {
+    "hostname": "0nsxtmgr.rubber.ducky",
+    "mgmt_ip": "192.168.254.61",
+    "datacenter": "Datacenter",
+    "cluster": "Management",
+    "datastore": "datastore36",
+    "portgroup": "VM Network"
+  },
+
+
+
+
+
+
+  "transport_node_collections": [
+    {
+      "state": "present",
+      "display_name": "workload-cluster-1-collection",
+      "description": "TNP for cluster1",
+      "resource_type": "TransportNodeCollection",
+      "compute_manager_name": "vcenter7",
+      "cluster_name": "workload-cluster1",
+      "transport_node_profile_name": "TNP-1"
+    }
+  ],
+
+}

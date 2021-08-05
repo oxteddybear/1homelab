@@ -1,3 +1,5 @@
+###this is commented out because i'm using modules, the variables have been shifted out to the main.tf
+
 
 # # Provider
 # vsphere_user = "administrator@vsphere.local"

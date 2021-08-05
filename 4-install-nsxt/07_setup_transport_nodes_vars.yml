@@ -1,0 +1,183 @@
+
+"transport_nodes": [
+    {
+      "display_name": "edge-01a",
+      "description": "NSX Edge Node 01a",
+      "host_switches": [
+        {
+          "host_switch_profiles": [
+            {
+              "name": "edge-sitea-profile",
+              "type": "UplinkHostSwitchProfile"
+            },
+            {
+              "name": "LLDP [Send Packet Disabled]",
+              "type": "LldpHostSwitchProfile"
+            }
+          ],
+          "host_switch_name": "nvds",
+          "pnics": [
+            {
+              "device_name": "fp-eth0",
+              "uplink_name": "dpg-ovl-edge-uplink1"
+            },
+            {
+              "device_name": "fp-eth1",
+              "uplink_name": "dpg-vl-edge-uplink1"
+            },
+            {
+              "device_name": "fp-eth2",
+              "uplink_name": "dpg-vl-edge-uplink2"
+            }
+          ],
+          "ip_assignment_spec":
+            {
+              "resource_type": "StaticIpPoolSpec",
+              "ip_pool_name": "ippool1"
+            }
+        }
+      ],
+      "transport_zone_endpoints": [
+        {
+          "transport_zone_name": "OVERLAY-TZ"
+        },
+        {
+          "transport_zone_name": "VLAN-EDGE-SITEA-TZ"
+        }
+      ],
+      "node_deployment_info": {
+        "deployment_type": "VIRTUAL_MACHINE",
+        "deployment_config": {
+          "vm_deployment_config": {
+            "vc_name": "192.168.254.132",
+            "vc_username": "administrator@vsphere.local",
+            "vc_password": "VMware1!",
+            "compute": "edge-cluster",
+            "storage": "iscsi108",
+            "host": "192.168.8.123",
+            "management_network": "dpg-vdsmgt-mgt",
+            "dns_servers": ["192.168.254.123"],
+            "ntp_servers": ["time.google.com"],
+            "hostname": "edgenode-01a.rubber.ducky",
+            "data_networks": [
+              "dpg-ovl-edge-uplink1",
+              "dpg-ovl-edge-uplink2",
+              "dpg-vl-edge-uplink1"
+
+            ],
+            "management_port_subnets": [
+              {
+                "ip_addresses": [ "192.168.219.19" ],
+                "prefix_length": 16
+              }
+            ],
+            "default_gateway_addresses": [ "192.168.219.1" ],
+            "allow_ssh_root_login": true,
+            "enable_ssh": true,
+            "placement_type": "VsphereDeploymentConfig"
+          },
+          "form_factor": "MEDIUM",
+          "node_user_settings": {
+            "cli_username": "admin" ,
+            "root_password": "VMware1!VMware1!",
+            "cli_password": "VMware1!VMware1!",
+            "audit_username": "audit",
+            "audit_password": "VMware1!VMware1!"
+          }
+        },
+        "resource_type": "EdgeNode",
+        "display_name": "edge-01a"
+      },
+    },
+    {
+      "display_name": "edge-02a",
+      "description": "NSX Edge Node 01a",
+      "host_switches": [
+        {
+          "host_switch_profiles": [
+            {
+              "name": "edge-sitea-profile",
+              "type": "UplinkHostSwitchProfile"
+            },
+            {
+              "name": "LLDP [Send Packet Disabled]",
+              "type": "LldpHostSwitchProfile"
+            }
+          ],
+          "host_switch_name": "nvds",
+          "pnics": [
+            {
+              "device_name": "fp-eth0",
+              "uplink_name": "dpg-ovl-edge-uplink1"
+            },
+            {
+              "device_name": "fp-eth1",
+              "uplink_name": "dpg-vl-edge-uplink1"
+            },
+            {
+              "device_name": "fp-eth2",
+              "uplink_name": "dpg-vl-edge-uplink2"
+            }
+          ],
+          "ip_assignment_spec":
+            {
+              "resource_type": "StaticIpPoolSpec",
+              "ip_pool_name": "ippool1"
+            }
+        }
+      ],
+      "transport_zone_endpoints": [
+        {
+          "transport_zone_name": "OVERLAY-TZ"
+        },
+        {
+          "transport_zone_name": "VLAN-EDGE-SITEA-TZ"
+        }
+      ],
+      "node_deployment_info": {
+        "deployment_type": "VIRTUAL_MACHINE",
+        "deployment_config": {
+          "vm_deployment_config": {
+            "vc_name": "192.168.254.132",
+            "vc_username": "administrator@vsphere.local",
+            "vc_password": "VMware1!",
+            "compute": "edge-cluster",
+            "storage": "iscsi108",
+            "host": "192.168.8.123",
+            "management_network": "dpg-vdsmgt-mgt",
+            "dns_servers": ["192.168.254.123"],
+            "ntp_servers": ["time.google.com"],
+            "hostname": "edgenode-02a.rubber.ducky",
+            "data_networks": [
+              "dpg-ovl-edge-uplink1",
+              "dpg-vl-edge-uplink1",
+              "dpg-vl-edge-uplink2"
+            ],
+            "management_port_subnets": [
+              {
+                "ip_addresses": [ "192.168.219.20" ],
+                "prefix_length": 16
+              }
+            ],
+            "default_gateway_addresses": [ "192.168.219.1" ],
+            "allow_ssh_root_login": true,
+            "enable_ssh": true,
+            "placement_type": "VsphereDeploymentConfig"
+          },
+          "form_factor": "MEDIUM",
+          "node_user_settings": {
+            "cli_username": "admin" ,
+            "root_password": "VMware1!VMware1!",
+            "cli_password": "VMware1!VMware1!",
+            "audit_username": "audit",
+            "audit_password": "VMware1!VMware1!"
+          }
+        },
+        "resource_type": "EdgeNode",
+        "display_name": "edge-02a"
+      },
+    },
+
+
+ 
+  ]

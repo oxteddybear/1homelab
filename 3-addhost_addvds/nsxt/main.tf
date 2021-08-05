@@ -116,6 +116,22 @@ resource "vsphere_distributed_virtual_switch" "vds2" {
   }
 }
 
+#create data esxi-vds
+resource "vsphere_distributed_virtual_switch" "vds3" {
+  name          = var.vds3_name
+  datacenter_id = vsphere_datacenter.target_dc.moid
+  max_mtu       = var.vds3_mtu
+  uplinks       = ["uplink1", "uplink2"]
+  
+  dynamic "host" {
+    for_each = vsphere_host.hostmember
+    content {
+      host_system_id = host.value.id #here host.value.id = <dynamic "host">."value" <==tis is a keyword to get the value id.<attribute> you can view the attribute in the state
+      devices        = var.data_vmnic1
+    }
+  }
+}
+
 # Distributed port groups for access mgt network
 
 resource "vsphere_distributed_port_group" "pg1" {
@@ -127,7 +143,8 @@ resource "vsphere_distributed_port_group" "pg1" {
 
 # #create pg on second vds - here i'm hardcoding since it makes no sense to create just 1 variable for this custom trunk
 resource "vsphere_distributed_port_group" "pg2" {
-  name     = "dpg-vdsdata-edgeuplink1"
+  for_each = var.pg2
+  name     = each.key
   distributed_virtual_switch_uuid = vsphere_distributed_virtual_switch.vds2.id
 
     vlan_range { #got this of the state file
@@ -136,12 +153,4 @@ resource "vsphere_distributed_port_group" "pg2" {
     }
 }
 
-resource "vsphere_distributed_port_group" "pg3" {
-  name     = "dpg-vdsdata-edgeuplink2"
-  distributed_virtual_switch_uuid = vsphere_distributed_virtual_switch.vds2.id
 
-    vlan_range { #got this of the state file
-        max_vlan = 4094
-        min_vlan = 0
-    }
-}

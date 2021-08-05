@@ -1,0 +1,58 @@
+  "uplink_profiles": [
+    {
+      "display_name": "edge-sitea-profile",
+      "teaming": {
+        "active_list": [
+          {
+            "uplink_name": "dpg-ovl-edge-uplink1",
+            "uplink_type": "PNIC"
+          }
+
+        ],
+        "policy": "LOADBALANCE_SRCID"
+      },
+      "named_teamings" : [
+        {
+          "name": "dpg-vl-edge-uplink1",
+          "active_list": [
+            {
+              "uplink_name": "dpg-vl-edge-uplink1",
+              "uplink_type": "PNIC"
+            }
+
+          ],
+          "policy": "FAILOVER_ORDER"
+        },
+        {
+          "name": "dpg-vl-edge-uplink2",
+          "active_list": [
+            {
+              "uplink_name": "dpg-vl-edge-uplink2",
+              "uplink_type": "PNIC"
+            }
+          ],
+          "policy": "FAILOVER_ORDER"
+        }
+      ],
+      "transport_vlan": 1234,
+    },
+
+    {
+      "display_name": "esxi-sitea-profile",
+      "teaming": {
+        "active_list": [
+          {
+            "uplink_name": "vmnic8",
+            "uplink_type": "PNIC"
+          },
+          {
+            "uplink_name": "vmnic9",
+            "uplink_type": "PNIC"
+          }
+        ],
+        "policy": "LOADBALANCE_SRCID"
+      },
+      "named_teamings" :[ ], #must specify empty list here or will break.
+      "transport_vlan": 1234
+    }
+  ]

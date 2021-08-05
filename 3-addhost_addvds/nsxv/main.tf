@@ -58,7 +58,7 @@ resource "vsphere_distributed_virtual_switch" "vds1" {
   }
 }
 
-#create data vds
+#create data edge-vds
 resource "vsphere_distributed_virtual_switch" "vds2" {
   name          = var.vds2_name
   datacenter_id = vsphere_datacenter.target_dc.moid
