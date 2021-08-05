@@ -59,6 +59,17 @@
             "dns_servers": ["192.168.254.123"],
             "ntp_servers": ["time.google.com"],
             "hostname": "edgenode-01a.rubber.ducky",
+            "reservation_info": [
+              "cpu_reservation": {
+                "reservation_in_mhz": 0
+              },
+              "memory_reservation": {
+                "reservation_percentage": 0
+              }
+              
+            ],
+            
+            
             "data_networks": [
               "dpg-ovl-edge-uplink1",
               "dpg-ovl-edge-uplink2",
