@@ -51,9 +51,9 @@
           "vm_deployment_config": {
             "vc_name": "192.168.254.132",
             "compute": "domain-c1168",
-            "storage": "iscsi108",
+            "storage": "datastore-1177",
             "host_id": "host-1174",
-            "management_network": "dpg-vdsmgt-mgt",
+            "management_network": "dvportgroup-1189",
             "hostname": "edgenode-01a.rubber.ducky",
             "data_networks": [
               "dpg-ovl-edge-uplink1",
@@ -136,9 +136,9 @@
           "vm_deployment_config": {
             "vc_name": "192.168.254.132",
             "compute": "domain-c1168",
-            "storage": "iscsi108",
+            "storage": "datastore-1177",
             "host_id": "host-1174",
-            "management_network": "dpg-vdsmgt-mgt",
+            "management_network": "dvportgroup-1189",
             "hostname": "edgenode-02a.rubber.ducky",
             "data_networks": [
               "dpg-ovl-edge-uplink1",
