@@ -56,8 +56,8 @@
             "storage": "iscsi108",
             "host": "192.168.8.123",
             "management_network": "dpg-vdsmgt-mgt",
-            "dns_servers": "192.168.254.123",
-            "ntp_servers": "time.google.com",
+            "dns_servers": ["192.168.254.123"],
+            "ntp_servers": ["time.google.com"],
             "hostname": "edgenode-01a.rubber.ducky",
             "data_networks": [
               "dpg-ovl-edge-uplink1",
@@ -145,8 +145,8 @@
             "storage": "iscsi108",
             "host": "192.168.8.123",
             "management_network": "dpg-vdsmgt-mgt",
-            "dns_servers": "192.168.254.123",
-            "ntp_servers": "time.google.com",
+            "dns_servers": ["192.168.254.123"],
+            "ntp_servers": ["time.google.com"],
             "hostname": "edgenode-02a.rubber.ducky",
             "data_networks": [
               "dpg-ovl-edge-uplink1",
