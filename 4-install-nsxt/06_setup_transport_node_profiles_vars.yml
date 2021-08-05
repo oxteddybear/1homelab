@@ -18,8 +18,12 @@
           "pnics": [],
           "uplinks": [
             {
-              "vds_uplink_name": "Uplink 1",
-              "uplink_name": "uplink-1"
+              "vds_uplink_name": "uplink1",
+              "uplink_name": "vmnic8"
+            },
+            {
+              "vds_uplink_name": "uplink2",
+              "uplink_name": "vmnic9"
             }
           ],
           "ip_assignment_spec": {
@@ -28,7 +32,7 @@
           },
           "transport_zone_endpoints": [
             {
-              "transport_zone_name": "overlayTZ"
+              "transport_zone_name": "OVERLAY-TZ"
             }
           ]
         }
