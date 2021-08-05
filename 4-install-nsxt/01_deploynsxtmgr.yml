@@ -5,7 +5,7 @@
     - 01_deploynsxtmgr_vars.yml
   tasks:
     - name: deploy NSX Manager OVA
-      vmware.ansible_for_nsxt.nsxt_deploy_ova:
+      nsxt_deploy_ova:
         ovftool_path: "/usr/bin"
         datacenter: "{{ nsx_node1['datacenter'] }}"
         datastore: "{{ nsx_node1['datastore'] }}"
