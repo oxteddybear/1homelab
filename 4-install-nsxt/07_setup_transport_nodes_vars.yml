@@ -23,14 +23,10 @@
             },
             {
               "device_name": "fp-eth1",
-              "uplink_name": "dpg-ovl-edge-uplink2"
-            },
-            {
-              "device_name": "fp-eth2",
               "uplink_name": "dpg-vl-edge-uplink1"
             },
             {
-              "device_name": "fp-eth3",
+              "device_name": "fp-eth2",
               "uplink_name": "dpg-vl-edge-uplink2"
             }
           ],
@@ -62,8 +58,8 @@
             "data_networks": [
               "dpg-ovl-edge-uplink1",
               "dpg-ovl-edge-uplink2",
-              "dpg-vl-edge-uplink1",
-              "dpg-vl-edge-uplink2"
+              "dpg-vl-edge-uplink1"
+
             ],
             "management_port_subnets": [
               {
@@ -112,14 +108,10 @@
             },
             {
               "device_name": "fp-eth1",
-              "uplink_name": "dpg-ovl-edge-uplink2"
-            },
-            {
-              "device_name": "fp-eth2",
               "uplink_name": "dpg-vl-edge-uplink1"
             },
             {
-              "device_name": "fp-eth3",
+              "device_name": "fp-eth2",
               "uplink_name": "dpg-vl-edge-uplink2"
             }
           ],
@@ -150,9 +142,8 @@
             "hostname": "edgenode-02a.rubber.ducky",
             "data_networks": [
               "dpg-ovl-edge-uplink1",
-              "dpg-ovl-edge-uplink2",
-              "dpg-vl-edge-uplink1"
-              # "dpg-vl-edge-uplink2"
+              "dpg-vl-edge-uplink1",
+              "dpg-vl-edge-uplink2"
             ],
             "management_port_subnets": [
               {
