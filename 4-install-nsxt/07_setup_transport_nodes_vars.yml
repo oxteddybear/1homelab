@@ -59,7 +59,7 @@
             "host": "192.168.8.123",
             "management_network": "dpg-vdsmgt-mgt",
             "hostname": "edgenode-01a.rubber.ducky",
-            "data_network_ids": [
+            "data_network": [
               "dpg-ovl-edge-uplink1",
               "dpg-ovl-edge-uplink2",
               "dpg-vl-edge-uplink1",
@@ -148,7 +148,7 @@
             "host": "192.168.8.123",
             "management_network": "dpg-vdsmgt-mgt",
             "hostname": "edgenode-02a.rubber.ducky",
-            "data_network_ids": [
+            "data_network": [
               "dpg-ovl-edge-uplink1",
               "dpg-ovl-edge-uplink2",
               "dpg-vl-edge-uplink1",
