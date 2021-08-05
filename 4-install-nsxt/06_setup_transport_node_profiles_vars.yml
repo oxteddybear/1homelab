@@ -11,7 +11,7 @@
           "host_switch_mode": "STANDARD",
           "host_switch_profiles": [
             {
-              "name": "esxi_uplink_profile",
+              "name": "esxi-sitea-profile",
               "type": "UplinkHostSwitchProfile"
             }
           ],
