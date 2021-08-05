@@ -50,7 +50,7 @@
         "deployment_config": {
           "vm_deployment_config": {
             "vc_name": "192.168.254.132",
-            "compute_id": "domain-c1134",
+            "compute": "domain-c1134",
             "storage": "iscsi108",
             "host": "192.168.8.123",
             "management_network": "dpg-vdsmgt-mgt",
@@ -135,7 +135,7 @@
         "deployment_config": {
           "vm_deployment_config": {
             "vc_name": "192.168.254.132",
-            "compute_id": "domain-c1134",
+            "compute": "domain-c1134",
             "storage": "iscsi108",
             "host": "192.168.8.123",
             "management_network": "dpg-vdsmgt-mgt",
