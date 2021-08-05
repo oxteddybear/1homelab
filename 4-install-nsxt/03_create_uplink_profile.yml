@@ -15,7 +15,7 @@
         validate_certs: False
         resource_type: UplinkHostSwitchProfile
         display_name: "{{item.display_name}}"
-        # mtu: ""
+        # mtu: "" #for vds setup this needs to be commented out
         teaming: "{{item.teaming}}"
         transport_vlan: "{{item.transport_vlan}}"
         state: "present"
