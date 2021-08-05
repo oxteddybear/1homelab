@@ -6,11 +6,8 @@
           {
             "uplink_name": "dpg-ovl-edge-uplink1",
             "uplink_type": "PNIC"
-          },
-          {
-            "uplink_name": "dpg-ovl-edge-uplink2",
-            "uplink_type": "PNIC"
           }
+
         ],
         "policy": "LOADBALANCE_SRCID"
       },
@@ -22,6 +19,7 @@
               "uplink_name": "dpg-vl-edge-uplink1",
               "uplink_type": "PNIC"
             }
+
           ],
           "policy": "FAILOVER_ORDER"
         },
