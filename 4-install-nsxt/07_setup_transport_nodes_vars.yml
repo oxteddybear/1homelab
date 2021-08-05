@@ -151,8 +151,8 @@
             "data_networks": [
               "dpg-ovl-edge-uplink1",
               "dpg-ovl-edge-uplink2",
-              "dpg-vl-edge-uplink1",
-              "dpg-vl-edge-uplink2"
+              "dpg-vl-edge-uplink1"
+              # "dpg-vl-edge-uplink2"
             ],
             "management_port_subnets": [
               {
