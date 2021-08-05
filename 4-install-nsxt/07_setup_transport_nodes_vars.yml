@@ -52,7 +52,7 @@
             "vc_name": "192.168.254.132",
             "compute": "domain-c1134",
             "storage": "iscsi108",
-            "host": "host-11",
+            "host_id": "host-11",
             "management_network": "dpg-vdsmgt-mgt",
             "hostname": "edgenode-01a.rubber.ducky",
             "data_networks": [
@@ -137,7 +137,7 @@
             "vc_name": "192.168.254.132",
             "compute": "domain-c1134",
             "storage": "iscsi108",
-            "host": "host-11",
+            "host_id": "host-11",
             "management_network": "dpg-vdsmgt-mgt",
             "hostname": "edgenode-02a.rubber.ducky",
             "data_networks": [
