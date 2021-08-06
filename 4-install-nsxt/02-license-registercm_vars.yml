@@ -24,6 +24,8 @@
     {
       "display_name": "192.168.254.133",
       "mgmt_ip": "192.168.254.133",
+      "origin_type": "vCenter",
+      "credential_type": "UsernamePasswordLoginCredential",
       "username": "administrator@vsphere.local",
       "password": "VMware1!"
     }
