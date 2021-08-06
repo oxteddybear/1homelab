@@ -1,27 +1,34 @@
----
-# hosts: <reference the inventory host group you want to run against here>
-# roles:
-#   - <put the directory where you keep the tasks to run>
-
-# - hosts: nsxtedges
-#   roles:
-#      - nsxtedge
-# - hosts: nsxtmgrs
-#   roles:
-#     - role: nsxtmgr
-#     - role: cpf
-#       # vars:
+- hosts: 127.0.0.1
+  connection: local
+  become: yes
+  vars_files:
+    - 02-license-registercm_vars.yml
+    - /ks/license_vars.yml
     
+  tasks:
+    - name: Add NSX License
+      nsxt_licenses:
+          hostname: "{{ nsx_node1.mgmt_ip }}"
+          username: "{{ nsx_username }}"
+          password: "{{ nsx_password }}"
+          validate_certs: "{{ validate_certs }}"
+          license_key: "{{ license_key }}"
+          state: "{{ state }}"
 
-- hosts: nsxtmgrs
-  roles:
-    - role: reg_cm
-    - role: cpf #add roles/cpf/vars/main.yml add the persona vars here
-      ansible_user: 'root' #requires that root be allowed to login, so much junk in this crap module
-     
-# - hosts: ext_net
-#   roles:
-#     - vyos
-# - hosts: nsxvmgrs
-#   roles:
-#     - nsxvmgr
+
+    - name: Register compute manager
+      nsxt_fabric_compute_managers:
+          hostname: "{{ nsx_node1.mgmt_ip }}"
+          username: "{{ nsx_username }}"
+          password: "{{ nsx_password }}"
+          validate_certs: "{{ validate_certs }}"
+          display_name: "{{ item.display_name }}"
+          server: "{{ item.mgmt_ip }}"
+          origin_type: "{{ item.origin_type }}"
+          credential:
+            credential_type: "{{ item.credential_type }}"
+            username: "{{ item.username }}"
+            password: "{{ item.password }}"
+          state: present
+      with_items:
+        - "{{compute_managers}}"   
