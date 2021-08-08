@@ -223,11 +223,18 @@ function startExcel(){
     $null = $usedRange.EntireColumn.Autofit()
 
 
-    ##figure out which services we actually need to add in nsxt from nsv
+    ##figure out which of the services were actually used in the rules
     $ws12 = $wb.Worksheets.Add()
     $ws12.Name = "Services used in DFWrules"
     Services_ws($ws12)
     $usedRange = $ws12.UsedRange
+    $null = $usedRange.EntireColumn.Autofit()
+
+    ##figure out which of the services groups were used in the rules
+    $ws13 = $wb.WorkSheets.Add()
+    $ws13.Name = "Services Group used in DFWrules"
+    service_groups_ws($ws13)
+    $usedRange = $ws2.UsedRange
     $null = $usedRange.EntireColumn.Autofit()
     # Must cleanup manually or excel process wont quit.
     ReleaseObject -Obj $ws1    
@@ -242,6 +249,8 @@ function startExcel(){
     ReleaseObject -Obj $ws10 
     ReleaseObject -Obj $ws11
     ReleaseObject -Obj $ws12 # "Services used in DFWrules"
+    ReleaseObject -Obj $ws13 # "Servicegroups used in DFWrules"
+    
     ReleaseObject -Obj $ws_sg_vm_mem
     ReleaseObject -Obj $usedRange
     
@@ -1248,8 +1257,9 @@ function pop_services_ws2($sheet){
 
     # Grab Services and populate
     $row=3
-    $usedservices = (Get-NsxFirewallSection -sectionType layer3sections | Get-NsxFirewallRule).services.service
-    $dedup_servicename = $services.Name | Sort-Object -Unique
+    $usedservices = (Get-NsxFirewallSection -sectionType layer3sections `
+    | Get-NsxFirewallRule).services.service | Where-Object type -eq Application
+    $dedup_servicename = $usedservices.Name | Sort-Object -Unique
         
     
     # $services = get-nsxservice -scopeID 'globalroot-0'
@@ -1284,8 +1294,8 @@ function service_groups_ws($sheet){
     $range1 = $sheet.Range("a1", "f1")
     $range1.merge() | Out-Null
 
-    $sheet.Cells.Item(2,1) = "Service Group Name"
-    $sheet.Cells.Item(2,2) = "Universal"
+    $sheet.Cells.Item(2,1) = "s/n"
+    $sheet.Cells.Item(2,2) = "Service Group Name"
     $sheet.Cells.Item(2,3) = "Scope"
     $sheet.Cells.Item(2,4) = "Service Members"
     $sheet.Cells.Item(2,5) = "Object-ID"
@@ -1293,7 +1303,11 @@ function service_groups_ws($sheet){
     $range2.Font.Bold = $subTitleFontBold
     $range2.Interior.ColorIndex = $subTitleInteriorColor
     $range2.Font.Name = $subTitleFontName
+    if ($sheet -ne $ws13){
     pop_service_groups_ws($sheet)
+    } else {
+        pop_service_groups_ws2($sheet)    
+    }
 }
 
 function pop_service_groups_ws($sheet){
@@ -1303,9 +1317,9 @@ function pop_service_groups_ws($sheet){
 
     foreach ($svc_mem in $SG) 
     {
-        $sheet.Cells.Item($row,1) = $svc_mem.name
-        $sheet.Cells.Item($row,1).Font.Bold = $true
-        $sheet.Cells.Item($row,2) = $svc_mem.isUniversal
+        $sheet.Cells.Item($row,2) = $svc_mem.name
+        $sheet.Cells.Item($row,2).Font.Bold = $true
+        # $sheet.Cells.Item($row,2) = $svc_mem.isUniversal
         $sheet.Cells.Item($row,3) = $svc_mem.scope.name
         $sheet.Cells.Item($row,5) = $svc_mem.objectId
        
@@ -1353,9 +1367,9 @@ function pop_service_groups_ws($sheet){
 
     foreach ($svc_mem in $SGU) 
     {
-        $sheet.Cells.Item($row,1) = $svc_mem.name
-        $sheet.Cells.Item($row,1).Font.Bold = $true
-        $sheet.Cells.Item($row,2) = $svc_mem.isUniversal
+        $sheet.Cells.Item($row,2) = $svc_mem.name
+        $sheet.Cells.Item($row,2).Font.Bold = $true
+        # $sheet.Cells.Item($row,2) = $svc_mem.isUniversal
         $sheet.Cells.Item($row,3) = $svc_mem.scope.name
         $sheet.Cells.Item($row,5) = $svc_mem.objectId
         
@@ -1399,7 +1413,42 @@ function pop_service_groups_ws($sheet){
         }
     }
 }
+function pop_service_groups_ws2($sheet){
 
+    $row=3
+    
+    $usedsvcgrp = (Get-NsxFirewallSection -sectionType layer3sections `
+        | Get-NsxFirewallRule).services.service `
+        |  Where-Object type -eq ApplicationGroup
+    $dedup_svcgrpname = $usedsvcgrp.Name | Sort-Object -Unique
+    
+    foreach ($item in $dedup_svcgrpname) 
+    {
+        
+        $svc_mem = Get-NsxServiceGroup -name $item
+
+        $sheet.Cells.Item($row,2) = $svc_mem.name
+        $sheet.Cells.Item($row,2).Font.Bold = $true
+        $sheet.Cells.Item($row,3) = $svc_mem.scope.name
+        $sheet.Cells.Item($row,5) = $svc_mem.objectId
+       
+        
+        $_member=""
+        foreach ($member in $svc_mem.member)
+        {
+            $_member = $_member + $member.name + ","
+                
+        }
+        $sheet.Cells.Item($row,4) = $_member.Substring(0,$_member.Length-1) 
+        
+        $row++
+        $_member=""
+    
+
+    }
+
+
+}
 ########################################################
 #    Security Tag Worksheet
 ########################################################
