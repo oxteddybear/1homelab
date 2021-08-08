@@ -140,14 +140,14 @@ function startExcel(){
 
     Write-Host "`nRetrieving Services configured in NSX-v." -foregroundcolor "magenta"
     $ws1 = $wb.WorkSheets.Add()
-    $ws1.Name = "Services"
+    $ws1.Name = "ALL Services"
     services_ws($ws1)
     $usedRange = $ws1.UsedRange
     $null = $usedRange.EntireColumn.Autofit()
 
     Write-Host "`nRetrieving Service Groups configured in NSX-v." -foregroundcolor "magenta"
     $ws2 = $wb.WorkSheets.Add()
-    $ws2.Name = "Service_Groups"
+    $ws2.Name = "ALL Service_Groups"
     service_groups_ws($ws2)
     $usedRange = $ws2.UsedRange
     $null = $usedRange.EntireColumn.Autofit()
@@ -226,7 +226,7 @@ function startExcel(){
     ##figure out which services we actually need to add in nsxt from nsv
     $ws12 = $wb.Worksheets.Add()
     $ws12.Name = "Services used in DFWrules"
-    Services2_ws($ws12)
+    Services_ws($ws12)
     $usedRange = $ws12.UsedRange
     $null = $usedRange.EntireColumn.Autofit()
     # Must cleanup manually or excel process wont quit.
@@ -1181,7 +1181,11 @@ function services_ws($sheet){
     $range2.Font.Bold = $subTitleFontBold
     $range2.Interior.ColorIndex = $subTitleInteriorColor
     $range2.Font.Name = $subTitleFontName
+    if ($sheet -ne $ws12) {
     pop_services_ws($sheet)
+    } else {
+        pop_services_ws2($sheet)
+    }
 }
 
 function pop_services_ws($sheet){
@@ -1240,6 +1244,31 @@ function pop_services_ws($sheet){
     }
 }
 
+function pop_services_ws2($sheet){
+
+    # Grab Services and populate
+    $row=3
+    $usedservices = (Get-NsxFirewallSection -sectionType layer3sections | Get-NsxFirewallRule).services.service
+    $dedup_servicename = $services.Name | Sort-Object -Unique
+        
+    
+    # $services = get-nsxservice -scopeID 'globalroot-0'
+    
+
+    foreach ($item in $dedup_servicename) {
+        $svc = Get-NsxService -Name $item
+        $sheet.Cells.Item($row,2) = $svc.name
+        $sheet.Cells.Item($row,8) = $svc.type.typeName
+        $sheet.Cells.Item($row,3) = $svc.element.applicationProtocol
+        $sheet.Cells.Item($row,4).NumberFormat = "@"
+        $sheet.Cells.Item($row,4) = $svc.element.value
+        $sheet.Cells.Item($row,5) = $svc.element.sourceport
+        $sheet.Cells.Item($row,7) = $svc.isUniversal
+     
+        $row++ # Increment Rows
+    }
+
+}
 ########################################################
 #    Service Groups Worksheet
 ########################################################
@@ -1551,9 +1580,12 @@ function pop_ip_address_ws($sheet){
 
 If (-not $DefaultNSXConnection) 
 {
+    
     Write-Warning "`nConnect to NSX Manager established"
-    $nsx_mgr = Read-Host "`nIP or FQDN of NSX Manager? "
-    Connect-NSXServer -NSXServer $nsx_mgr
+    #$nsx_mgr = Read-Host "`nIP or FQDN of NSX Manager? "
+    # Connect-NSXServer -NSXServer $nsx_mgr
+    Connect-NSXServer -NSXServer 192.168.8.141 -Username admin -Password VMware1!VMware1!
+
 }
 
 $version = Get-NsxManagerSystemSummary
