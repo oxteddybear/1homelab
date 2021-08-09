@@ -232,14 +232,14 @@ function startExcel(){
 
     ##figure out which of the services groups were used in the rules
     $ws13 = $wb.WorkSheets.Add()
-    $ws13.Name = "Services Group inuse"
+    $ws13.Name = "ServiceGroup usedby rules"
     service_groups_ws($ws13)
     $usedRange = $ws13.UsedRange
     $null = $usedRange.EntireColumn.Autofit()
 
     #list out the definations of the services defined in those service groups used in the rules
     $ws14 = $wb.WorkSheets.Add()
-    $ws14.Name = "Svc of Svcgrp in use"
+    $ws14.Name = "Services in Svcgrp usedbyrule"
     services_ws($ws14)
     $usedRange = $ws14.UsedRange
     $null = $usedRange.EntireColumn.Autofit()
@@ -605,6 +605,7 @@ $_dstvm = ""
 
 $_svcraw = ""
 $_svcname = ""
+$_svcgrp = ""
 
                     foreach($service in $rule.services.service){
                         if($service.protocolName) #if there's raw protocol definations then do this block
@@ -620,8 +621,13 @@ $_svcname = ""
                                  }
                         }
                         else {
-                            
-                             $_svcname = $_svcname + $service.name +","   
+                            if ($service.type -eq "ApplicationGroup") {
+                                $_svcgrp = $_svcgrp + $service.name + ","
+                            } else {
+                                $_svcname = $_svcname + $service.name +","   
+                            }
+
+                             
                              #Write-Host "$_svcname="$_svcname
                         }
                         
@@ -636,13 +642,23 @@ $_svcname = ""
 
                     if ($_svcname  -ne "") {
                     
-                     $sheet.Cells.Item($svcRow,7) = "services/servicegroup"
+                     $sheet.Cells.Item($svcRow,7) = "Services"
+                    #  $sheet.Cells.Item($svcRow,7) = "services/servicegroup"
                      $sheet.Cells.Item($svcRow,8) = $_svcname.Substring(0,$_svcname.Length-1)
                      $svcRow++
                     }
+            
 
+                    if ($_svcgrp  -ne "") {
+                    
+                        $sheet.Cells.Item($svcRow,7) = "Servicegroup"
+                        $sheet.Cells.Item($svcRow,8) = $_svcgrp.Substring(0,$_svcgrp.Length-1)
+                        $svcRow++
+                       }                    
+   
 $_svcraw=""
 $_svcname=""
+$_svcgrp = ""
                 }
 
                 ###### AppliedTo ######
