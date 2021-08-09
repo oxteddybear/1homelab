@@ -1209,7 +1209,7 @@ function services_ws($sheet){
     $sheet.Cells.Item(2,6) = "Remarks"
     $sheet.Cells.Item(2,7) = "Universal"
 
-    $range2 = $sheet.Range("a2", "g2")
+    $range2 = $sheet.Range("a2", "h2")
     $range2.Font.Bold = $subTitleFontBold
     $range2.Interior.ColorIndex = $subTitleInteriorColor
     $range2.Font.Name = $subTitleFontName
@@ -1371,7 +1371,7 @@ function service_groups_ws($sheet){
     $sheet.Cells.Item(2,3) = "Scope"
     $sheet.Cells.Item(2,4) = "Service Members"
     $sheet.Cells.Item(2,5) = "Object-ID"
-    $range2 = $sheet.Range("a2", "e2")
+    $range2 = $sheet.Range("a2", "f2")
     $range2.Font.Bold = $subTitleFontBold
     $range2.Interior.ColorIndex = $subTitleInteriorColor
     $range2.Font.Name = $subTitleFontName
@@ -1488,7 +1488,7 @@ function pop_service_groups_ws($sheet){
 function pop_service_groups_ws2($sheet){
 
     $row=3
-    
+    $sheet.Cells.Item(1,1) = "Service Groups used in the rules"
     $usedsvcgrp = (Get-NsxFirewallSection -sectionType layer3sections `
         | Get-NsxFirewallRule).services.service `
         |  Where-Object type -eq ApplicationGroup
