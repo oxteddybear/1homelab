@@ -225,16 +225,23 @@ function startExcel(){
 
     ##figure out which of the services were actually used in the rules
     $ws12 = $wb.Worksheets.Add()
-    $ws12.Name = "Services used in DFWrules"
+    $ws12.Name = "Services usedby rules"
     Services_ws($ws12)
     $usedRange = $ws12.UsedRange
     $null = $usedRange.EntireColumn.Autofit()
 
     ##figure out which of the services groups were used in the rules
     $ws13 = $wb.WorkSheets.Add()
-    $ws13.Name = "Services Group used in DFWrules"
+    $ws13.Name = "Services Group usedby rules"
     service_groups_ws($ws13)
-    $usedRange = $ws2.UsedRange
+    $usedRange = $ws13.UsedRange
+    $null = $usedRange.EntireColumn.Autofit()
+
+    #list out the definations of the services defined in those service groups used in the rules
+    $ws14 = $wb.WorkSheets.Add()
+    $ws14.Name = "Svcdef of svcgrp used"
+    services_ws($ws14)
+    $usedRange = $ws14.UsedRange
     $null = $usedRange.EntireColumn.Autofit()
     # Must cleanup manually or excel process wont quit.
     ReleaseObject -Obj $ws1    
@@ -250,7 +257,7 @@ function startExcel(){
     ReleaseObject -Obj $ws11
     ReleaseObject -Obj $ws12 # "Services used in DFWrules"
     ReleaseObject -Obj $ws13 # "Servicegroups used in DFWrules"
-    
+    ReleaseObject -Obj $ws14 # "memberservices of svcgrp used in rules"
     ReleaseObject -Obj $ws_sg_vm_mem
     ReleaseObject -Obj $usedRange
     
@@ -1175,7 +1182,7 @@ function services_ws($sheet){
     $sheet.Cells.Item(1,1).Font.ColorIndex = $titleFontColorIndex
     $sheet.Cells.Item(1,1).Font.Name = $titleFontName
     $sheet.Cells.Item(1,1).Interior.ColorIndex = $titleInteriorColor
-    $range1 = $sheet.Range("a1", "g1")
+    $range1 = $sheet.Range("a1", "h1")
     $range1.merge() | Out-Null
 
     $sheet.Cells.Item(2,1) = "s/n"
@@ -1190,12 +1197,17 @@ function services_ws($sheet){
     $range2.Font.Bold = $subTitleFontBold
     $range2.Interior.ColorIndex = $subTitleInteriorColor
     $range2.Font.Name = $subTitleFontName
-    if ($sheet -ne $ws12) {
-    pop_services_ws($sheet)
-    } else {
+    if ($sheet -eq $ws1) {
+        pop_services_ws($sheet)
+    } elseif ($sheet -eq $ws12) {
         pop_services_ws2($sheet)
+    } elseif ($sheet -eq $ws14) {
+        pop_services_ws3($sheet)
     }
 }
+
+
+
 
 function pop_services_ws($sheet){
 
@@ -1256,6 +1268,7 @@ function pop_services_ws($sheet){
 function pop_services_ws2($sheet){
 
     # Grab Services and populate
+    $sheet.Cells.Item(1,1) = "Services that are used in the rules note: services ONLY, service groups are not included"
     $row=3
     $usedservices = (Get-NsxFirewallSection -sectionType layer3sections `
     | Get-NsxFirewallRule).services.service | Where-Object type -eq Application
@@ -1266,7 +1279,7 @@ function pop_services_ws2($sheet){
     
 
     foreach ($item in $dedup_servicename) {
-        $svc = Get-NsxService -Name $item
+        $svc = Get-NsxService -Name $item -scopeID 'globalroot-0'
         $sheet.Cells.Item($row,2) = $svc.name
         $sheet.Cells.Item($row,8) = $svc.type.typeName
         $sheet.Cells.Item($row,3) = $svc.element.applicationProtocol
@@ -1276,6 +1289,49 @@ function pop_services_ws2($sheet){
         $sheet.Cells.Item($row,7) = $svc.isUniversal
      
         $row++ # Increment Rows
+    }
+
+}
+
+function pop_services_ws3($sheet){
+
+    # Grab Services and populate
+     $sheet.Cells.Item(1,1) = "Member services of the Service groups used in the rules"
+    $row=3
+
+   
+    # $services = get-nsxservice -scopeID 'globalroot-0'
+    $usedsvcgrp = (Get-NsxFirewallSection -sectionType layer3sections `
+    | Get-NsxFirewallRule).services.service `
+    |  Where-Object type -eq ApplicationGroup
+    $dedup_svcgrpname = $usedsvcgrp.name | Sort-Object -Unique
+
+    $_member=@()
+    foreach ($item in $dedup_svcgrpname) { # we want the set of all services used in the service group
+        $svcgrp = Get-NsxServiceGroup -name $item -scopeID 'globalroot-0'
+
+        foreach ($item in $svcgrp.member) {
+            $_member = $_member + $item.name 
+        }
+        
+    }
+
+    $dedup_servicename = $_member | Sort-Object -Unique
+    # $_member
+    write-host "############################"
+    foreach ($item in $dedup_servicename) {
+        $svc = Get-NsxService -Name $item -scopeID 'globalroot-0'
+        Write-Host $svc.name
+        $sheet.Cells.Item($row,2) = $svc.name
+        $sheet.Cells.Item($row,8) = $svc.type.typeName
+        $sheet.Cells.Item($row,3) = $svc.element.applicationProtocol
+        $sheet.Cells.Item($row,4).NumberFormat = "@"
+        $sheet.Cells.Item($row,4) = $svc.element.value
+        $sheet.Cells.Item($row,5) = $svc.element.sourceport
+        $sheet.Cells.Item($row,7) = $svc.isUniversal
+        
+        $row++ # Increment Rows$$ 
+        
     }
 
 }
