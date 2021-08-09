@@ -232,14 +232,14 @@ function startExcel(){
 
     ##figure out which of the services groups were used in the rules
     $ws13 = $wb.WorkSheets.Add()
-    $ws13.Name = "Services Group usedby rules"
+    $ws13.Name = "Services Group inuse"
     service_groups_ws($ws13)
     $usedRange = $ws13.UsedRange
     $null = $usedRange.EntireColumn.Autofit()
 
     #list out the definations of the services defined in those service groups used in the rules
     $ws14 = $wb.WorkSheets.Add()
-    $ws14.Name = "Svcdef of svcgrp used"
+    $ws14.Name = "Svc of Svcgrp in use"
     services_ws($ws14)
     $usedRange = $ws14.UsedRange
     $null = $usedRange.EntireColumn.Autofit()
