@@ -1306,6 +1306,27 @@ function pop_services_ws2($sheet){
      
         $row++ # Increment Rows
     }
+#get the firewall section which are under universal and are services only
+    $usedservices = (Get-NsxFirewallSection -sectionType layer3sections | Where-Object {($_.managedBy -eq 'universalroot-0')} `
+    | Get-NsxFirewallRule).services.service | Where-Object type -eq Application
+# remove duplication    
+    $dedup_servicename = $usedservices.Name | Sort-Object -Unique
+        
+        
+        foreach ($item in $dedup_servicename) {
+        #for the same service there are univeral and global ones identical names only get the universal ones
+        Get-NsxService -Name $item -scopeID 'universalroot-0'
+        $svc = Get-NsxService -Name $item -scopeID 'universalroot-0'
+        $sheet.Cells.Item($row,2) = $svc.name
+        $sheet.Cells.Item($row,8) = $svc.type.typeName
+        $sheet.Cells.Item($row,3) = $svc.element.applicationProtocol
+        $sheet.Cells.Item($row,4).NumberFormat = "@"
+        $sheet.Cells.Item($row,4) = $svc.element.value
+        $sheet.Cells.Item($row,5) = $svc.element.sourceport
+        $sheet.Cells.Item($row,7) = $svc.isUniversal
+     
+        $row++ # Increment Rows
+    }
 
 }
 
@@ -1519,8 +1540,50 @@ function pop_service_groups_ws2($sheet){
 
     }
 
+    # get only the universal section, all the services, ipsets etc are all universal from here on
+    $usedsvcgrp = (Get-NsxFirewallSection -sectionType layer3sections `
+        | Where-Object ($_.managedBy -eq 'universalroot-0') `
+        | Get-NsxFirewallRule).services.service `
+        |  Where-Object type -eq ApplicationGroup
+
+        #deduplicate the servicegroups
+        $dedup_svcgrpname = $usedsvcgrp.Name | Sort-Object -Unique
+  
+        foreach ($item in $dedup_svcgrpname) 
+        {
+            
+            $svc_mem = Get-NsxServiceGroup -name $item -scopeID 'universalroot-0'
+    
+            $sheet.Cells.Item($row,2) = $svc_mem.name
+            $sheet.Cells.Item($row,2).Font.Bold = $true
+            $sheet.Cells.Item($row,3) = $svc_mem.scope.name
+            $sheet.Cells.Item($row,5) = $svc_mem.objectId
+           
+            
+            $_member=""
+            foreach ($member in $svc_mem.member)
+            {
+                $_member = $_member + $member.name + ","
+                    
+            }
+            $sheet.Cells.Item($row,4) = $_member.Substring(0,$_member.Length-1) 
+            
+            $row++
+            $_member=""
+        
+    
+        }
+
+
 
 }
+
+
+
+
+
+
+
 ########################################################
 #    Security Tag Worksheet
 ########################################################
