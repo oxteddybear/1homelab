@@ -1646,12 +1646,12 @@ function pop_service_groups_ws4($sheet){
         
         # Get-NsxServiceGroup -name $item 
         $svc_mem = Get-NsxServiceGroup -name $item 
-        write-host "############parent service group######"
-        write-host “parentservicegroup="$svc_mem.name
-        $sheet.Cells.Item($row,2) = $svc_mem.name #parent name
-        $sheet.Cells.Item($row,2).Font.Bold = $true
-        $sheet.Cells.Item($row,6) = $svc_mem.scope.name
-        $sheet.Cells.Item($row,7) = $svc_mem.objectId
+        # write-host "############parent service group######"
+        # write-host “parentservicegroup="$svc_mem.name
+         $sheet.Cells.Item($row,2) = $svc_mem.name #parent name
+         $sheet.Cells.Item($row,2).Font.Bold = $true
+         $sheet.Cells.Item($row,6) = $svc_mem.scope.name
+         $sheet.Cells.Item($row,7) = $svc_mem.objectId
         
         $_childsvc=""
         $_childgrp=""
@@ -1659,7 +1659,7 @@ function pop_service_groups_ws4($sheet){
             
             if ($member.objectTypeName -eq 'ApplicationGroup'){ #look for members that are service groups
                 # write-host "childservicegroup="$member.name
-                # $sheet.Cells.Item($row,3) = $member.name #child name
+                $sheet.Cells.Item($row,3) = $member.name #child name
                   # child service group name
    
                  foreach ($child in $member.name){
