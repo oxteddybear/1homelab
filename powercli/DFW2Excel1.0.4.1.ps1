@@ -1648,58 +1648,62 @@ function pop_service_groups_ws4($sheet){
         $svc_mem = Get-NsxServiceGroup -name $item 
         # write-host "############parent service group######"
         # write-host “parentservicegroup="$svc_mem.name
-         $sheet.Cells.Item($row,2) = $svc_mem.name #parent name
-         $sheet.Cells.Item($row,2).Font.Bold = $true
-         $sheet.Cells.Item($row,6) = $svc_mem.scope.name
-         $sheet.Cells.Item($row,7) = $svc_mem.objectId
+
+
+        # $sheet.Cells.Item($row,2) = $svc_mem.name #parent name
+        #  $sheet.Cells.Item($row,2).Font.Bold = $true
+        #  $sheet.Cells.Item($row,6) = $svc_mem.scope.name
+        #  $sheet.Cells.Item($row,7) = $svc_mem.objectId
         
-        $_childsvc=""
-        $_childgrp=""
+        $_grandchildsvc=""
+        $_grandchildsvcgrp=""
         foreach ($member in $svc_mem.member){
             
             if ($member.objectTypeName -eq 'ApplicationGroup'){ #look for members that are service groups
-                # write-host "childservicegroup="$member.name
-                $sheet.Cells.Item($row,3) = $member.name #child name
+                write-host "childservicegroup="$member.name
+                # $sheet.Cells.Item($row,3) = $member.name #child name
                   # child service group name
    
                  foreach ($child in $member.name){
-                     $childmemsvc = Get-NsxServiceGroup -name $child
-
-                     if ($childmemsvc.member.objectTypeName -eq 'Application'){
-                        write-host "#####Application###"
-                        write-host "childmemsvc grouptype="$childmemsvc.member.objectTypeName
-                        write-host "childname="$child
-                        write-host "childsvc="$childmemsvc.member.name
-                        $_childsvc = $_childsvc + $childmemsvc.member.name +"'"
-                     }
+                     $childmemsvc = Get-NsxServiceGroup -name $child 
+                     $appmember = $childmemsvc.member | Where-Object objectTypeName -eq "Application"
                      
-                     if ($childmemsvc.member.objectTypeName -eq 'ApplicationGroup'){
-                        write-host "#####ApplicationGroup###"
-                        write-host "childmemsvc grouptype="$childmemsvc.member.objectTypeName
-                        write-host "childname="$child
-                        write-host "childsvcgrp="$childmemsvc.member.name
-                        $_childgrp = $_childgrp + $childmemsvc.member.name + "'"
-                     }
+                        foreach ($grandchild in $appmember){
+                            $_grandchildsvc = $_grandchildsvc + $grandchild.name + ","
+                            write-host "grandchild="$grandchild.name
+                        }
+                     $appmember = $childmemsvc.member | Where-Object objectTypeName -eq "ApplicationGroup"
+                     
+                        foreach ($grandchild in $appmember){
+                            $_grandchildsvcgrp = $_grandchildsvcgrp + $grandchild.name + ","
+                            write-host "_grandchildsvcgrp="$grandchild.name
+                        }
+                     
+                        
+ 
+
                  }
 
                 # write-host "_member_grpingrp=" $_member_grpingrp
             }
         
         }
-        if ($_childsvc -ne "") {
-            $sheet.Cells.Item($row,4) = $_childsvc.Substring(0,$_childsvc.Length-1) 
-            $sheet.Cells.Item($row,5) = "Service"
-            $row++
-        }
-        if ($_childgrp -ne "") {
-            $sheet.Cells.Item($row,4) = $_childgrp.Substring(0,$_childgrp.Length-1) 
-            $sheet.Cells.Item($row,5) = "ServiceGroup"
-            $row++
+        # if ($_childsvc -ne "") {
+        #     $sheet.Cells.Item($row,4) = $_childsvc.Substring(0,$_childsvc.Length-1) 
+        #     $sheet.Cells.Item($row,5) = "Service"
+        #     $row++
+        # }
+        # if ($_childgrp -ne "") {
+        #     $sheet.Cells.Item($row,4) = $_childgrp.Substring(0,$_childgrp.Length-1) 
+        #     $sheet.Cells.Item($row,5) = "ServiceGroup"
+        #     $row++
 
-        }
+        # }
+        write-host "_grandchildsvc="$_grandchildsvc
+        write-host "_grandchildsvcgrp="$_grandchildsvcgrp
 
-        $_childsvc=""
-        $_childgrp=""
+        $_grandchildsvc=""
+        $_grandchildsvcgrp=""
     }
 
 }
