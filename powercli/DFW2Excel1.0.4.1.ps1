@@ -1625,6 +1625,91 @@ function pop_service_groups_ws2($sheet){
 
 }
 
+function pop_service_groups_ws4($sheet){
+
+    $row=3
+    $sheet.Cells.Item(1,1) = "Service Groups used in the rules"
+    $sheet.Cells.Item(2,1) = "S/N"
+    $sheet.Cells.Item(2,2) = "Parent"
+    $sheet.Cells.Item(2,3) = "Child"
+    $sheet.Cells.Item(2,4) = "Service Member"
+    $sheet.Cells.Item(2,5) = "Service Member Type"
+    $sheet.Cells.Item(2,6) = "Scope"
+    $sheet.Cells.Item(2,7) = "Parent ObjectID"
+
+
+
+    
+    $usedsvcgrp = (Get-NsxFirewallSection -sectionType layer3sections `
+        | Get-NsxFirewallRule).services.service `
+        |  Where-Object type -eq ApplicationGroup
+    $dedup_svcgrpname = $usedsvcgrp.Name | Sort-Object -Unique
+    
+    foreach ($item in $dedup_svcgrpname) 
+    {
+        
+        # Get-NsxServiceGroup -name $item 
+        $svc_mem = Get-NsxServiceGroup -name $item 
+        write-host “parentservicegroup="$svc_mem.name
+        # $sheet.Cells.Item($row,2) = $svc_mem.name #parent name
+        # $sheet.Cells.Item($row,2).Font.Bold = $true
+        # $sheet.Cells.Item($row,6) = $svc_mem.scope.name
+        # $sheet.Cells.Item($row,7) = $svc_mem.objectId
+        
+    #     write-host $item
+    #    write-host "################################"
+    #     write-host $svc_mem.name
+        $_member=""
+        $_member_grpingrp=""
+        $_child=""
+        $_childgrp=""
+        foreach ($member in $svc_mem.member)
+        {
+        
+            # if ($member.objectTypeName -eq 'Application'){
+            #     $_member = $_member + $member.name + ","
+            #     # write-host "_member=" $_member
+            # }
+            
+            if ($member.objectTypeName -eq 'ApplicationGroup'){ #look for members that are service groups
+                write-host "childservicegroup="$member.name
+                # $sheet.Cells.Item($row,3) = $member.name #child name
+                  # child service group name
+   
+                 foreach ($child in $member.name){
+                     $childsvc = Get-NsxServiceGroup -name $child
+                     if ($childsvc.objectTypeName -eq 'Application'){
+                      write-host "childsvc="$childsvc.name
+                     }
+                     
+                     if ($childsvc.objectTypeName -eq 'ApplicationGroup'){
+                        write-host "childsvcgroup="$childsvc.name
+                     }
+                 }
+
+                # write-host "_member_grpingrp=" $_member_grpingrp
+            }
+        
+        }
+        # if ($_child -ne "") {
+        #     $sheet.Cells.Item($row,4) = $_child.Substring(0,$_child.Length-1) 
+        #     $sheet.Cells.Item($row,5) = "Service"
+        #     $row++
+        # }
+        # if ($_member_grpingrp -ne "") {
+        #     $sheet.Cells.Item($row,4) = $_childgrp.Substring(0,$_childgrp.Length-1) 
+        #     $sheet.Cells.Item($row,5) = "ServiceGroup"
+        #     $row++
+
+        # }
+            
+        $_member=""
+        $_member_grpingrp=""
+        
+    }
+
+}
+
 
 ####################################################
 
