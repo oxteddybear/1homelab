@@ -1665,22 +1665,20 @@ function pop_service_groups_ws4($sheet){
                   # child service group name
    
                  foreach ($child in $member.name){
-                     $childmemsvc = Get-NsxServiceGroup -name $child 
-                     $appmember = $childmemsvc.member | Where-Object objectTypeName -eq "Application"
-                     
-                        foreach ($grandchild in $appmember){
-                            $_grandchildsvc = $_grandchildsvc + $grandchild.name + ","
-                            write-host "grandchild="$grandchild.name
-                        }
-                     $appmember = $childmemsvc.member | Where-Object objectTypeName -eq "ApplicationGroup"
-                     
-                        foreach ($grandchild in $appmember){
-                            $_grandchildsvcgrp = $_grandchildsvcgrp + $grandchild.name + ","
-                            write-host "_grandchildsvcgrp="$grandchild.name
-                        }
-                     
-                        
- 
+                    $childmemsvc = Get-NsxServiceGroup -name $child 
+                    $appmember = $childmemsvc.member | Where-Object objectTypeName -eq "Application"
+                    
+                    foreach ($grandchild in $appmember){
+                        $_grandchildsvc = $_grandchildsvc + $grandchild.name + ","
+                        write-host "grandchild="$grandchild.name
+                    }
+
+                    $appmember = $childmemsvc.member | Where-Object objectTypeName -eq "ApplicationGroup"
+                    
+                    foreach ($grandchild in $appmember){
+                        $_grandchildsvcgrp = $_grandchildsvcgrp + $grandchild.name + ","
+                        write-host "_grandchildsvcgrp="$grandchild.name
+                    }
 
                  }
 
