@@ -1643,17 +1643,17 @@ function pop_service_groups_ws4($sheet){
     $dedup_svcgrpname = $usedsvcgrp.Name | Sort-Object -Unique
     
     foreach ($item in $dedup_svcgrpname) {
-        
+        write-host "row="$row
         # Get-NsxServiceGroup -name $item 
         $svc_mem = Get-NsxServiceGroup -name $item 
         # write-host "############parent service group######"
         # write-host “parentservicegroup="$svc_mem.name
 
 
-        # $sheet.Cells.Item($row,2) = $svc_mem.name #parent name
-        #  $sheet.Cells.Item($row,2).Font.Bold = $true
-        #  $sheet.Cells.Item($row,6) = $svc_mem.scope.name
-        #  $sheet.Cells.Item($row,7) = $svc_mem.objectId
+        $sheet.Cells.Item($row,2) = $svc_mem.name #parent name
+        $sheet.Cells.Item($row,2).Font.Bold = $true
+        $sheet.Cells.Item($row,6) = $svc_mem.scope.name
+        $sheet.Cells.Item($row,7) = $svc_mem.objectId
         
         $_grandchildsvc=""
         $_grandchildsvcgrp=""
@@ -1661,7 +1661,7 @@ function pop_service_groups_ws4($sheet){
             
             if ($member.objectTypeName -eq 'ApplicationGroup'){ #look for members that are service groups
                 write-host "childservicegroup="$member.name
-                # $sheet.Cells.Item($row,3) = $member.name #child name
+                $sheet.Cells.Item($row,3) = $member.name #child name
                   # child service group name
    
                  foreach ($child in $member.name){
@@ -1686,22 +1686,23 @@ function pop_service_groups_ws4($sheet){
             }
         
         }
-        # if ($_childsvc -ne "") {
-        #     $sheet.Cells.Item($row,4) = $_childsvc.Substring(0,$_childsvc.Length-1) 
-        #     $sheet.Cells.Item($row,5) = "Service"
-        #     $row++
-        # }
-        # if ($_childgrp -ne "") {
-        #     $sheet.Cells.Item($row,4) = $_childgrp.Substring(0,$_childgrp.Length-1) 
-        #     $sheet.Cells.Item($row,5) = "ServiceGroup"
-        #     $row++
+        if ($_grandchildsvc -ne "") {
+            $sheet.Cells.Item($row,4) = $_grandchildsvc.Substring(0,$_grandchildsvc.Length-1) 
+            $sheet.Cells.Item($row,5) = "Service"
+            $row++
+        }
+        if ($_grandchildsvcgrp -ne "") {
+            $sheet.Cells.Item($row,4) = $_grandchildsvcgrp.Substring(0,$_grandchildsvcgrp.Length-1) 
+            $sheet.Cells.Item($row,5) = "ServiceGroup"
+            $row++
 
-        # }
+        }
         write-host "_grandchildsvc="$_grandchildsvc
         write-host "_grandchildsvcgrp="$_grandchildsvcgrp
 
         $_grandchildsvc=""
         $_grandchildsvcgrp=""
+        write-host "row="$row
     }
 
 }
