@@ -5,7 +5,7 @@
     - 10_create_segment vars.yml
   tasks:
     - name: Modify Segment
-      vmware.ansible_for_nsxt.nsxt_policy_segment:
+      nsxt_policy_segment:
         hostname: "{{ nsx_manager }}"
         username: "{{ nsx_username }}"
         password: "{{ nsx_password }}"
