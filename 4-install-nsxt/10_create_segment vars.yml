@@ -65,11 +65,11 @@
     "segments": [
         {
             "display_name": "seg-uplink36",
-            "tz": "Overlay-TZ",
+            "tz": "OVERLAY-TZ",
         },
         {
             "display_name": "seg-uplink37",
-            "tz": "Overlay-TZ",
+            "tz": "OVERLAY-TZ",
         }
                                                                                                                                                                  
     ],
