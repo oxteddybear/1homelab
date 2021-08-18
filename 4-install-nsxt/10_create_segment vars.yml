@@ -125,7 +125,7 @@
                   "scope": "east"
                 }
             ]
-        }
+        },
         {
             "display_name": "seg-uplink39",
             "tier1_display_name": "Tier-1",
@@ -146,7 +146,7 @@
                   "scope": "east"
                 }
             ]
-        }        
+        },        
         {
             "display_name": "seg-uplink40",
             "tier1_display_name": "Tier-1",
@@ -167,7 +167,7 @@
                   "scope": "east"
                 }
             ]
-        }     
+        },  
         {
             "display_name": "seg-uplink41",
             "tier1_display_name": "Tier-1",
@@ -188,7 +188,7 @@
                   "scope": "east"
                 }
             ]
-        }     
+        },     
         {
             "display_name": "seg-uplink42",
             "tier1_display_name": "Tier-1",
@@ -209,7 +209,7 @@
                   "scope": "east"
                 }
             ]
-        }     
+        },     
         {
             "display_name": "seg-uplink43",
             "tier1_display_name": "Tier-1",
@@ -230,7 +230,7 @@
                   "scope": "east"
                 }
             ]
-        }     
+        },     
         {
             "display_name": "seg-uplink44",
             "tier1_display_name": "Tier-1",
@@ -251,7 +251,7 @@
                   "scope": "east"
                 }
             ]
-        }     
+        },     
         {
             "display_name": "seg-uplink45",
             "tier1_display_name": "Tier-1",
@@ -272,7 +272,7 @@
                   "scope": "east"
                 }
             ]
-        }     
+        },     
         {
             "display_name": "seg-uplink46",
             "tier1_display_name": "Tier-1",
@@ -293,7 +293,7 @@
                   "scope": "east"
                 }
             ]
-        }     
+        },     
         {
             "display_name": "seg-uplink47",
             "tier1_display_name": "Tier-1",
@@ -314,7 +314,7 @@
                   "scope": "east"
                 }
             ]
-        }     
+        },     
         {
             "display_name": "seg-uplink48",
             "tier1_display_name": "Tier-1",
@@ -335,7 +335,7 @@
                   "scope": "east"
                 }
             ]
-        }     
+        },     
         {
             "display_name": "seg-uplink49",
             "tier1_display_name": "Tier-1",
@@ -356,7 +356,7 @@
                   "scope": "east"
                 }
             ]
-        }     
+        },     
         {
             "display_name": "seg-uplink50",
             "tier1_display_name": "Tier-1",
@@ -377,7 +377,7 @@
                   "scope": "east"
                 }
             ]
-        }     
+        },     
         {
             "display_name": "seg-uplink51",
             "tier1_display_name": "Tier-1",
@@ -398,7 +398,7 @@
                   "scope": "east"
                 }
             ]
-        }     
+        },     
         {
             "display_name": "seg-uplink52",
             "tier1_display_name": "Tier-1",
@@ -419,7 +419,7 @@
                   "scope": "east"
                 }
             ]
-        }     
+        },     
         {
             "display_name": "seg-uplink53",
             "tier1_display_name": "Tier-1",
@@ -440,7 +440,7 @@
                   "scope": "east"
                 }
             ]
-        }     
+        },     
         {
             "display_name": "seg-uplink54",
             "tier1_display_name": "Tier-1",
@@ -461,7 +461,7 @@
                   "scope": "east"
                 }
             ]
-        }     
+        },     
         {
             "display_name": "seg-uplink55",
             "tier1_display_name": "Tier-1",
@@ -482,7 +482,7 @@
                   "scope": "east"
                 }
             ]
-        }     
+        },     
         {
             "display_name": "seg-uplink56",
             "tier1_display_name": "Tier-1",
@@ -503,7 +503,7 @@
                   "scope": "east"
                 }
             ]
-        }     
+        },     
         {
             "display_name": "seg-uplink57",
             "tier1_display_name": "Tier-1",
@@ -524,7 +524,7 @@
                   "scope": "east"
                 }
             ]
-        }     
+        },     
         {
             "display_name": "seg-uplink58",
             "tier1_display_name": "Tier-1",
@@ -545,7 +545,7 @@
                   "scope": "east"
                 }
             ]
-        }     
+        },     
         {
             "display_name": "seg-uplink59",
             "tier1_display_name": "Tier-1",
@@ -566,7 +566,7 @@
                   "scope": "east"
                 }
             ]
-        }     
+        },     
         {
             "display_name": "seg-uplink60",
             "tier1_display_name": "Tier-1",
@@ -587,7 +587,7 @@
                   "scope": "east"
                 }
             ]
-        }  
+        },  
         {
             "display_name": "seg-uplink61",
             "tier1_display_name": "Tier-1",
@@ -608,7 +608,7 @@
                   "scope": "east"
                 }
             ]
-        }             
+        },             
         {
             "display_name": "seg-uplink62",
             "tier1_display_name": "Tier-1",
@@ -629,7 +629,7 @@
                   "scope": "east"
                 }
             ]
-        }   
+        },   
         {
             "display_name": "seg-uplink63",
             "tier1_display_name": "Tier-1",
@@ -650,7 +650,7 @@
                   "scope": "east"
                 }
             ]
-        }   
+        },   
                 {
             "display_name": "seg-uplink64",
             "tier1_display_name": "Tier-1",
@@ -671,7 +671,7 @@
                   "scope": "east"
                 }
             ]
-        }    
+        },    
         {
             "display_name": "seg-uplink65",
             "tier1_display_name": "Tier-1",
@@ -857,16 +857,3 @@
         }
     ]
 }
-© 2021 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
-Loading complete
