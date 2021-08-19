@@ -44,18 +44,19 @@ data "nsxt_policy_edge_node" "edge02a" {
 
 resource "nsxt_policy_segment" "seg-uplink36" {
   count=3
-  display_name        = "seg-uplink36"
+  display_name        = "seg-uplink36${count.index}"
   description         = "Terraform provisioned Segment"
   transport_zone_path = data.nsxt_policy_transport_zone.nsx-overlay-transportzone.path
 }
 resource "nsxt_policy_tier0_gateway_interface" "red_vrf_uplink1" {
-  display_name   = "seg-uplink36"
+  count=3
+  display_name   = "seg-uplink36${count.index}"
   type           = "EXTERNAL"
   edge_node_path = data.nsxt_policy_edge_node.edge01a.path
   gateway_path   = data.nsxt_policy_tier0_gateway.t0_red.path
-  segment_path   = nsxt_policy_segment.seg-uplink36.path
+  segment_path   = nsxt_policy_segment.seg-uplink36[count.index].path
   # access_vlan_id = 112
-  subnets        = ["192.168.112.1/31"]
+  subnets        = ["192.168.112.1${count.index+1}/31"]
   mtu            = 1500
 
   # depends_on = [nsxt_policy_tier0_gateway_interface.parent_uplink1]
