@@ -53,8 +53,8 @@ resource "nsxt_policy_tier0_gateway_interface" "red_vrf_uplink1" {
   display_name   = "seg-uplink1"
   type           = "EXTERNAL"
   edge_node_path = data.nsxt_policy_edge_node.edge01a.path
-  gateway_path   = nsxt_policy_tier0_gateway.t0_red.path
-  segment_path   = nsxt_policy_vlan_segment.segment1.path
+  gateway_path   = data.nsxt_policy_tier0_gateway.t0_red.path
+  segment_path   = nsxt_policy_segment.segment1.path
   # access_vlan_id = 112
   subnets        = ["192.168.112.254/24"]
   mtu            = 1500
