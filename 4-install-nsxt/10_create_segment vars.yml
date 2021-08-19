@@ -258,8 +258,52 @@
         {
             "display_name": "seg-uplink85",
             "tz": "OVERLAY-TZ",
+        },
+        {
+            "display_name": "seg-uplink86",
+            "tz": "OVERLAY-TZ",
+        },
+        {
+            "display_name": "seg-uplink87",
+            "tz": "OVERLAY-TZ",
+        },
+        {
+            "display_name": "seg-uplink88",
+            "tz": "OVERLAY-TZ",
+        },
+        {
+            "display_name": "seg-uplink89",
+            "tz": "OVERLAY-TZ",
+        },
+        {
+            "display_name": "seg-uplink90",
+            "tz": "OVERLAY-TZ",
+        },
+        {
+            "display_name": "seg-uplink91",
+            "tz": "OVERLAY-TZ",
+        },
+        {
+            "display_name": "seg-uplink92",
+            "tz": "OVERLAY-TZ",
+        },
+        {
+            "display_name": "seg-uplink93",
+            "tz": "OVERLAY-TZ",
+        },
+        {
+            "display_name": "seg-uplink94",
+            "tz": "OVERLAY-TZ",
+        },
+        {
+            "display_name": "seg-uplink95",
+            "tz": "OVERLAY-TZ",
+        },
+        {
+            "display_name": "seg-uplink96",
+            "tz": "OVERLAY-TZ",
         }
-                
+                     
                                                                                                                                                                  
     ],
 
