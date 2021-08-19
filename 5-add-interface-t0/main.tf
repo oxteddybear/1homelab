@@ -56,7 +56,7 @@ resource "nsxt_policy_tier0_gateway_interface" "red_vrf_uplink1" {
   gateway_path   = data.nsxt_policy_tier0_gateway.t0_red.path
   segment_path   = nsxt_policy_segment.seg-uplink36[count.index].path
   # access_vlan_id = 112
-  subnets        = ["192.168.112.1${count.index+1}/31"]
+  subnets        = ["192.168.${count.index}.1/31"]
   mtu            = 1500
 
   # depends_on = [nsxt_policy_tier0_gateway_interface.parent_uplink1]
