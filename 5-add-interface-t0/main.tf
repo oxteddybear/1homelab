@@ -61,7 +61,7 @@ resource "nsxt_policy_tier0_gateway_interface" "red_vrf_uplink1" {
 
   # depends_on = [nsxt_policy_tier0_gateway_interface.parent_uplink1]
 }
-resource "nsxt_policy_tier0_gateway_interface" "red_vrf_uplink1" {
+resource "nsxt_policy_tier0_gateway_interface" "red_vrf_uplink2" {
   count=300
   display_name   = "seg-uplink36${count.index}"
   type           = "EXTERNAL"
