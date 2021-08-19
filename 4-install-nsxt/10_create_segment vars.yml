@@ -65,243 +65,243 @@
     "segments": [
         {
             "display_name": "seg-uplink36",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink37",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink38",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink39",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink40",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink41",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink42",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink43",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink44",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink45",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink46",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink74",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink48",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink49",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink50",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink51",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink52",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink53",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink54",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink55",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink56",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink58",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink59",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink60",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink61",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink62",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink63",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink64",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink65",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink66",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink67",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink68",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink69",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink70",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink71",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink72",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink73",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink74",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink75",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink76",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink77",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink78",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink79",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink80",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink81",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink82",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink83",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink84",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink85",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink86",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink87",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink88",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink89",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink90",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink91",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink92",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink93",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink94",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink95",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         },
         {
             "display_name": "seg-uplink96",
-            "tz": "OVERLAY-TZ",
+            "tz": "nsx-overlay-transportzone",
         }
                      
                                                                                                                                                                  
