@@ -17,9 +17,9 @@ provider "nsxt" {
   retry_on_status_codes = [429]
 }
 
-data "nsxt_policy_tier0_gateway" "t0_red" {
-  display_name = "t0_red"
-}
+# data "nsxt_policy_tier0_gateway" "t0_red" {
+#   display_name = "t0_red"
+# }
 
 # data "nsxt_policy_edge_cluster" "edge-cluster01" {
 #   display_name = "edge-cluster01"
