@@ -43,7 +43,7 @@ data "nsxt_policy_transport_zone" "nsx-overlay-transportzone" {
 # }
 
 resource "nsxt_policy_segment" "seg-uplink36" {
-  count=1
+  count=80
   display_name        = "seg-uplink36${count.index}"
   description         = "Terraform provisioned Segment"
   transport_zone_path = data.nsxt_policy_transport_zone.nsx-overlay-transportzone.path
