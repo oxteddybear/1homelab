@@ -26,7 +26,7 @@ provider "nsxt" {
 # }
 
 data "nsxt_policy_transport_zone" "nsx-overlay-transportzone" {
-  display_name = "nsx-overlay-transportzone"
+  display_name = "OVERLAY-TZ"
 }
 # data "nsxt_policy_edge_node" "edge01a" {
 #   edge_cluster_path = data.nsxt_policy_edge_cluster.edge-cluster01.path
