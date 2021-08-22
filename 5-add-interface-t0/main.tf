@@ -21,22 +21,22 @@ data "nsxt_policy_tier0_gateway" "t0_red" {
   display_name = "t0_red"
 }
 
-data "nsxt_policy_edge_cluster" "edge-cluster01" {
-  display_name = "edge-cluster01"
-}
+# data "nsxt_policy_edge_cluster" "edge-cluster01" {
+#   display_name = "edge-cluster01"
+# }
 
 data "nsxt_policy_transport_zone" "nsx-overlay-transportzone" {
   display_name = "nsx-overlay-transportzone"
 }
-data "nsxt_policy_edge_node" "edge01a" {
-  edge_cluster_path = data.nsxt_policy_edge_cluster.edge-cluster01.path
-  member_index      = 0
-}
+# data "nsxt_policy_edge_node" "edge01a" {
+#   edge_cluster_path = data.nsxt_policy_edge_cluster.edge-cluster01.path
+#   member_index      = 0
+# }
 
-data "nsxt_policy_edge_node" "edge02a" {
-  edge_cluster_path = data.nsxt_policy_edge_cluster.edge-cluster01.path
-  member_index      = 1
-}
+# data "nsxt_policy_edge_node" "edge02a" {
+#   edge_cluster_path = data.nsxt_policy_edge_cluster.edge-cluster01.path
+#   member_index      = 1
+# }
 # resource "nsxt_policy_vlan_segment" "seg-uplink36" {
 #   display_name = "seg-uplink36"
 #   vlan_ids     = [12]
