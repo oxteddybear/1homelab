@@ -253,7 +253,13 @@ function startExcel(){
     service_groups_ws($ws15)
     $usedRange = $ws15.UsedRange
     $null = $usedRange.EntireColumn.Autofit()
-
+#list security groups in nsxv
+    Write-Host "`nRetrieving Security Groups configured in NSX-v." -foregroundcolor "magenta"
+    $ws16 = $wb.WorkSheets.Add()
+    $ws16.Name = "Security Group Configuration2"
+    sg_ws($ws16)
+    $usedRange = $ws16.UsedRange
+    $null = $usedRange.EntireColumn.Autofit()
     # Must cleanup manually or excel process wont quit.
     ReleaseObject -Obj $ws1    
     ReleaseObject -Obj $ws2
@@ -270,6 +276,7 @@ function startExcel(){
     ReleaseObject -Obj $ws13 # "Servicegroups used in DFWrules"
     ReleaseObject -Obj $ws14 # "memberservices of svcgrp used in rules"
     ReleaseObject -Obj $ws15 # "memberservices of svcgrp in svcgrp used in rules"
+    ReleaseObject -Obj $ws16 # "memberservices of svcgrp in svcgrp used in rules"
 
 
     ReleaseObject -Obj $ws_sg_vm_mem
@@ -700,7 +707,7 @@ $_svcgrp = ""
 
 function sg_ws($sheet){
 
-    $sheet.Cells.Item(1,1) = "Security Group Configuration"
+    $sheet.Cells.Item(1,1) = "Security Group Configuration2"
     $sheet.Cells.Item(1,1).Font.Size = $titleFontSize
     $sheet.Cells.Item(1,1).Font.Bold = $titleFontBold
     $sheet.Cells.Item(1,1).Font.ColorIndex = $titleFontColorIndex
@@ -723,7 +730,13 @@ function sg_ws($sheet){
     $range2.Font.Bold = $subTitleFontBold
     $range2.Interior.ColorIndex = $subTitleInteriorColor
     $range2.Font.Name = $subTitleFontName
-    pop_sg_ws($sheet)
+    if($sheet -eq $ws16){
+        pop_sg_ws2($sheet)
+    }
+    if($sheet -eq $ws5){
+        pop_sg_ws($sheet)
+    }
+    # pop_sg_ws($sheet)
 }
 
 function pop_sg_ws($sheet){
@@ -843,7 +856,7 @@ function pop_sg_ws($sheet){
         $sheet.Cells.Item($row,2) = $member.objectId
         $sheet.Cells.Item($row,3) = $member.isUniversal
         $range_row = $row
-        $row++
+        # $row++
 
         if ( $member.member ) {
             
@@ -878,7 +891,7 @@ function pop_sg_ws($sheet){
         $sheet.Cells.Item($row,2) = $member.objectId
         $sheet.Cells.Item($row,3) = $member.isUniversal
 
-        $row++
+        # $row++
 
         if ( $member.member ) {
             
@@ -907,6 +920,393 @@ function pop_sg_ws($sheet){
         }        
     }
 } 
+
+
+##meeeeeeeeeeeee######################################
+function pop_sg_ws2($sheet){
+
+    $row = 3
+    $sg = Get-NSXSecurityGroup -scopeID 'globalroot-0'
+    foreach ($member in $sg){
+        try 
+        {
+            $link_ref = "Security_Groups!" + ($sheet.Cells.Item($row,1)).address($false,$false)
+            if($secgrp_ht.ContainsKey($member.objectID) -eq $false)
+            {
+                $secgrp_ht.Add($member.objectID, $link_ref)
+            }
+        }
+        catch [Exception]{
+            Write-Warning $member.objectID + "already exists, manually create hyperlink reference"
+        }
+
+        if($member.dynamicMemberDefinition){
+
+            $sheet.Cells.Item($row,1) = $member.name
+            $sheet.Cells.Item($row,2) = $member.scope.name
+            $sheet.Cells.Item($row,3) = $member.isUniversal
+            $sheet.Cells.Item($row,4) = $member.inhertianceAllowed
+            $sheet.Cells.Item($row,10) = $member.objectId
+            $sheet.Cells.Item($row,5) = "Dynamic"
+
+            foreach ($entity in $member.dynamicMemberDefinition.dynamicSet.dynamicCriteria){
+                $sheet.Cells.Item($row,6) = $entity.key
+                $sheet.Cells.Item($row,7) = $entity.operator
+                $sheet.Cells.Item($row,8) = $entity.criteria
+                $sheet.Cells.Item($row,9) = $entity.value
+                $row++
+            }
+        }
+        else{
+            $sheet.Cells.Item($row,1) = $member.name
+            $sheet.Cells.Item($row,2) = $member.scope.name
+            $sheet.Cells.Item($row,3) = $member.isUniversal
+            $sheet.Cells.Item($row,4) = $member.inhertianceAllowed
+            $sheet.Cells.Item($row,10) = $member.objectId
+            $sheet.Cells.Item($row,5) = "Static"
+            $row++
+        }
+    }
+    $sgu = Get-NSXSecurityGroup -scopeID 'universalroot-0'
+    foreach ($member in $sgu){
+        try 
+        {
+            $link_ref = "Security_Groups!" + ($sheet.Cells.Item($row,1)).address($false,$false)
+            if($secgrp_ht.ContainsKey($member.objectID) -eq $false)
+            {
+                $secgrp_ht.Add($member.objectID, $link_ref)
+            }
+        }
+        catch [Exception]{
+            Write-Warning $member.objectID + "already exists, manually create hyperlink reference"
+        }
+        if($member.dynamicMemberDefinition){
+
+            $sheet.Cells.Item($row,1) = $member.name
+            $sheet.Cells.Item($row,2) = $member.scope.name
+            $sheet.Cells.Item($row,3) = $member.isUniversal
+            $sheet.Cells.Item($row,4) = $member.inhertianceAllowed
+            $sheet.Cells.Item($row,10) = $member.objectId
+            $sheet.Cells.Item($row,5) = "Dynamic"
+
+            foreach ($entity in $member.dynamicMemberDefinition.dynamicSet.dynamicCriteria){
+                $sheet.Cells.Item($row,6) = $entity.key
+                $sheet.Cells.Item($row,7) = $entity.operator
+                $sheet.Cells.Item($row,8) = $entity.criteria
+                $sheet.Cells.Item($row,9) = $entity.value
+                $row++
+            }
+        }
+        else{
+            $sheet.Cells.Item($row,1) = $member.name
+            $sheet.Cells.Item($row,2) = $member.scope.name
+            $sheet.Cells.Item($row,3) = $member.isUniversal
+            $sheet.Cells.Item($row,4) = $member.inhertianceAllowed
+            $sheet.Cells.Item($row,10) = $member.objectId
+            $sheet.Cells.Item($row,5) = "Static"
+            $row++
+        }
+    }
+
+    $sheet.Cells.Item($row,1) = "Security Group Exclude & Include Membership"
+    $sheet.Cells.Item($row,1).Font.Size = $titleFontSize
+    $sheet.Cells.Item($row,1).Font.Bold = $titleFontBold
+    $sheet.Cells.Item($row,1).Font.ColorIndex = $titleFontColorIndex
+    $sheet.Cells.Item($row,1).Font.Name = $titleFontName
+    $sheet.Cells.Item($row,1).Interior.ColorIndex = $titleInteriorColor
+    $range2 = $sheet.Range("a"+$row, "H"+$row)
+    $range2.merge() | Out-Null
+
+    $row++
+
+    $sheet.Cells.Item($row,1) = "SG Name"
+    $sheet.Cells.Item($row,2) = "SG Object ID"   
+    $sheet.Cells.Item($row,3) = "Is Universal"
+    $sheet.Cells.Item($row,4) = "Inclusion or Exclusion"
+    $sheet.Cells.Item($row,5) = "Member Type"
+    $sheet.Cells.Item($row,6) = "Member Name"
+    $sheet.Cells.Item($row,7) = "Member Object-ID"
+    $sheet.Cells.Item($row,8) = "Universal"    
+    $range3 = $sheet.Range("a"+$row, "h"+$row)
+    $range3.Font.Bold = $subTitleFontBold
+    $range3.Interior.ColorIndex = $subTitleInteriorColor
+    $range3.Font.Name = $subTitleFontName
+
+    $row++
+
+    foreach ( $member in $sg ){
+
+        $sheet.Cells.Item($row,1) = $member.name
+        $sheet.Cells.Item($row,2) = $member.objectId
+        $sheet.Cells.Item($row,3) = $member.isUniversal
+        $range_row = $row
+        # $row++
+
+        if ( $member.member ) { #this means included
+            $ipsetsgname=""
+            $vmsgname=""
+            $macset=""
+            $sgsgname=""
+            $othersgname=""
+
+            foreach ($item in $member.member ) {
+                if ($item.objectTypeName -eq "IPSet"){
+                    $ipsetsgname= $ipsetsgname + $item.name + ","
+                }elseif ($item.objectTypeName -eq "VirtualMachine") {
+                    $vmsgname= $vmsgname + $item.name + ","
+                }elseif ($item.objectTypeName -eq "MACSet") {
+                    $macset= $macset + $item.name + ","
+                }elseif ($item.objectTypeName -eq "SecurityGroup") {
+                    $sgsgname= $sgsgname + $item.name + ","
+                }else {
+                    $othersgname= $othersgname + $item.name + ","
+                }
+                # $sheet.Cells.Item($dstRow,6) = $_dstipv4.Substring(0,$_dstipv4.Length-1)
+            }
+            if ($ipsetsgname -ne "" ){
+                $sheet.Cells.Item($row,4) = "Include"
+                $sheet.Cells.Item($row,5) = "IPSET"
+                $sheet.Cells.Item($row,6) = $ipsetsgname.Substring(0,$ipsetsgname.Length-1)
+                $sheet.Cells.Item($row,8) = "False"
+                $row++
+            }
+            if ($vmsgname -ne "" ){
+                $sheet.Cells.Item($row,4) = "Include"
+                $sheet.Cells.Item($row,5) = "VirtualMachine"
+                $sheet.Cells.Item($row,6) = $vmsgname.Substring(0,$vmsgname.Length-1)
+                $sheet.Cells.Item($row,8) = "False"
+                $row++
+            }
+            if ($macset -ne "" ){
+                $sheet.Cells.Item($row,4) = "Include"
+                $sheet.Cells.Item($row,5) = "MACSet"
+                $sheet.Cells.Item($row,6) = $macset.Substring(0,$macset.Length-1)
+                $sheet.Cells.Item($row,8) = "False"
+                $row++
+            }
+            if ($sgsgname -ne "" ){
+                $sheet.Cells.Item($row,4) = "Include"
+                $sheet.Cells.Item($row,5) = "SecurityGroup"
+                $sheet.Cells.Item($row,6) = $sgsgname.Substring(0,$sgsgname.Length-1)
+                $sheet.Cells.Item($row,8) = "False"
+                $row++
+            }
+            if ($othersgname -ne "" ){
+                $sheet.Cells.Item($row,4) = "Include"
+                $sheet.Cells.Item($row,5) = "others"
+                $sheet.Cells.Item($row,6) = $othersgname.Substring(0,$othersgname.Length-1)
+                $sheet.Cells.Item($row,8) = "False"
+                $row++
+            }
+            $ipsetsgname=""
+            $vmsgname=""
+            $macset=""
+            $sgsgname=""
+            $othersgname=""
+        }
+        
+        if ( $member.excludeMember ) {
+            $x_ipsetsgname=""
+            $x_vmsgname=""
+            $x_macset=""
+            $x_sgsgname=""
+            $x_othersgname=""
+            
+            foreach ($item in $member.excludeMember ) {
+                
+                if ($item.objectTypeName -eq "IPSet"){
+                    $x_ipsetsgname= $x_ipsetsgname + $item.name + ","
+                }elseif ($item.objectTypeName -eq "VirtualMachine") {
+                    $x_vmsgname= $x_vmsgname + $item.name + ","
+                }elseif ($item.objectTypeName -eq "MACSet") {
+                    $x_macset= $x_macset + $item.name + ","
+                }elseif ($item.objectTypeName -eq "SecurityGroup") {
+                    $x_sgsgname= $x_sgsgname + $item.name + ","
+                }else {
+                    $x_othersgname= $x_othersgname + $item.name + ","
+                }
+            }
+            if ($x_ipsetsgname -ne "" ){
+                $sheet.Cells.Item($row,4) = "Exclude"
+                $sheet.Cells.Item($row,5) = "IPSET"
+                $sheet.Cells.Item($row,6) = $x_ipsetsgname.Substring(0,$x_ipsetsgname.Length-1)
+                $sheet.Cells.Item($row,8) = "False"
+                $row++
+            }
+            if ($x_vmsgname -ne "" ){
+                $sheet.Cells.Item($row,4) = "Exclude"
+                $sheet.Cells.Item($row,5) = "VirtualMachine"
+                $sheet.Cells.Item($row,6) = $x_vmsgname.Substring(0,$x_vmsgname.Length-1)
+                $sheet.Cells.Item($row,8) = "False"
+                $row++
+            }
+            if ($x_macset -ne "" ){
+                $sheet.Cells.Item($row,4) = "Exclude"
+                $sheet.Cells.Item($row,5) = "MACSet"
+                $sheet.Cells.Item($row,6) = $x_macset.Substring(0,$x_macset.Length-1)
+                $sheet.Cells.Item($row,8) = "False"
+                $row++
+            }
+            if ($x_sgsgname -ne "" ){
+                $sheet.Cells.Item($row,4) = "Exclude"
+                $sheet.Cells.Item($row,5) = "SecurityGroup"
+                $sheet.Cells.Item($row,6) = $x_sgsgname.Substring(0,$sgsgname.Length-1)
+                $sheet.Cells.Item($row,8) = "False"
+                $row++
+            }            
+            if ($x_othersgname -ne "" ){
+                $sheet.Cells.Item($row,4) = "Exclude"
+                $sheet.Cells.Item($row,5) = "other"
+                $sheet.Cells.Item($row,6) = $x_othersgname.Substring(0,$x_othersgname.Length-1)
+                $sheet.Cells.Item($row,8) = "False"
+                $row++
+            }            
+            $x_ipsetsgname=""
+            $x_vmsgname=""
+            $x_macset=""
+            $x_sgsgname=""
+            $x_othersgname=""
+        }        
+    }
+    foreach ( $member in $sgu ){
+
+        $sheet.Cells.Item($row,1) = $member.name
+        $sheet.Cells.Item($row,2) = $member.objectId
+        $sheet.Cells.Item($row,3) = $member.isUniversal
+        $range_row = $row
+        # $row++
+
+        if ( $member.member ) { #this means included
+            $ipsetsgname=""
+            $vmsgname=""
+            $macset=""
+            $sgsgname=""
+            $othersgname=""
+
+            foreach ($item in $member.member ) {
+                if ($item.objectTypeName -eq "IPSet"){
+                    $ipsetsgname= $ipsetsgname + $item.name + ","
+                }elseif ($item.objectTypeName -eq "VirtualMachine") {
+                    $vmsgname= $vmsgname + $item.name + ","
+                }elseif ($item.objectTypeName -eq "MACSet") {
+                    $macset= $macset + $item.name + ","
+                }elseif ($item.objectTypeName -eq "SecurityGroup") {
+                    $sgsgname= $sgsgname + $item.name + ","
+                }else {
+                    $othersgname = $othersgname + $item.name + ","
+                }
+                
+            }
+            if ($ipsetsgname -ne "" ){
+                $sheet.Cells.Item($row,4) = "Include"
+                $sheet.Cells.Item($row,5) = "IPSET"
+                $sheet.Cells.Item($row,6) = $ipsetsgname.Substring(0,$ipsetsgname.Length-1)
+                $sheet.Cells.Item($row,8) = "True"
+                $row++
+            }
+            if ($vmsgname -ne "" ){
+                $sheet.Cells.Item($row,4) = "Include"
+                $sheet.Cells.Item($row,5) = "VirtualMachine"
+                $sheet.Cells.Item($row,6) = $vmsgname.Substring(0,$vmsgname.Length-1)
+                $sheet.Cells.Item($row,8) = "True"
+                $row++
+            }
+            if ($macset -ne "" ){
+                $sheet.Cells.Item($row,4) = "Include"
+                $sheet.Cells.Item($row,5) = "MACSet"
+                $sheet.Cells.Item($row,6) = $macset.Substring(0,$macset.Length-1)
+                $sheet.Cells.Item($row,8) = "True"
+                $row++
+            }
+            if ($sgsgname -ne "" ){
+                $sheet.Cells.Item($row,4) = "Include"
+                $sheet.Cells.Item($row,5) = "SecurityGroup"
+                $sheet.Cells.Item($row,6) = $sgsgname.Substring(0,$sgsgname.Length-1)
+                $sheet.Cells.Item($row,8) = "True"
+                $row++
+            }
+            if ($othersgname -ne "" ){
+                $sheet.Cells.Item($row,4) = "Include"
+                $sheet.Cells.Item($row,5) = "others"
+                $sheet.Cells.Item($row,6) = $othersgname.Substring(0,$othersgname.Length-1)
+                $sheet.Cells.Item($row,8) = "True"
+                $row++
+            }
+            $ipsetsgname=""
+            $vmsgname=""
+            $macset=""
+            $sgsgname=""
+            $othersgname=""
+        }
+        
+        if ( $member.excludeMember ) {
+            $x_ipsetsgname=""
+            $x_vmsgname=""
+            $x_macset=""
+            $x_sgsgname=""
+            $x_othersgname=""
+            foreach ($item in $member.excludeMember ) {
+                
+                if ($item.objectTypeName -eq "IPSet"){
+                    $x_ipsetsgname= $x_ipsetsgname + $item.name + ","
+                }elseif ($item.objectTypeName -eq "VirtualMachine") {
+                    $x_vmsgname= $x_vmsgname + $item.name + ","
+                }elseif ($item.objectTypeName -eq "MACSet") {
+                    $x_macset= $x_macset + $item.name + ","
+                }elseif ($item.objectTypeName -eq "SecurityGroup") {
+                    $x_sgsgname= $x_sgsgname + $item.name + ","
+                }else {
+                    $x_othersgname= $x_othersgname + $item.name + ","
+                }
+            }
+            if ($x_ipsetsgname -ne "" ){
+                $sheet.Cells.Item($row,4) = "Exclude"
+                $sheet.Cells.Item($row,5) = "IPSET"
+                $sheet.Cells.Item($row,6) = $x_ipsetsgname.Substring(0,$x_ipsetsgname.Length-1)
+                $sheet.Cells.Item($row,8) = "False"
+                $row++
+            }
+            if ($x_vmsgname -ne "" ){
+                $sheet.Cells.Item($row,4) = "Exclude"
+                $sheet.Cells.Item($row,5) = "VirtualMachine"
+                $sheet.Cells.Item($row,6) = $x_vmsgname.Substring(0,$x_vmsgname.Length-1)
+                $sheet.Cells.Item($row,8) = "False"
+                $row++
+            }
+            if ($x_macset -ne "" ){
+                $sheet.Cells.Item($row,4) = "Exclude"
+                $sheet.Cells.Item($row,5) = "MACSet"
+                $sheet.Cells.Item($row,6) = $x_macset.Substring(0,$x_macset.Length-1)
+                $sheet.Cells.Item($row,8) = "False"
+                $row++
+            }
+            if ($x_sgsgname -ne "" ){
+                $sheet.Cells.Item($row,4) = "Exclude"
+                $sheet.Cells.Item($row,5) = "SecurityGroup"
+                $sheet.Cells.Item($row,6) = $x_sgsgname.Substring(0,$sgsgname.Length-1)
+                $sheet.Cells.Item($row,8) = "False"
+                $row++
+            }            
+            if ($x_othersgname -ne "" ){
+                $sheet.Cells.Item($row,4) = "Exclude"
+                $sheet.Cells.Item($row,5) = "others"
+                $sheet.Cells.Item($row,6) = $x_othersgname.Substring(0,$x_othersgname.Length-1)
+                $sheet.Cells.Item($row,8) = "False"
+                $row++
+            }            
+            $x_ipsetsgname=""
+            $x_vmsgname=""
+            $x_macset=""
+            $x_sgsgname=""
+            $x_othersgname=""
+
+        }        
+    }
+
+} 
+
+
+
 
 ########################################################
 #    Security Groups - Effective Membership
