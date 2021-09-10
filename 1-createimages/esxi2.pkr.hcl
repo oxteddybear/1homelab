@@ -33,6 +33,7 @@ variable vm_disk_controller        {  default = "" }
 source "vsphere-iso" "esxi1" {
   CPUs                 = "${var.vm_cpu_size}"
   RAM                  = "${var.vm_ram_size}"
+  NestedHV             = "true"
   boot_command         = ["<enter>", "<SHIFT+O>", " ks=nfs://${var.nfs_server_path}", "<enter>", ""]
   cluster              = "${var.vsphere_cluster}"
   communicator         = "ssh"
@@ -66,6 +67,7 @@ source "vsphere-iso" "esxi1" {
 source "vsphere-iso" "esxi2" {
   CPUs                 = "${var.vm_cpu_size}"
   RAM                  = "${var.vm_ram_size}"
+  NestedHV             = "true"
   boot_command         = ["<enter>", "<SHIFT+O>", " ks=nfs://${var.nfs_server_path}", "<enter>", ""]
   cluster              = "${var.vsphere_cluster}"
   communicator         = "ssh"
@@ -98,6 +100,7 @@ source "vsphere-iso" "esxi2" {
 source "vsphere-iso" "esxi3" {
   CPUs                 = "${var.vm_cpu_size}"
   RAM                  = "${var.vm_ram_size}"
+  NestedHV             = "true"
   boot_command         = ["<enter>", "<SHIFT+O>", " ks=nfs://${var.nfs_server_path}", "<enter>", ""]
   cluster              = "${var.vsphere_cluster}"
   communicator         = "ssh"
@@ -130,6 +133,7 @@ source "vsphere-iso" "esxi3" {
 source "vsphere-iso" "esxi4" {
   CPUs                 = "${var.vm_cpu_size}"
   RAM                  = "${var.vm_ram_size}"
+  NestedHV             = "true"
   boot_command         = ["<enter>", "<SHIFT+O>", " ks=nfs://${var.nfs_server_path}", "<enter>", ""]
   cluster              = "${var.vsphere_cluster}"
   communicator         = "ssh"
@@ -162,6 +166,7 @@ source "vsphere-iso" "esxi4" {
 source "vsphere-iso" "esxi5" {
   CPUs                 = "${var.vm_cpu_size}"
   RAM                  = "${var.vm_ram_size}"
+  NestedHV             = "true"
   boot_command         = ["<enter>", "<SHIFT+O>", " ks=nfs://${var.nfs_server_path}", "<enter>", ""]
   cluster              = "${var.vsphere_cluster}"
   communicator         = "ssh"
