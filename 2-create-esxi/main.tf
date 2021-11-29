@@ -82,7 +82,7 @@ locals {
 
 resource "vsphere_virtual_machine" "vesxi" {
   count = length(var.template.name)
-  name = substr(var.template.name[count.index],8,7) #take a subset of the template name as new vm name## substr(string, offset, length) eg. substr("template-esxi001",9,7) = esxi001
+  name = "repro" + substr(var.template.name[count.index],10,7) #take a subset of the template name as new vm name## substr(string, offset, length) eg. substr("template-esxi001",9,7) = esxi001
   
   datastore_id     = data.vsphere_datastore.target_datastore.id
   folder           = var.vsphere_folder
