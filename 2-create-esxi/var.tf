@@ -70,11 +70,11 @@ default = {
   
   ]
   "octet"=[  #put the last octet of the esxi here, do not use 108 and 109 as the parent uses them
-    121,
-    122,
-    123,
-    124,
-    125
+    141,
+    142,
+    143,
+    144,
+    145
     ]
   }
 }
