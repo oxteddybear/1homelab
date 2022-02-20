@@ -29,7 +29,7 @@ variable "addhost" { ### compute hosts
 variable "addhost1" { ### edge hosts
   default = {
    name = [
-      "192.168.9.144"
+      "192.168.15.144"
     ]
   }
 }
