@@ -21,6 +21,10 @@ data "vsphere_host_thumbprint" "finger1" { #compute host
 }
 
 data "vsphere_host_thumbprint" "finger2" { #edge host
+  address = var.addhost.name[2]
+  insecure = true
+}
+data "vsphere_host_thumbprint" "finger3" { #edge host
   address = var.addhost1.name[0]
   insecure = true
 }
@@ -39,7 +43,8 @@ resource "vsphere_compute_cluster" "c2" {
 locals {
   fingerprint = [
     data.vsphere_host_thumbprint.finger0.id,
-    data.vsphere_host_thumbprint.finger1.id
+    data.vsphere_host_thumbprint.finger1.id,
+    data.vsphere_host_thumbprint.finger2.id
   ]
     fingerprint1 = [
     data.vsphere_host_thumbprint.finger2.id
@@ -68,7 +73,7 @@ resource "vsphere_host" "hostmember1" {
 }
 
 
-#create mgt vds 
+#create mgt vds , add hosts in hostmember and hostmember1 into respective cluster c1 and c2
 resource "vsphere_distributed_virtual_switch" "vds1" {
   name          = var.vds1_name
   datacenter_id = vsphere_datacenter.target_dc.moid
@@ -92,7 +97,7 @@ resource "vsphere_distributed_virtual_switch" "vds1" {
   }
 }
 
-#create data vds
+#create data vds and add hosts in hostmember in vds2
 resource "vsphere_distributed_virtual_switch" "vds2" {
   name          = var.vds2_name
   datacenter_id = vsphere_datacenter.target_dc.moid
@@ -107,16 +112,16 @@ resource "vsphere_distributed_virtual_switch" "vds2" {
     }
   }
 
-  dynamic "host" {
-    for_each = vsphere_host.hostmember1
-    content {
-      host_system_id = host.value.id #here host.value.id = <dynamic "host">."value" <==tis is a keyword to get the value id.<attribute> you can view the attribute in the state
-      devices        = var.data_vmnic
-    }
-  }
+  # dynamic "host" {
+  #   for_each = vsphere_host.hostmember1
+  #   content {
+  #     host_system_id = host.value.id #here host.value.id = <dynamic "host">."value" <==tis is a keyword to get the value id.<attribute> you can view the attribute in the state
+  #     devices        = var.data_vmnic
+  #   }
+  # }
 }
 
-#create data esxi-vds
+#create data vds3, add hostmember1 hosts to it
 resource "vsphere_distributed_virtual_switch" "vds3" {
   name          = var.vds3_name
   datacenter_id = vsphere_datacenter.target_dc.moid
@@ -124,7 +129,7 @@ resource "vsphere_distributed_virtual_switch" "vds3" {
   uplinks       = ["uplink1", "uplink2"]
   
   dynamic "host" {
-    for_each = vsphere_host.hostmember
+    for_each = vsphere_host.hostmember1
     content {
       host_system_id = host.value.id #here host.value.id = <dynamic "host">."value" <==tis is a keyword to get the value id.<attribute> you can view the attribute in the state
       devices        = var.data_vmnic1

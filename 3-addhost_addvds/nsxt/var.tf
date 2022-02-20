@@ -17,8 +17,11 @@ variable "vds3_mtu"           {  description = "VDS MTU"}
 variable "addhost" { ### compute hosts
   default = {
    name = [
-      "192.168.9.141",
-      "192.168.9.142"
+      "192.168.15.141",
+      "192.168.15.142",
+      "192.168.15.143"
+           
+      
     ]
   }
 }
@@ -26,7 +29,7 @@ variable "addhost" { ### compute hosts
 variable "addhost1" { ### edge hosts
   default = {
    name = [
-      "192.168.9.143"
+      "192.168.9.144"
     ]
   }
 }
