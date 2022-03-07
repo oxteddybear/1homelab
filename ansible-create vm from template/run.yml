@@ -13,7 +13,7 @@
       name: "{{ item }}"
       template: template-ubuntu-dhcp
       datacenter: dc1
-      folder: /dc1/splunk
+      folder: /splunk
       state: poweredon
       wait_for_ip_address: yes
     loop:
