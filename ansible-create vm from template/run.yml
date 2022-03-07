@@ -10,7 +10,7 @@
       username: administrator@vsphere.local
       password: VMware1!
       validate_certs: False
-      name: {{item}}
+      name: "{{ item }}"
       template: template-ubuntu-dhcp
       datacenter: dc1
       folder: /DC1/splunk
