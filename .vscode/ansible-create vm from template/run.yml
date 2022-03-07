@@ -1,0 +1,25 @@
+---
+- name: Create a VM from a template
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks:
+  - name: Clone the template
+    vmware_guest:
+      hostname: 192.168.254.133
+      username: administrator@vsphere.local
+      password: VMware1!
+      validate_certs: False
+      name: {{item}}
+      template: template-ubuntu-dhcp
+      datacenter: dc1
+      folder: /DC1/splunk
+      state: poweredon
+      wait_for_ip_address: yes
+    loop:
+      - { name: 'index1'}
+      - { name: 'index2'}
+      - { name: 'seaarch-head01'}
+      - { name: 'seaarch-head02'}
+      - { name: 'seaarch-head03'}
+      - { name: 'deployer'}
