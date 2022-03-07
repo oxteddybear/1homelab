@@ -1,6 +1,6 @@
 ---
 - name: Create a VM from a template
-  hosts: all
+  hosts: host
   connection: local
   gather_facts: no
   tasks:
@@ -13,7 +13,7 @@
       name: "{{ item }}"
       template: template-ubuntu-dhcp
       datacenter: dc1
-      folder: /DC1/splunk
+      folder: /dc1/splunk
       state: poweredon
       wait_for_ip_address: yes
     loop:
