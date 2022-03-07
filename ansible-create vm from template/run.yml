@@ -17,9 +17,9 @@
       state: poweredon
       wait_for_ip_address: yes
     loop:
-      - { name: 'index1'}
-      - { name: 'index2'}
-      - { name: 'seaarch-head01'}
-      - { name: 'seaarch-head02'}
-      - { name: 'seaarch-head03'}
-      - { name: 'deployer'}
+      - { 'index1'}
+      - { 'index2'}
+      - { 'seaarch-head01'}
+      - { 'seaarch-head02'}
+      - { 'seaarch-head03'}
+      - { 'deployer'}
