@@ -6,7 +6,7 @@ module "nsxt" {
     vsphere_server = "192.168.254.131"
 
     # Infrastructure
-    vsphere_datacenter = "nsxt-dc"
+    vsphere_datacenter = "DC1"
     compute_cluster = "Prod"
     edge_cluster = "Staging"
     esxi_user = "root"
