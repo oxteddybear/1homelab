@@ -7,15 +7,15 @@ module "nsxt" {
 
     # Infrastructure
     vsphere_datacenter = "nsxt-dc"
-    compute_cluster = "clusterm"
-    edge_cluster = "cluster-greenfield"
+    compute_cluster = "Prod"
+    edge_cluster = "Staging"
     esxi_user = "root"
     esxi_password = "VMware1!"
 
     ####vds stuff
-    vds1_name = "vds-clusterm-mgt"
-    vds2_name = "vds-clusterm-data"
-    vds3_name = "vds-clustergreen-data"
+    vds1_name = "vds-mgt"
+    vds2_name = "vds-prod-data"
+    vds3_name = "vds-staging-data"
 
     vds1_mtu = "1500"
     vds2_mtu = "1700"
