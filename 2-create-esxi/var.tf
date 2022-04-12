@@ -62,19 +62,19 @@ default = {
   #name = contains the template names that exists on vcente, octet is the last octet of the ip addresses it will have
   
   "name" = [ #put the names of the templates you have in vcenter under Packer_vms
-  "7template-esxi-7.0.u3c001", 
-  "7template-esxi-7.0.u3c002",
-  "7template-esxi-7.0.u3c003", 
-  "7template-esxi-7.0.u3c004",
-  "7template-esxi-7.0.u3c005"
+  "7template-esxi-7.0.u3d001", 
+  "7template-esxi-7.0.u3d002",
+  "7template-esxi-7.0.u3d003", 
+  "7template-esxi-7.0.u3d004",
+  "7template-esxi-7.0.u3d005"
   
   ]
   "octet"=[  #put the last octet of the esxi here, do not use 108 and 109 as the parent uses them
-    141,
-    142,
-    143,
-    144,
-    145
+    151,
+    152,
+    153,
+    154,
+    155
     ]
   }
 }
