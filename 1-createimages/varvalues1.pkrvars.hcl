@@ -13,8 +13,8 @@ vm_name3                = "7template-esxi-7.0.u3c003"
 vm_name4                = "7template-esxi-7.0.u3c004"
 vm_name5                = "7template-esxi-7.0.u3c005"
 vm_hostname             = "temphostname"
-#vm_guestos              = "vmkernel7guest" #for esxi7
-vm_guestos              = "vmkernel6guest" #for esxi6
+vm_guestos              = "vmkernel7guest" #for esxi7
+#vm_guestos              = "vmkernel6guest" #for esxi6
 vm_cpu_size             = "8"
 vm_ram_size             = "16384"
 vm_disk_size            = "8192"
@@ -23,7 +23,7 @@ guest_password          = "VMware1!"
 ssh_timeout             = "15m"
 nfs_server_path         = "192.168.254.123/ks/ks.cfg"
 # iso_file_path           = "iso/VMware-VMvisor-Installer-7.0U2a-17867351.x86_64.iso"
-iso_file_path           = "iso/VMware-VMvisor-Installer-7.0U3c-19193900.x86_64.iso"
+iso_file_path           = "iso/VMware-VMvisor-Installer-7.0U3d-19482537.x86_64.iso"
 
 
 vm_disk_controller      = "pvscsi"
