@@ -10,22 +10,22 @@ resource "vsphere_datacenter" "target_dc" {
 }
 
 ######update this fingerprint block for as many 
-data "vsphere_host_thumbprint" "finger0" { #compute host
+data "vsphere_host_thumbprint" "finger0" { #prod host
   address = var.addhost.name[0]
   insecure = true
 }
 
-data "vsphere_host_thumbprint" "finger1" { #compute host
+data "vsphere_host_thumbprint" "finger1" { #prod host
   address = var.addhost.name[1]
   insecure = true
 }
 
-data "vsphere_host_thumbprint" "finger2" { #edge host
-  address = var.addhost.name[2]
+data "vsphere_host_thumbprint" "finger2" { #staging host
+  address = var.addhost1.name[0]
   insecure = true
 }
-data "vsphere_host_thumbprint" "finger3" { #edge host
-  address = var.addhost1.name[0]
+data "vsphere_host_thumbprint" "finger3" { #staging host
+  address = var.addhost1.name[1]
   insecure = true
 }
 
