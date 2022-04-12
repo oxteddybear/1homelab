@@ -43,10 +43,10 @@ resource "vsphere_compute_cluster" "c2" {
 locals {
   fingerprint = [
     data.vsphere_host_thumbprint.finger0.id,
-    data.vsphere_host_thumbprint.finger1.id,
-    data.vsphere_host_thumbprint.finger2.id
+    data.vsphere_host_thumbprint.finger1.id
   ]
     fingerprint1 = [
+    data.vsphere_host_thumbprint.finger2.id,  
     data.vsphere_host_thumbprint.finger3.id
     
   ]
