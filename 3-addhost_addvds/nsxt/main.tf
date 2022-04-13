@@ -98,6 +98,7 @@ resource "vsphere_distributed_virtual_switch" "vds1" {
 }
 
 #create data vds and add hosts in hostmember in vds2
+#this is for Prod overlay
 resource "vsphere_distributed_virtual_switch" "vds2" {
   name          = var.vds2_name
   datacenter_id = vsphere_datacenter.target_dc.moid
@@ -122,12 +123,37 @@ resource "vsphere_distributed_virtual_switch" "vds2" {
 }
 
 #create data vds3, add hostmember1 hosts to it
+#this is for staging overlay
 resource "vsphere_distributed_virtual_switch" "vds3" {
   name          = var.vds3_name
   datacenter_id = vsphere_datacenter.target_dc.moid
   max_mtu       = var.vds3_mtu
   uplinks       = ["uplink1", "uplink2"]
   
+  dynamic "host" {
+    for_each = vsphere_host.hostmember1
+    content {
+      host_system_id = host.value.id #here host.value.id = <dynamic "host">."value" <==tis is a keyword to get the value id.<attribute> you can view the attribute in the state
+      devices        = var.data_vmnic
+    }
+  }
+}
+
+#this will be for the global service segment
+resource "vsphere_distributed_virtual_switch" "vds4" {
+  name          = var.vds4_name
+  datacenter_id = vsphere_datacenter.target_dc.moid
+  max_mtu       = var.vds4_mtu
+  uplinks        = ["uplink1", "uplink2"]
+  
+  dynamic "host" {
+    for_each = vsphere_host.hostmember
+    content {
+      host_system_id = host.value.id #here host.value.id = <dynamic "host">."value" <==tis is a keyword to get the value id.<attribute> you can view the attribute in the state
+      devices        = var.data_vmnic1
+    }
+  }
+
   dynamic "host" {
     for_each = vsphere_host.hostmember1
     content {

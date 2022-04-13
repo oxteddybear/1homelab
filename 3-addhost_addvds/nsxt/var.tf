@@ -14,6 +14,10 @@ variable "vds2_mtu"           {  description = "VDS MTU"}
 variable "vds3_name"          {  description = "VDS Name"}
 variable "vds3_mtu"           {  description = "VDS MTU"}
 
+variable "vds4_name"          {  description = "VDS Name"}
+variable "vds4_mtu"           {  description = "VDS MTU"}
+
+
 variable "addhost" { ### compute hosts
   default = {
    name = [
@@ -58,6 +62,8 @@ variable "pg3" { # put all the portgroups for the stagingdata here: <portgroup-n
     "dpg-staging-vl-edge-uplink2"  = "0-4094"
 
   }
+
+
 }
 variable "mgt_vmnic"  {  default = ["vmnic1"] }
 variable "data_vmnic" {  default = ["vmnic4","vmnic5"] }
