@@ -52,15 +52,7 @@ data "vsphere_virtual_machine" "template2" {
   name          = var.template.name[2]
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
-data "vsphere_virtual_machine" "template3" {
-  name          = var.template.name[3]
-  datacenter_id = data.vsphere_datacenter.target_dc.id
-}
 
-data "vsphere_virtual_machine" "template4" {
-  name          = var.template.name[4]
-  datacenter_id = data.vsphere_datacenter.target_dc.id
-}
 
 data "vsphere_host" "host" {
   name          = var.host_to_installon
@@ -73,8 +65,6 @@ locals {
     data.vsphere_virtual_machine.template0.id,
     data.vsphere_virtual_machine.template1.id,
     data.vsphere_virtual_machine.template2.id,
-    data.vsphere_virtual_machine.template3.id,
-    data.vsphere_virtual_machine.template4.id
   ]
 
 }
@@ -169,7 +159,8 @@ provisioner "remote-exec" {
 
     "esxcli iscsi networkportal add -n vmk1 -A vmhba65",
     "esxcli iscsi adapter discovery sendtarget add -a 10.10.9.177:3260 -A vmhba65",
-    "esxcli iscsi adapter discovery rediscover -A vmhba65"
+    "esxcli iscsi adapter discovery rediscover -A vmhba65",
+	"esxcli storage nfs remove -v remote-install-location"
     ]
 }
 
