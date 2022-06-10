@@ -22,7 +22,8 @@ variable "addhost" { ### compute hosts
   default = {
    name = [
       "192.168.15.151",
-      "192.168.15.152"
+      "192.168.15.152",
+      "192.168.15.153"
       
            
       
@@ -30,14 +31,6 @@ variable "addhost" { ### compute hosts
   }
 }
 
-variable "addhost1" { ### edge hosts
-  default = {
-   name = [
-      "192.168.15.153",
-      "192.168.15.154"
-    ]
-  }
-}
 
 variable "pg1" { # put all the portgroups for the mgtvds here: <portgroup-name> = <vlanid>
   default = {
@@ -46,25 +39,12 @@ variable "pg1" { # put all the portgroups for the mgtvds here: <portgroup-name> 
 }
 variable "pg2" { # put all the portgroups for the proddata here: <portgroup-name> = <vlanid>
   default = {
-    "dpg-prod-ovl-edge-uplink1" = "0-4094",
-    "dpg-prod-ovl-edge-uplink2" = "0-4094",
-    "dpg-prod-vl-edge-uplink1"  = "0-4094",
-    "dpg-prod-vl-edge-uplink2"  = "0-4094"
+    "dpg-prod-ovl-edge-trunk1" = "0-4094",
+    "dpg-prod-ovl-edge-trunk2" = "0-4094"
 
   }
 }
 
-variable "pg3" { # put all the portgroups for the stagingdata here: <portgroup-name> = <vlanid>
-  default = {
-    "dpg-staging-ovl-edge-uplink1" = "0-4094",
-    "dpg-staging-ovl-edge-uplink2" = "0-4094",
-    "dpg-staging-vl-edge-uplink1"  = "0-4094",
-    "dpg-staging-vl-edge-uplink2"  = "0-4094"
-
-  }
-
-
-}
 variable "mgt_vmnic"  {  default = ["vmnic1"] }
 variable "data_vmnic" {  default = ["vmnic4","vmnic5"] }
 variable "data_vmnic1" {  default = ["vmnic6", "vmnic7"] }
