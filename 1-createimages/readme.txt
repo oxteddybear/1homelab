@@ -15,7 +15,7 @@ Files
 build location
 ==============
 The vms are going to get built in the folder "Packer_vm" on vsphere, so make sure it exists. you can change this in the varvalues.pkr.hcl file.
-
+put the esxi iso into the datastore under /iso folder
 Steps
 =====
 
@@ -23,6 +23,7 @@ Steps
 2. run "packer init" to find missing plugins. 
 	- uses the packer-builder-vsphere plugin, this has been merged into the official packer core.
 3. run "packer build -var-file=varvalues2.pkr.hcl esxi2.pkr.hcl"
+
 
 
 other Attributes you can use but not documented in official packer document
