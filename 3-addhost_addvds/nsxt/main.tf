@@ -31,10 +31,6 @@ resource "vsphere_compute_cluster" "c1" {
   datacenter_id   = vsphere_datacenter.target_dc.moid
 }
 
-resource "vsphere_compute_cluster" "c2" {
-  name            = var.edge_cluster
-  datacenter_id   = vsphere_datacenter.target_dc.moid
-}
 
 locals {
   fingerprint = [
