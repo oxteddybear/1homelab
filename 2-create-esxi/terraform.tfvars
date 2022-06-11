@@ -6,7 +6,7 @@ host_to_installon = "192.168.254.108"
 # Infrastructure
 vsphere_datacenter = "dc1"
 vsphere_cluster = "c1"
-vsphere_datastore = "iscsi108"
+vsphere_datastore = "v2"
 vsphere_folder = "/"
 
 # MGMT network to connect first network adapter of the VM
