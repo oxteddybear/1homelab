@@ -21,7 +21,7 @@ data "vsphere_host_thumbprint" "finger1" { #prod host
 }
 
 data "vsphere_host_thumbprint" "finger2" { #staging host
-  address = var.addhost.name[0]
+  address = var.addhost.name[2]
   insecure = true
 }
 
