@@ -6,7 +6,7 @@ host_to_installon = "192.168.254.108"
 # Infrastructure
 vsphere_datacenter = "dc1"
 vsphere_cluster = "c1"
-vsphere_datastore = "v2"
+vsphere_datastore = "d1"
 vsphere_folder = "/"
 
 # MGMT network to connect first network adapter of the VM
@@ -17,7 +17,7 @@ workload_network = "isolated-trunk"
 vmotion_network = "10.10.10.0"
 # Guest
 guest_vcpu = "8"
-guest_memory = "16384"
+guest_memory = "32768"
 guest_user = "root"
 guest_password = "VMware1!"
 # Disks for the guest. Disk0 is main drive, disk1 and disk2 for VSAN
