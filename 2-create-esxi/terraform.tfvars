@@ -1,10 +1,10 @@
 # Provider
 vsphere_user = "administrator@vsphere.local"
 vsphere_password = "VMware1!"
-vsphere_server = "192.168.254.133"
+vsphere_server = "192.168.254.132"
 host_to_installon = "192.168.254.108"
 # Infrastructure
-vsphere_datacenter = "dc1"
+vsphere_datacenter = "lab"
 vsphere_cluster = "c1"
 vsphere_datastore = "d1"
 vsphere_folder = "/"
@@ -16,8 +16,8 @@ iscsi_network1 = "10.10.9.0"
 workload_network = "i-trunk"
 vmotion_network = "i-vmotion"
 # Guest
-guest_vcpu = "8"
-guest_memory = "32768"
+guest_vcpu = "16"
+guest_memory = "49152"
 guest_user = "root"
 guest_password = "VMware1!"
 # Disks for the guest. Disk0 is main drive, disk1 and disk2 for VSAN

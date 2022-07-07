@@ -7,8 +7,8 @@ variable "compute_cluster"    {  description = "Compute cluster name"}
 #variable "edge_cluster"       {  description = "edge cluster name"}
 variable "esxi_user"          {  description = "esxi root user"}
 variable "esxi_password"      {  description = "esxi root password"}
-variable "vds1_name"          {  description = "VDS Name"}
-variable "vds1_mtu"           {  description = "VDS MTU"}
+#variable "vds1_name"          {  description = "VDS Name"}
+#variable "vds1_mtu"           {  description = "VDS MTU"}
 variable "vds2_name"          {  description = "VDS Name"}
 variable "vds2_mtu"           {  description = "VDS MTU"}
 #variable "vds3_name"          {  description = "VDS Name"}
@@ -22,8 +22,7 @@ variable "addhost" { ### compute hosts
   default = {
    name = [
       "192.168.15.11",
-      "192.168.15.12",
-      "192.168.15.13"
+      "192.168.15.12"
       
            
       
