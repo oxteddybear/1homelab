@@ -44,14 +44,6 @@ data "vsphere_virtual_machine" "template0" {
   name          = var.template.name[0]
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
-data "vsphere_virtual_machine" "template1" {
-  name          = var.template.name[1]
-  datacenter_id = data.vsphere_datacenter.target_dc.id
-}
-#data "vsphere_virtual_machine" "template2" {
-#  name          = var.template.name[2]
-#  datacenter_id = data.vsphere_datacenter.target_dc.id
-#}
 
 
 data "vsphere_host" "host" {
@@ -63,8 +55,6 @@ data "vsphere_host" "host" {
 locals {
   uuids = [
     data.vsphere_virtual_machine.template0.id,
-    data.vsphere_virtual_machine.template1.id
- #   data.vsphere_virtual_machine.template2.id,
   ]
 
 }
