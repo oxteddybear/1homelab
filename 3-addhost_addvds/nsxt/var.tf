@@ -21,8 +21,8 @@ variable "vds2_mtu"           {  description = "VDS MTU"}
 variable "addhost" { ### compute hosts
   default = {
    name = [
-      "192.168.15.11",
-      "192.168.15.12"
+      "192.168.15.41",
+      "192.168.15.42"
       
            
       

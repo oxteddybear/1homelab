@@ -10,7 +10,7 @@ vsphere_datastore = "d5"
 vsphere_folder = "/"
 
 # MGMT network to connect first network adapter of the VM
-mgt_network = "VM Network"
+mgt_network = "10G-vlan111"
 # Network to connect rest of the adapters. By default it will be trunked port group
 iscsi_network1 = "10.10.9.0"
 workload_network = "i-trunk"
@@ -26,12 +26,12 @@ guest_dns = "192.168.254.123"
 guest_ntp = "time.google.com"
 guest_domain = "rubber.ducky"
 # Guest_start_IP format includes first 3 octets of the address with "." .Last octet will be added in main program
-guest_start_ip = "192.168.15."
+guest_start_ip = "10.168.254."
 guest_start_ip1 = "10.10.9."
 guest_start_ip2 = "10.11.10."
 
-guest_netmask = "255.255.0.0"
+guest_netmask = "255.255.255.0"
 guest_netmask1 = "255.255.255.0"
 guest_netmask2 = "255.255.255.0"
-guest_gateway = "192.168.254.254"
+guest_gateway = "10.168.254.254"
                                       
