@@ -151,7 +151,7 @@ provisioner "remote-exec" {
     "esxcli iscsi software set --enabled=true",
 
     "esxcli iscsi networkportal add -n vmk1 -A vmhba65",
-    "esxcli iscsi adapter discovery sendtarget add -a 10.10.9.177:3260 -A vmhba65",
+    "esxcli iscsi adapter discovery sendtarget add -a 10.10.8.177:3260 -A vmhba65",
     "esxcli iscsi adapter discovery rediscover -A vmhba65"
     ]
 }
