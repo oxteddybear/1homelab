@@ -20,10 +20,6 @@ data "vsphere_host_thumbprint" "finger1" { #compute host
   insecure = true
 }
 
-data "vsphere_host_thumbprint" "finger2" { #edge host
-  address = var.addhost1.name[0]
-  insecure = true
-}
 
 
 resource "vsphere_compute_cluster" "c1" {
@@ -31,19 +27,11 @@ resource "vsphere_compute_cluster" "c1" {
   datacenter_id   = vsphere_datacenter.target_dc.moid
 }
 
-resource "vsphere_compute_cluster" "c2" {
-  name            = var.edge_cluster
-  datacenter_id   = vsphere_datacenter.target_dc.moid
-}
 
 locals {
   fingerprint = [
     data.vsphere_host_thumbprint.finger0.id,
     data.vsphere_host_thumbprint.finger1.id
-  ]
-    fingerprint1 = [
-    data.vsphere_host_thumbprint.finger2.id
-    
   ]
 }
 
@@ -58,16 +46,6 @@ resource "vsphere_host" "hostmember" {
   cluster = vsphere_compute_cluster.c1.id
 }
 
-resource "vsphere_host" "hostmember1" {
-  count = length(var.addhost1.name)
-  hostname = var.addhost1.name[count.index]
-  username = var.esxi_user
-  password = var.esxi_password
-  thumbprint = local.fingerprint1[count.index]
-  cluster = vsphere_compute_cluster.c2.id
-}
-
-
 #create mgt vds 
 resource "vsphere_distributed_virtual_switch" "vds1" {
   name          = var.vds1_name
@@ -77,14 +55,6 @@ resource "vsphere_distributed_virtual_switch" "vds1" {
   
   dynamic "host" {
     for_each = vsphere_host.hostmember
-    content {
-      host_system_id = host.value.id #here host.value.id = <dynamic "host">."value" <==tis is a keyword to get the value id.<attribute> you can view the attribute in the state
-      devices        = var.mgt_vmnic
-    }
-  }
-
-  dynamic "host" {
-    for_each = vsphere_host.hostmember1
     content {
       host_system_id = host.value.id #here host.value.id = <dynamic "host">."value" <==tis is a keyword to get the value id.<attribute> you can view the attribute in the state
       devices        = var.mgt_vmnic
@@ -106,31 +76,8 @@ resource "vsphere_distributed_virtual_switch" "vds2" {
       devices        = var.data_vmnic
     }
   }
-
-  dynamic "host" {
-    for_each = vsphere_host.hostmember1
-    content {
-      host_system_id = host.value.id #here host.value.id = <dynamic "host">."value" <==tis is a keyword to get the value id.<attribute> you can view the attribute in the state
-      devices        = var.data_vmnic
-    }
-  }
 }
 
-#create data esxi-vds
-resource "vsphere_distributed_virtual_switch" "vds3" {
-  name          = var.vds3_name
-  datacenter_id = vsphere_datacenter.target_dc.moid
-  max_mtu       = var.vds3_mtu
-  uplinks       = ["uplink1", "uplink2"]
-  
-  dynamic "host" {
-    for_each = vsphere_host.hostmember
-    content {
-      host_system_id = host.value.id #here host.value.id = <dynamic "host">."value" <==tis is a keyword to get the value id.<attribute> you can view the attribute in the state
-      devices        = var.data_vmnic1
-    }
-  }
-}
 
 # Distributed port groups for access mgt network
 
