@@ -12,6 +12,7 @@ variable "workload_network" {  description = "Porgroup to which the virtual mach
 variable "iscsi_network1" {  description = "Porgroup to which the virtual machine will be connected."}
 variable "vmotion_network" {  description = "Porgroup to which the virtual machine will be connected."}
 variable "mgt_network" {  description = "Porgroup to which the virtual machine management will be connected."}
+variable "t0_network" {  description = "Porgroup to which the virtual machine management will be connected."}
 
 variable "guest_vcpu" {  description = "Guest VM vCPU amount"}
 variable "guest_memory" {  description = "Guest VM Memory size"}

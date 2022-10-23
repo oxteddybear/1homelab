@@ -33,7 +33,10 @@ data "vsphere_network" "workload_network" {
   name          = var.workload_network
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
-
+data "vsphere_network" "t0_network" {
+  name          = var.t0_network
+  datacenter_id = data.vsphere_datacenter.target_dc.id
+}
 data "vsphere_network" "vmotion_network" {
   name          = var.vmotion_network
   datacenter_id = data.vsphere_datacenter.target_dc.id
@@ -54,7 +57,7 @@ data "vsphere_host" "host" {
 # increase the number of data resource queries in locals block below to match the templates you need
 locals {
   uuids = [
-    data.vsphere_virtual_machine.template0.id,
+    data.vsphere_virtual_machine.template0.id
   ]
 
 }
@@ -85,7 +88,7 @@ resource "vsphere_virtual_machine" "vesxi" {
   network_interface {    network_id   = data.vsphere_network.vmotion_network.id   }
   network_interface {    network_id   = data.vsphere_network.workload_network.id  }
   network_interface {    network_id   = data.vsphere_network.workload_network.id  }
-  network_interface {    network_id   = data.vsphere_network.workload_network.id  }
+  network_interface {    network_id   = data.vsphere_network.t0_network.id  }
   network_interface {    network_id   = data.vsphere_network.workload_network.id  }
   network_interface {    network_id   = data.vsphere_network.workload_network.id  }
   network_interface {    network_id   = data.vsphere_network.workload_network.id  }

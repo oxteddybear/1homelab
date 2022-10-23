@@ -1,7 +1,7 @@
 # Provider
 vsphere_user = "administrator@vsphere.local"
 vsphere_password = "VMware1!"
-vsphere_server = "192.168.254.132"
+vsphere_server = "10.168.254.134"
 host_to_installon = "192.168.254.108"
 # Infrastructure
 vsphere_datacenter = "lab"
@@ -15,6 +15,7 @@ mgt_network = "10G-vlan111"
 iscsi_network1 = "10.10.9.0"
 workload_network = "i-trunk"
 vmotion_network = "i-vmotion"
+t0_network = "ss-trunk"
 # Guest
 guest_vcpu = "16"
 guest_memory = "50176"
@@ -23,7 +24,7 @@ guest_password = "VMware1!"
 # Disks for the guest. Disk0 is main drive, disk1 and disk2 for VSAN
 guest_disk0_size = "8"
 guest_dns = "192.168.254.123"
-guest_ntp = "time.google.com"
+guest_ntp = "192.168.254.123"
 guest_domain = "rubber.ducky"
 # Guest_start_IP format includes first 3 octets of the address with "." .Last octet will be added in main program
 guest_start_ip = "10.168.254."
