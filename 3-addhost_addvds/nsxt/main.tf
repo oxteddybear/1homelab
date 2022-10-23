@@ -49,7 +49,23 @@ resource "vsphere_host" "hostmember" {
 
 
 
-#create mgt vds , add hosts in hostmember and hostmember1 into respective cluster c1 and c2
+#create backup vds , add hosts in hostmember and hostmember1 into respective cluster c1 and c2
+resource "vsphere_distributed_virtual_switch" "vds3" {
+  name          = var.vds3_name
+  datacenter_id = vsphere_datacenter.target_dc.moid
+  max_mtu       = var.vds3_mtu
+  uplinks       = ["uplink1", "uplink2"]
+
+  dynamic "host" {
+    for_each = vsphere_host.hostmember
+    content {
+      host_system_id = host.value.id #here host.value.id = <dynamic "host">."value" <==tis is a keyword to get the value id.<attribute> you can view the attribute in the state
+      devices        = var.data_vmnic
+    }
+  }
+
+}
+
 
 #create data vds and add hosts in hostmember in vds2
 #this is for Prod overlay
@@ -57,13 +73,13 @@ resource "vsphere_distributed_virtual_switch" "vds2" {
   name          = var.vds2_name
   datacenter_id = vsphere_datacenter.target_dc.moid
   max_mtu       = var.vds2_mtu
-  uplinks       = ["uplink1", "uplink2"]
+  uplinks       = ["uplink1"]
   
   dynamic "host" {
     for_each = vsphere_host.hostmember
     content {
       host_system_id = host.value.id #here host.value.id = <dynamic "host">."value" <==tis is a keyword to get the value id.<attribute> you can view the attribute in the state
-      devices        = var.data_vmnic
+      devices        = var.data_vmnic2
     }
   }
 

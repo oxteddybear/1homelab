@@ -13,7 +13,9 @@
 # ####vds stuff
  vds1_name = "vdsmgt"
  vds2_name = "vdsdata"
+ vds3_name = "vdsvelerobackup"
 
  vds1_mtu = "1500"
  vds2_mtu = "9000"
+ vds2_mtu = "1500"
 

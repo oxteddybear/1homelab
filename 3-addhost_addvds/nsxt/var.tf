@@ -11,8 +11,8 @@ variable "esxi_password"      {  description = "esxi root password"}
 #variable "vds1_mtu"           {  description = "VDS MTU"}
 variable "vds2_name"          {  description = "VDS Name"}
 variable "vds2_mtu"           {  description = "VDS MTU"}
-#variable "vds3_name"          {  description = "VDS Name"}
-#variable "vds3_mtu"           {  description = "VDS MTU"}
+variable "vds3_name"          {  description = "VDS Name"}
+variable "vds3_mtu"           {  description = "VDS MTU"}
 
 #variable "vds4_name"          {  description = "VDS Name"}
 #variable "vds4_mtu"           {  description = "VDS MTU"}
@@ -46,4 +46,4 @@ variable "pg2" { # put all the portgroups for the proddata here: <portgroup-name
 
 variable "mgt_vmnic"  {  default = ["vmnic1"] }
 variable "data_vmnic" {  default = ["vmnic4","vmnic5"] }
-variable "data_vmnic1" {  default = ["vmnic6", "vmnic7"] }
+variable "data_vmnic2" {  default = ["vmnic7"] }
