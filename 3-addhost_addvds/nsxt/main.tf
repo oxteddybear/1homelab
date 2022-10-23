@@ -73,7 +73,7 @@ resource "vsphere_distributed_virtual_switch" "vds2" {
   name          = var.vds2_name
   datacenter_id = vsphere_datacenter.target_dc.moid
   max_mtu       = var.vds2_mtu
-  uplinks       = ["uplink1"]
+  uplinks       = ["uplink1","uplink2"]
   
   dynamic "host" {
     for_each = vsphere_host.hostmember
@@ -86,7 +86,6 @@ resource "vsphere_distributed_virtual_switch" "vds2" {
 }
 
 
-# Distributed port groups for access mgt network
 
 
 # #create pg on second vds - here i'm hardcoding since it makes no sense to create just 1 variable for this custom trunk
@@ -101,3 +100,9 @@ resource "vsphere_distributed_port_group" "pg2" {
     }
 }
 
+resource "vsphere_distributed_port_group" "pgbackup" {
+  name     = "dpg-velero-vlan456"
+  distributed_virtual_switch_uuid = vsphere_distributed_virtual_switch.vds3.id
+
+  vlan_id = 456
+}

@@ -21,8 +21,8 @@ variable "vds3_mtu"           {  description = "VDS MTU"}
 variable "addhost" { ### compute hosts
   default = {
    name = [
-      "192.168.15.41",
-      "192.168.15.42"
+      "10.168.254.41",
+      "10.168.254.42"
       
            
       
@@ -39,7 +39,6 @@ variable "pg1" { # put all the portgroups for the mgtvds here: <portgroup-name> 
 variable "pg2" { # put all the portgroups for the proddata here: <portgroup-name> = <vlanid>
   default = {
     "dpg-prod-ovl-edge-trunk1" = "0-4094",
-    "dpg-prod-ovl-edge-trunk2" = "0-4094"
 
   }
 }
