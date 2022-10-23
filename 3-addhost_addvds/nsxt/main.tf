@@ -57,13 +57,13 @@ resource "vsphere_distributed_virtual_switch" "vds3" {
   name          = var.vds3_name
   datacenter_id = vsphere_datacenter.target_dc.moid
   max_mtu       = var.vds3_mtu
-  uplinks       = ["uplink1", "uplink2"]
+  uplinks       = ["uplink1"]
 
   dynamic "host" {
     for_each = vsphere_host.hostmember
     content {
       host_system_id = host.value.id #here host.value.id = <dynamic "host">."value" <==tis is a keyword to get the value id.<attribute> you can view the attribute in the state
-      devices        = var.data_vmnic
+      devices        = var.data_vmnic3
     }
   }
 
