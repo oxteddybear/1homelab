@@ -1,7 +1,7 @@
 # Provider
 vsphere_user = "administrator@vsphere.local"
 vsphere_password = "VMware1!"
-vsphere_server = "192.168.254.132"
+vsphere_server = "192.168.254.133"
 host_to_installon = "192.168.254.108"
 # Infrastructure
 vsphere_datacenter = "lab"
@@ -10,7 +10,7 @@ vsphere_datastore = "d5"
 vsphere_folder = "/"
 
 # MGMT network to connect first network adapter of the VM
-mgt_network = "10g-vlan111"
+mgt_network = "10G-vlan111"
 # Network to connect rest of the adapters. By default it will be trunked port group
 iscsi_network1 = "10.10.9.0"
 workload_network = "i-trunk"
