@@ -15,10 +15,10 @@ data "vsphere_datastore" "target_datastore" {
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
 
-#data "vsphere_compute_cluster" "target_cluster" {
-#  name          = var.vsphere_cluster
-#  datacenter_id = data.vsphere_datacenter.target_dc.id
-#}
+data "vsphere_compute_cluster" "target_cluster" {
+  name          = var.vsphere_cluster
+  datacenter_id = data.vsphere_datacenter.target_dc.id
+}
 
 data "vsphere_network" "mgt_network" {
   name          = var.mgt_network
