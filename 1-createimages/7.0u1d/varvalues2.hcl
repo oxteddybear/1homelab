@@ -25,7 +25,7 @@ guest_username          = "root"
 guest_password          = "VMware1!"
 ssh_timeout             = "15m"
 nfs_server_path         = "192.168.254.124/ks/ks.cfg"
-iso_file_path           = "iso/VMware-VMvisor-Installer-7.0u3g-17325551.x86_64.iso"
+iso_file_path           = "iso/VMware-VMvisor-Installer-7.0U3g-20328353.x86_64.iso"
 
 
 vm_disk_controller      = "pvscsi"
