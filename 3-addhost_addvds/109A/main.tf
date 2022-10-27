@@ -22,7 +22,7 @@ data "vsphere_host_thumbprint" "finger1" { #prod host
 
 
 
-resource "vsphere_compute_cluster" "tanzuc1" {
+resource "vsphere_compute_cluster" "c1" {
   name            = var.compute_cluster
   datacenter_id   = vsphere_datacenter.target_dc.moid
   drs_enabled          = true
