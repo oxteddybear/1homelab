@@ -63,7 +63,7 @@ resource "vsphere_distributed_virtual_switch" "vds2" {
     for_each = vsphere_host.hostmember
     content {
       host_system_id = host.value.id
-      devices        = "vmnic4"
+      devices        = ["vmnic4"]
     }
   }
 
@@ -81,7 +81,7 @@ resource "vsphere_distributed_virtual_switch" "vds3" {
     for_each = vsphere_host.hostmember
     content {
       host_system_id = host.value.id 
-      devices        = "vmnic5"
+      devices        = ["vmnic5"]
     }
   }
 
