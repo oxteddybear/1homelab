@@ -14,7 +14,7 @@ vm_name3                = "7template-esxi-7.0.u3g003"
 vm_name4                = "7template-esxi-7.0.u3g004"
 vm_name5                = "7template-esxi-7.0.u3g005"
 vm_name6                = "7template-esxi-7.0.u3g006"
-vm_name7                = "7template-esxi-7.0.u3g007"
+
 vm_hostname             = "temphostname"
 #vm_guestos              = "vmkernel7guest" #for esxi7 #
 vm_guestos              = "vmkernel6guest" #for esxi6
