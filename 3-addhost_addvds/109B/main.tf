@@ -5,7 +5,11 @@ provider "vsphere" {
   allow_unverified_ssl = true
 }
 
-resource "vsphere_datacenter" "target_dc" {
+#resource "vsphere_datacenter" "target_dc" {
+#  name = var.vsphere_datacenter
+#}
+
+data "vsphere_datacenter" "target_dc" {
   name = var.vsphere_datacenter
 }
 
