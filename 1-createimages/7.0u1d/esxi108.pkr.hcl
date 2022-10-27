@@ -13,6 +13,7 @@ variable vm_name2                  {  default = "" }
 variable vm_name3                  {  default = "" }
 variable vm_name4                  {  default = "" }
 variable vm_name5                  {  default = "" }
+variable vm_name6                  {  default = "" }
 
 
 variable vm_hostname               {  default = "" }
