@@ -54,7 +54,7 @@ resource "vsphere_host" "hostmember" {
 
 #create backup vds , add hosts in hostmember and hostmember1 into respective cluster c1 and c2
 resource "vsphere_distributed_virtual_switch" "vds2" {
-  name          = "tanzu1-vds-data"
+  name          = "rack1-vds-data"
   datacenter_id = vsphere_datacenter.target_dc.moid
   max_mtu       = 9000
   uplinks       = ["uplink1"]
@@ -72,7 +72,7 @@ resource "vsphere_distributed_virtual_switch" "vds2" {
 
 
 resource "vsphere_distributed_virtual_switch" "vds3" {
-  name          = "tanzu1-vds-velero"
+  name          = "rack1-vds-velero"
   datacenter_id = vsphere_datacenter.target_dc.moid
   max_mtu       = 1500
   uplinks       = ["uplink1"]
@@ -118,7 +118,7 @@ resource "vsphere_distributed_virtual_switch" "vds3" {
 #}
 
 resource "vsphere_distributed_port_group" "pgbackup" {
-  name     = "dpg-velero-vlan456"
+  name     = "dpg-rack1-velero-vlan456"
   distributed_virtual_switch_uuid = vsphere_distributed_virtual_switch.vds3.id
 
   vlan_id = 456
