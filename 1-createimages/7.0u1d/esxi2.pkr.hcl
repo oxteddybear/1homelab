@@ -260,7 +260,7 @@ source "vsphere-iso" "esxi7" {
   }
   username       = "${var.vsphere_username}"
   vcenter_server = "${var.vsphere_vcenter}"
-  vm_name        = "${var.vm_name6}"
+  vm_name        = "${var.vm_name7}"
 }
 
 build {
