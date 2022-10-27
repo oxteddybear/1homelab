@@ -5,6 +5,7 @@ variable vsphere_password          {  default = "" }
 variable vsphere_datacenter        {  default = "" }
 variable vsphere_cluster           {  default = "" }
 variable parent_host               {  default = "" }
+variable parent_host108               {  default = "" }
 variable vsphere_datastore         {  default = "" }
 variable vsphere_template_folder   {  default = "" }
 variable vm_name1                  {  default = "" }
@@ -175,7 +176,7 @@ source "vsphere-iso" "esxi5" {
   datastore            = "${var.vsphere_datastore}"
   folder               = "${var.vsphere_template_folder}"
   guest_os_type        = "${var.vm_guestos}"
-  host                 = "${var.parent_host}"
+  host                 = "${var.parent_host108}"
   insecure_connection  = true
   iso_paths            = ["[${var.vsphere_datastore}] ${var.iso_file_path}"]
   disk_controller_type    = ["${var.vm_disk_controller}"]
@@ -208,7 +209,7 @@ source "vsphere-iso" "esxi6" {
   datastore            = "${var.vsphere_datastore}"
   folder               = "${var.vsphere_template_folder}"
   guest_os_type        = "${var.vm_guestos}"
-  host                 = "${var.parent_host}"
+  host                 = "${var.parent_host108}"
   insecure_connection  = true
   iso_paths            = ["[${var.vsphere_datastore}] ${var.iso_file_path}"]
   disk_controller_type    = ["${var.vm_disk_controller}"]
