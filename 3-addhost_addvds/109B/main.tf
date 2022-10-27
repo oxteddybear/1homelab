@@ -28,7 +28,7 @@ data "vsphere_host_thumbprint" "finger1" { #prod host
 
 resource "vsphere_compute_cluster" "c1" {
   name            = var.compute_cluster
-  datacenter_id   = data.vsphere_datacenter.target_dc.moid
+  datacenter_id   = data.vsphere_datacenter.target_dc.id
   drs_enabled          = true
   drs_automation_level = "fullyAutomated"
   ha_enabled = true
@@ -59,7 +59,7 @@ resource "vsphere_host" "hostmember" {
 #create backup vds , add hosts in hostmember and hostmember1 into respective cluster c1 and c2
 resource "vsphere_distributed_virtual_switch" "vds2" {
   name          = "rack2-vds-data"
-  datacenter_id = vsphere_datacenter.target_dc.moid
+  datacenter_id = data.vsphere_datacenter.target_dc.id
   max_mtu       = 9000
   uplinks       = ["uplink1"]
   version		= "7.0.3"
@@ -77,7 +77,7 @@ resource "vsphere_distributed_virtual_switch" "vds2" {
 
 resource "vsphere_distributed_virtual_switch" "vds3" {
   name          = "rack2-vds-velero"
-  datacenter_id = vsphere_datacenter.target_dc.moid
+  datacenter_id = data.vsphere_datacenter.target_dc.id
   max_mtu       = 1500
   uplinks       = ["uplink1"]
   version		= "7.0.3"
