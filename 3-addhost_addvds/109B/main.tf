@@ -122,7 +122,7 @@ resource "vsphere_distributed_virtual_switch" "vds3" {
 #}
 
 resource "vsphere_distributed_port_group" "pgbackup" {
-  name     = "dpg-velero-vlan456"
+  name     = "dpg-rack2-velero-vlan456"
   distributed_virtual_switch_uuid = vsphere_distributed_virtual_switch.vds3.id
 
   vlan_id = 456
