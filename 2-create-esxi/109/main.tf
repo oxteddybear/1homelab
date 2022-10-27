@@ -52,6 +52,14 @@ data "vsphere_virtual_machine" "template1" {
   name          = var.template.name[1]
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
+data "vsphere_virtual_machine" "template2" {
+  name          = var.template.name[2]
+  datacenter_id = data.vsphere_datacenter.target_dc.id
+}
+data "vsphere_virtual_machine" "template3" {
+  name          = var.template.name[3]
+  datacenter_id = data.vsphere_datacenter.target_dc.id
+}
 data "vsphere_host" "host" {
   name          = var.host_to_installon
   datacenter_id = data.vsphere_datacenter.target_dc.id
@@ -61,7 +69,9 @@ data "vsphere_host" "host" {
 locals {
   uuids = [
     data.vsphere_virtual_machine.template0.id,
-    data.vsphere_virtual_machine.template1.id
+    data.vsphere_virtual_machine.template1.id,
+    data.vsphere_virtual_machine.template2.id,
+    data.vsphere_virtual_machine.template3.id
   ]
 
 }
@@ -156,7 +166,7 @@ provisioner "remote-exec" {
 
     "esxcli iscsi networkportal add -n vmk1 -A vmhba65",
     "esxcli iscsi networkportal add -n vmk0 -A vmhba65",
-    "esxcli iscsi adapter discovery sendtarget add -a 10.10.8.177:3260 -A vmhba65",
+    "esxcli iscsi adapter discovery sendtarget add -a 10.10.9.177:3260 -A vmhba65",
     "esxcli iscsi adapter discovery sendtarget add -a 192.168.254.123:3260 -A vmhba65",
     "esxcli iscsi adapter discovery rediscover -A vmhba65",
     ]
