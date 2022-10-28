@@ -262,17 +262,14 @@ source "vsphere-iso" "esxi7" {
   vcenter_server = "${var.vsphere_vcenter}"
   vm_name        = "${var.vm_name7}"
 }
-
+##maximium packer can build is 5 vms that's y have to split into 2 hcl files
 build {
   sources = [
     "source.vsphere-iso.esxi1",
     "source.vsphere-iso.esxi2",
     "source.vsphere-iso.esxi3",
     "source.vsphere-iso.esxi4",
-    "source.vsphere-iso.esxi5",
-	"source.vsphere-iso.esxi6",
-	"source.vsphere-iso.esxi7"
-	
+
 	
   ]
   
