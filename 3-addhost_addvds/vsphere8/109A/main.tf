@@ -61,7 +61,7 @@ resource "vsphere_distributed_virtual_switch" "vds2" {
   datacenter_id = data.vsphere_datacenter.target_dc.id
   max_mtu       = 9000
   uplinks       = ["uplink1"]
-  version		= "8.0.0"
+  #version		= "8.0.0"
   dynamic "host" {
     for_each = vsphere_host.hostmember
     content {
@@ -80,7 +80,7 @@ resource "vsphere_distributed_virtual_switch" "vds3" {
   datacenter_id = data.vsphere_datacenter.target_dc.id
   max_mtu       = 1500
   uplinks       = ["uplink1"]
-  version		= "8.0.0"
+  #version		= "8.0.0"
   dynamic "host" {
     for_each = vsphere_host.hostmember
     content {
