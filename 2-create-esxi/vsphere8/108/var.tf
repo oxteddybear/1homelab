@@ -25,37 +25,11 @@ variable "guest_domain" {  description = "Domain for the guest." }
 variable "guest_start_ip" {  description = "Starting IP address for the guest vmk0 interface"  }
 variable "guest_start_ip1" {  description = "Starting IP address for the guest vmk1 interface" }
 variable "guest_start_ip2" {  description = "Starting IP address for the guest vmk1 interface" }
-# variable "guest_start_ip2" {  description = "Starting IP address for the guest vmk2 interface"}
 variable "guest_netmask" {  description = "Netmask for the guest vmk0 interface"   }
 variable "guest_netmask1" {  description = "Netmask for the guest vmk1 interface"}
 variable "guest_netmask2" {  description = "Netmask for the guest vmk1 interface"}
-# variable "guest_netmask2" {  description = "Netmask for the guest vmk2 interface"}
 variable "guest_gateway" {  description = "Gateway for the guest vmk0 interface" }
 
-
-# variable "template" {
-# default = {
-#   #the type is a map of lists take note of the brackets []=list {}=map=key/value pairs
-#   #to access the values: var.variablename.key[index] eg. var.template.octet[0] give you 101
-#   #name = contains the template names that exists on vcente, octet is the last octet of the ip addresses it will have
-  
-#   "name" = [ #put the names of the templates you have in vcenter under Packer_vms
-#   "1template-esxi001", 
-#   "1template-esxi002",
-#   "1template-esxi003", 
-#   "1template-esxi004",
-#   "1template-esxi005"
-  
-#   ]
-#   "octet"=[  #put the last octet of the esxi here
-#     101,
-#     102,
-#     103,
-#     104,
-#     105
-#     ]
-#   }
-# }
 variable "template" {
 default = {
   #the type is a map of lists take note of the brackets []=list {}=map=key/value pairs
@@ -63,13 +37,13 @@ default = {
   #name = contains the template names that exists on vcente, octet is the last octet of the ip addresses it will have
   
   "name" = [ #put the names of the templates you have in vcenter under Packer_vms
-  "7template-esxi-7.0.u3g001",
-  "7template-esxi-7.0.u3g002" 
+  "template-esxi-8.0-005",
+  "template-esxi-8.0-006" 
   
   ]
   "octet"=[  #put the last octet of the esxi here, do not use 108 and 109 as the parent uses them
-    5,
-	6
+    85,
+	86
     ]
   }
 }

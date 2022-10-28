@@ -5,7 +5,7 @@ vsphere_server = "192.168.254.134"
 host_to_installon = "192.168.254.108"
 # Infrastructure
 vsphere_datacenter = "lab"
-vsphere_cluster = "c1"
+vsphere_cluster = "c8"
 vsphere_datastore = "d0"
 vsphere_folder = "/"
 
