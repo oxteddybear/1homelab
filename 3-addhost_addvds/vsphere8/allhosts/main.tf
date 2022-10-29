@@ -10,9 +10,9 @@ data "vsphere_datacenter" "target_dc" {
 }
 
 data "vsphere_host" "hostmember" {
-  count = length(var.addhost.name)
+  
   datacenter_id = data.vsphere_datacenter.target_dc.id
-  hostname = var.addhost.name[count.index]
+  
 }
 
 
