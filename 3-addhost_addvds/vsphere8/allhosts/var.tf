@@ -3,7 +3,6 @@ variable "vsphere_server"     {  description = "Standalone --not the parent--- v
 variable "vsphere_user"       {  description = "vSphere username" }
 variable "vsphere_password"   {  description = "vSphere password" }
 variable "vsphere_datacenter" {  description = "vSphere datacenter" }
-variable "compute_cluster"    {  description = "Compute cluster name"}
 variable "esxi_user"          {  description = "esxi root user"}
 variable "esxi_password"      {  description = "esxi root password"}
 #variable "vds2_name"          {  description = "VDS Name"}
