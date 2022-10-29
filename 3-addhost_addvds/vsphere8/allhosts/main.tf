@@ -10,9 +10,9 @@ data "vsphere_datacenter" "target_dc" {
 }
 
 data "vsphere_host" "hostmember" {
-  
+  count = length(var.addhost.name)
   datacenter_id = data.vsphere_datacenter.target_dc.id
-  
+  hostname = var.addhost.name[count.index]
 }
 
 
@@ -22,7 +22,7 @@ resource "vsphere_distributed_virtual_switch" "overlay" {
   max_mtu       = 9000
   uplinks       = ["uplink1"]
   dynamic "host" {
-    for_each = data.vsphere_host.hostmember
+    for_each = vsphere_host.hostmember
     content {
       host_system_id = host.value.id
       devices        = ["vmnic6"]
