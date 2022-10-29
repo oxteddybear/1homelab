@@ -22,7 +22,7 @@ resource "vsphere_distributed_virtual_switch" "overlay" {
   max_mtu       = 9000
   uplinks       = ["uplink1"]
   dynamic "host" {
-    for_each = vsphere_host.hostmember
+    for_each = data.vsphere_host.hostmember
     content {
       host_system_id = host.value.id
       devices        = ["vmnic6"]
