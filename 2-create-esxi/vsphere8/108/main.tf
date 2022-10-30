@@ -81,7 +81,7 @@ resource "vsphere_virtual_machine" "vesxi" {
   memory   = var.guest_memory
   nested_hv_enabled = "true"
   wait_for_guest_net_routable ="false"
-  guest_id = "vmkernel6Guest" #i hardcoded this, although you can query this from the data resource of the template
+  guest_id = "vmkernel7Guest" #i hardcoded this, although you can query this from the data resource of the template
   wait_for_guest_net_timeout = 35
   wait_for_guest_ip_timeout = 35
   scsi_type = "pvscsi"
