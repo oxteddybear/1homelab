@@ -10,7 +10,7 @@ vsphere_datastore = "d0"
 vsphere_folder = "/"
 
 # MGMT network to connect first network adapter of the VM
-mgt_network = "ss-10.168.254.0-vlan11"
+mgt_network = "ss-10.168.254.0-vlan111"
 # Network to connect rest of the adapters. By default it will be trunked port group
 iscsi_network1 = "10.10.8.0"
 workload_network = "ss-trunk"
