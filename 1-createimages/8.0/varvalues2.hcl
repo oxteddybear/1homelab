@@ -17,8 +17,8 @@ vm_name5                = "template-esxi-8.0-005"
 vm_name6                = "template-esxi-8.0-006"
 
 vm_hostname             = "temphostname"
-#vm_guestos              = "vmkernel7guest" #for esxi7 #
-vm_guestos              = "vmkernel6guest" #for esxi6
+vm_guestos              = "vmkernel7guest" #for esxi7 #
+#vm_guestos              = "vmkernel6guest" #for esxi6
 vm_cpu_size             = "16"
 vm_ram_size             = "4096"
 vm_disk_size            = "81920"
