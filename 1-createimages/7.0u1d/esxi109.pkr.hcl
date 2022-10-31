@@ -36,7 +36,7 @@ source "vsphere-iso" "esxi1" {
   RAM                  = "${var.vm_ram_size}"
   NestedHV             = "true"
   boot_command         = ["<enter>", "<SHIFT+O>", " ks=nfs://${var.nfs_server_path}", "<enter>", ""]
-#  cluster              = "${var.vsphere_cluster}"
+  cluster              = "${var.vsphere_cluster}"
   communicator         = "ssh"
   convert_to_template  = "true"
   datacenter           = "${var.vsphere_datacenter}"
@@ -70,7 +70,7 @@ source "vsphere-iso" "esxi2" {
   RAM                  = "${var.vm_ram_size}"
   NestedHV             = "true"
   boot_command         = ["<enter>", "<SHIFT+O>", " ks=nfs://${var.nfs_server_path}", "<enter>", ""]
-#  cluster              = "${var.vsphere_cluster}"
+  cluster              = "${var.vsphere_cluster}"
   communicator         = "ssh"
   convert_to_template  = "true"
   datacenter           = "${var.vsphere_datacenter}"
@@ -103,7 +103,7 @@ source "vsphere-iso" "esxi3" {
   RAM                  = "${var.vm_ram_size}"
   NestedHV             = "true"
   boot_command         = ["<enter>", "<SHIFT+O>", " ks=nfs://${var.nfs_server_path}", "<enter>", ""]
-#  cluster              = "${var.vsphere_cluster}"
+  cluster              = "${var.vsphere_cluster}"
   communicator         = "ssh"
   convert_to_template  = "true"
   datacenter           = "${var.vsphere_datacenter}"
@@ -136,7 +136,7 @@ source "vsphere-iso" "esxi4" {
   RAM                  = "${var.vm_ram_size}"
   NestedHV             = "true"
   boot_command         = ["<enter>", "<SHIFT+O>", " ks=nfs://${var.nfs_server_path}", "<enter>", ""]
-#  cluster              = "${var.vsphere_cluster}"
+  cluster              = "${var.vsphere_cluster}"
   communicator         = "ssh"
   convert_to_template  = "true"
   datacenter           = "${var.vsphere_datacenter}"
@@ -169,7 +169,7 @@ source "vsphere-iso" "esxi5" {
   RAM                  = "${var.vm_ram_size}"
   NestedHV             = "true"
   boot_command         = ["<enter>", "<SHIFT+O>", " ks=nfs://${var.nfs_server_path}", "<enter>", ""]
-#  cluster              = "${var.vsphere_cluster}"
+  cluster              = "${var.vsphere_cluster}"
   communicator         = "ssh"
   convert_to_template  = "true"
   datacenter           = "${var.vsphere_datacenter}"
@@ -202,7 +202,7 @@ source "vsphere-iso" "esxi6" {
   RAM                  = "${var.vm_ram_size}"
   NestedHV             = "true"
   boot_command         = ["<enter>", "<SHIFT+O>", " ks=nfs://${var.nfs_server_path}", "<enter>", ""]
-#  cluster              = "${var.vsphere_cluster}"
+  cluster              = "${var.vsphere_cluster}"
   communicator         = "ssh"
   convert_to_template  = "true"
   datacenter           = "${var.vsphere_datacenter}"
@@ -235,7 +235,7 @@ source "vsphere-iso" "esxi7" {
   RAM                  = "${var.vm_ram_size}"
   NestedHV             = "true"
   boot_command         = ["<enter>", "<SHIFT+O>", " ks=nfs://${var.nfs_server_path}", "<enter>", ""]
-#  cluster              = "${var.vsphere_cluster}"
+  cluster              = "${var.vsphere_cluster}"
   communicator         = "ssh"
   convert_to_template  = "true"
   datacenter           = "${var.vsphere_datacenter}"

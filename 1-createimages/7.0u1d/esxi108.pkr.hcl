@@ -37,12 +37,12 @@ source "vsphere-iso" "esxi5" {
   RAM                  = "${var.vm_ram_size}"
   NestedHV             = "true"
   boot_command         = ["<enter>", "<SHIFT+O>", " ks=nfs://${var.nfs_server_path}", "<enter>", ""]
-#  cluster              = "${var.vsphere_cluster}"
+  cluster              = "${var.vsphere_cluster}"
   communicator         = "ssh"
   convert_to_template  = "true"
   datacenter           = "${var.vsphere_datacenter}"
   datastore            = "${var.vsphere_datastore}"
-  folder               = "${var.vsphere_template_folder}"
+#  folder               = "${var.vsphere_template_folder}"
   guest_os_type        = "${var.vm_guestos}"
   host                 = "${var.parent_host108}"
   insecure_connection  = true
@@ -70,12 +70,12 @@ source "vsphere-iso" "esxi6" {
   RAM                  = "${var.vm_ram_size}"
   NestedHV             = "true"
   boot_command         = ["<enter>", "<SHIFT+O>", " ks=nfs://${var.nfs_server_path}", "<enter>", ""]
-#  cluster              = "${var.vsphere_cluster}"
+  cluster              = "${var.vsphere_cluster}"
   communicator         = "ssh"
   convert_to_template  = "true"
   datacenter           = "${var.vsphere_datacenter}"
   datastore            = "${var.vsphere_datastore}"
-  folder               = "${var.vsphere_template_folder}"
+#  folder               = "${var.vsphere_template_folder}"
   guest_os_type        = "${var.vm_guestos}"
   host                 = "${var.parent_host108}"
   insecure_connection  = true
