@@ -14,8 +14,8 @@ variable "esxi_password"      {  description = "esxi root password"}
 variable "addhost" { ### compute hosts
   default = {
    name = [
-      "192.168.253.1",
-      "192.168.253.2"
+      "192.168.253.71",
+      "192.168.253.72"
     ]
   }
 }
