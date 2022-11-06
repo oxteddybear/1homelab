@@ -28,7 +28,7 @@ guest_ntp = "time.google.com"
 guest_domain = "rubber.ducky"
 # Guest_start_IP format includes first 3 octets of the address with "." .Last octet will be added in main program
 guest_start_ip = "192.168.253."
-guest_start_ip1 = "10.10.8."
+guest_start_ip1 = "10.10.9."
 guest_start_ip2 = "10.11.10."
 
 guest_netmask = "255.255.0.0"
