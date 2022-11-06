@@ -53,12 +53,12 @@ data "vsphere_virtual_machine" "template1" {
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
 
-data "vsphere_virtual_machine" "template0" {
+data "vsphere_virtual_machine" "template2" {
   name          = var.template.name[2]
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
 
-data "vsphere_virtual_machine" "template1" {
+data "vsphere_virtual_machine" "template3" {
   name          = var.template.name[3]
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
