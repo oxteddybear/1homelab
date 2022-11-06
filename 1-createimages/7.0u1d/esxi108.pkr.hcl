@@ -3,7 +3,7 @@ variable vsphere_username          {  default = "" }
 
 variable vsphere_password          {  default = "" }
 variable vsphere_datacenter        {  default = "" }
-variable vsphere_cluster           {  default = "" }
+variable vsphere_cluster108           {  default = "" }
 variable parent_host               {  default = "" }
 variable parent_host108               {  default = "" }
 variable vsphere_datastore         {  default = "" }
@@ -37,7 +37,7 @@ source "vsphere-iso" "esxi5" {
   RAM                  = "${var.vm_ram_size}"
   NestedHV             = "true"
   boot_command         = ["<enter>", "<SHIFT+O>", " ks=nfs://${var.nfs_server_path}", "<enter>", ""]
-  cluster              = "${var.vsphere_cluster}"
+  cluster              = "${var.vsphere_cluster108}"
   communicator         = "ssh"
   convert_to_template  = "true"
   datacenter           = "${var.vsphere_datacenter}"
@@ -70,7 +70,7 @@ source "vsphere-iso" "esxi6" {
   RAM                  = "${var.vm_ram_size}"
   NestedHV             = "true"
   boot_command         = ["<enter>", "<SHIFT+O>", " ks=nfs://${var.nfs_server_path}", "<enter>", ""]
-  cluster              = "${var.vsphere_cluster}"
+  cluster              = "${var.vsphere_cluster108}"
   communicator         = "ssh"
   convert_to_template  = "true"
   datacenter           = "${var.vsphere_datacenter}"
