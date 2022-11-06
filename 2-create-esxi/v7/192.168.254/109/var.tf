@@ -25,21 +25,10 @@ variable "guest_domain" {  description = "Domain for the guest." }
 variable "guest_start_ip" {  description = "Starting IP address for the guest vmk0 interface"  }
 variable "guest_start_ip1" {  description = "Starting IP address for the guest vmk1 interface" }
 variable "guest_start_ip2" {  description = "Starting IP address for the guest vmk1 interface" }
-# variable "guest_start_ip2" {  description = "Starting IP address for the guest vmk2 interface"}
 variable "guest_netmask" {  description = "Netmask for the guest vmk0 interface"   }
 variable "guest_netmask1" {  description = "Netmask for the guest vmk1 interface"}
 variable "guest_netmask2" {  description = "Netmask for the guest vmk1 interface"}
-# variable "guest_netmask2" {  description = "Netmask for the guest vmk2 interface"}
 variable "guest_gateway" {  description = "Gateway for the guest vmk0 interface" }
-
-
-# variable "template" {
-# default = {
-#   #the type is a map of lists take note of the brackets []=list {}=map=key/value pairs
-#   #to access the values: var.variablename.key[index] eg. var.template.octet[0] give you 101
-#   #name = contains the template names that exists on vcente, octet is the last octet of the ip addresses it will have
-  
-  
 
 variable "template" {
 default = {
@@ -48,17 +37,17 @@ default = {
   #name = contains the template names that exists on vcente, octet is the last octet of the ip addresses it will have
   
   "name" = [ #put the names of the templates you have in vcenter under Packer_vms
-  "template-esxi-8.0-001",
-  "template-esxi-8.0-002",
-  "template-esxi-8.0-003",
-  "template-esxi-8.0-004"
+  "7template-esxi-7.0.u3g001",
+  "7template-esxi-7.0.u3g002",
+  "7template-esxi-7.0.u3g003",
+  "7template-esxi-7.0.u3g004" 
   
   ]
   "octet"=[  #put the last octet of the esxi here, do not use 108 and 109 as the parent uses them
-    81,
-	82,
-	83,
-	84
+    71,
+	72,
+	73,
+	74
     ]
   }
 }

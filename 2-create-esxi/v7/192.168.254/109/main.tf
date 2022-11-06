@@ -52,11 +52,13 @@ data "vsphere_virtual_machine" "template1" {
   name          = var.template.name[1]
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
-data "vsphere_virtual_machine" "template2" {
+
+data "vsphere_virtual_machine" "template0" {
   name          = var.template.name[2]
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
-data "vsphere_virtual_machine" "template3" {
+
+data "vsphere_virtual_machine" "template1" {
   name          = var.template.name[3]
   datacenter_id = data.vsphere_datacenter.target_dc.id
 }
@@ -80,7 +82,7 @@ locals {
 resource "vsphere_virtual_machine" "vesxi" {
   count = length(var.template.name)
   #name = substr(var.template.name[count.index],10,7) #take a subset of the template name as new vm name## substr(string, offset, length) eg. substr("template-esxi001",9,7) = esxi001
-  #name = "prison${count.index}"
+  
   name = "tanzu${var.template.octet[count.index]}"
   datastore_id     = data.vsphere_datastore.target_datastore.id
   folder           = var.vsphere_folder
@@ -166,7 +168,8 @@ provisioner "remote-exec" {
 
     "esxcli iscsi networkportal add -n vmk1 -A vmhba65",
     "esxcli iscsi networkportal add -n vmk0 -A vmhba65",
-    "esxcli iscsi adapter discovery sendtarget add -a 10.10.9.177:3260 -A vmhba65",
+    "esxcli iscsi adapter discovery sendtarget add -a 10.10.8.177:3260 -A vmhba65",
+    #"esxcli iscsi adapter discovery sendtarget add -a 192.168.254.123:3260 -A vmhba65",
     "esxcli iscsi adapter discovery rediscover -A vmhba65",
     ]
 }
