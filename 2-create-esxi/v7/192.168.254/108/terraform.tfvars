@@ -24,7 +24,7 @@ guest_password = "VMware1!"
 # Disks for the guest. Disk0 is main drive, disk1 and disk2 for VSAN
 guest_disk0_size = "80"
 guest_dns = "192.168.254.254"
-guest_ntp = "time.google.com"
+guest_ntp = "216.239.35.4"
 guest_domain = "rubber.ducky"
 # Guest_start_IP format includes first 3 octets of the address with "." .Last octet will be added in main program
 guest_start_ip = "192.168.253."
@@ -34,5 +34,5 @@ guest_start_ip2 = "10.11.10."
 guest_netmask = "255.255.0.0"
 guest_netmask1 = "255.255.255.0"
 guest_netmask2 = "255.255.255.0"
-guest_gateway = "10.168.254.254"
+guest_gateway = "192.168.254.254"
                                       
