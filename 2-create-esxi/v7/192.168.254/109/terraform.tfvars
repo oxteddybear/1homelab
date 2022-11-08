@@ -6,7 +6,7 @@ host_to_installon = "192.168.254.109"
 # Infrastructure
 vsphere_datacenter = "lab"
 vsphere_cluster = "c9"
-vsphere_datastore = "d00"
+vsphere_datastore = "d0"
 vsphere_folder = "/"
 
 # MGMT network to connect first network adapter of the VM
@@ -34,5 +34,5 @@ guest_start_ip2 = "10.11.10."
 guest_netmask = "255.255.0.0"
 guest_netmask1 = "255.255.255.0"
 guest_netmask2 = "255.255.255.0"
-guest_gateway = "10.168.254.254"
+guest_gateway = "192.168.254.254"
                                       
