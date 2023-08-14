@@ -46,7 +46,6 @@ source "vsphere-iso" "esxi1" {
   insecure_connection  = true
   iso_paths            = ["[${var.vsphere_datastore}] ${var.iso_file_path}"]
   disk_controller_type    = ["${var.vm_disk_controller}"]
- NestedHV               = true
   network_adapters {
     network      = "${var.vnic_network}"
     network_card = "vmxnet3"
