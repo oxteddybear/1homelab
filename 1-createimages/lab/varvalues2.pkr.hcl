@@ -23,7 +23,8 @@ guest_password          = "VMware1!"
 ssh_timeout             = "15m"
 nfs_server_path         = "192.168.254.123/ks/ks.cfg"
 # iso_file_path           = "iso/VMware-VMvisor-Installer-7.0U2a-17867351.x86_64.iso"
-iso_file_path           = "ds1/VMware-VMvisor-Installer-8.0U1a-21813344.x86_64.iso"
+#if iso file is in the root and not in /iso directory in datastore ds1
+iso_file_path           = "VMware-VMvisor-Installer-8.0U1a-21813344.x86_64.iso"
 vm_disk_controller      = "pvscsi"
 #cdrom_adapter_type      = "sata"
 
