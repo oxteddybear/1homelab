@@ -38,7 +38,7 @@ default = {
   
   "name" = [ #put the names of the templates you have in vcenter under Packer_vms
   "template-esxi-801a.u3d001",
-  "template-esxi-801a.u3d0012"
+  "template-esxi-801a.u3d002"
 #  "template-esxi-8.0-005",
 #  "template-esxi-8.0-006" 
   
