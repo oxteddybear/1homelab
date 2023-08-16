@@ -58,7 +58,7 @@ resource "vsphere_host" "hostmember" {
 
 #create backup vds , add hosts in hostmember and hostmember1 into respective cluster c1 and c2
 resource "vsphere_distributed_virtual_switch" "vds2" {
-  name          = "rack3-vds-data"
+  name          = "nsxt-data"
   #datacenter_id = vsphere_datacenter.target_dc.moid
   datacenter_id = data.vsphere_datacenter.target_dc.id
   max_mtu       = 9000
@@ -77,7 +77,7 @@ resource "vsphere_distributed_virtual_switch" "vds2" {
 
 
 resource "vsphere_distributed_virtual_switch" "vds3" {
-  name          = "rack3-vds-velero"
+  name          = "tanzu-vds"
   #datacenter_id = vsphere_datacenter.target_dc.moid
   datacenter_id = data.vsphere_datacenter.target_dc.id
   max_mtu       = 1500
@@ -94,9 +94,15 @@ resource "vsphere_distributed_virtual_switch" "vds3" {
 }
 
 
-resource "vsphere_distributed_port_group" "pgbackup" {
-  name     = "dpg-rack3-velero-vlan456"
+resource "vsphere_distributed_port_group" "dpg1" {
+  name     = "tanzu-frontend-10.102.1.0"
   distributed_virtual_switch_uuid = vsphere_distributed_virtual_switch.vds3.id
 
-  vlan_id = 456
+  vlan_id = 1021
+}
+resource "vsphere_distributed_port_group" "dpg2" {
+  name     = "tanzu-workload-10.102.2.0"
+  distributed_virtual_switch_uuid = vsphere_distributed_virtual_switch.vds3.id
+
+  vlan_id = 1020
 }
