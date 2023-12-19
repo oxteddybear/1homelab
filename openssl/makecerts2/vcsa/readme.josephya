@@ -1,0 +1,13 @@
+you need to scp the following files
+
+vcsa1.crt
+vcsa1.key
+root.crt
+
+inorder to scp you need to do the follwing on vcsa
+chsh -s /bin/bash
+
+run usr/lib/vmware-vmca/bin/certificate-manager
+
+ Replace Machine SSL certificate with Custom Certificate
+
