@@ -1,6 +1,5 @@
-cat > v3.ext <<-EOF
 [req]
-default_bits = 2048
+default_bits = 3072
 default_keyfile = rui.key
 distinguished_name = req_distinguished_name
 encrypt_key = no
@@ -14,7 +13,7 @@ stateOrProvinceName = SINGAPORE
 localityName = SINGAPORE
 0.organizationName = DUCKY
 organizationalUnitName = QUACK
-commonName = DUCKYNAME.domain.com
+commonName = vcsa.domain.com
 
 [v3_req]
 basicConstraints = CA:FALSE
@@ -23,7 +22,5 @@ extendedKeyUsage = serverAuth, clientAuth
 subjectAltName = @alt_names
 
 [alt_names]
-DNS.1=vcsa5.rubber.ducky
-IP.1=192.168.2.134
-EOF
-
+DNS.1=vcsa1.domain.com
+IP.1=10.149.80.249
