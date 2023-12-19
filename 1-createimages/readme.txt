@@ -12,6 +12,13 @@ Files
 	- esxi2.pkr.hcl <<< main configuration file where you modify varaibles, etc etc.
 	- ks.cfg << kickstart file for esxi on a nfs mount.
 
+install packer 
+===============
+curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+sudo apt-get update && sudo apt-get install packer
+
+
 build location
 ==============
 The vms are going to get built in the folder "Packer_vm" on vsphere, so make sure it exists. you can change this in the varvalues.pkr.hcl file.
