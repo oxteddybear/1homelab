@@ -1,0 +1,21 @@
+#you need to scp the following files
+
+vcsa1.crt
+vcsa1.key
+root.crt
+
+#inorder to scp you need to do the follwing on vcsa
+chsh -s /bin/bash
+
+#run usr/lib/vmware-vmca/bin/certificate-manager
+
+ Replace Machine SSL certificate with Custom Certificate
+
+#create tarball
+tar -cvf tarball.tar ./
+tar -czvf tarball.tar.gz ./
+
+#view cert
+openssl x509 -in vcsa1.crt -noout -text
+
+##as long as the url or ip is in the SAN the cert can be used.

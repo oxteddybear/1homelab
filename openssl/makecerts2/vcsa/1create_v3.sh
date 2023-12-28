@@ -23,7 +23,7 @@ extendedKeyUsage = serverAuth, clientAuth
 subjectAltName = @alt_names
 
 [alt_names]
-DNS.1=vcsa1.domain.com
+DNS.1=vcsa1.leafy.branch
 IP.1=10.149.80.249
 EOF
 
