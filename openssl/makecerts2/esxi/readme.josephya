@@ -35,3 +35,7 @@ update VECS on vcenter with the signing CA cert.
 #on the vcenter you can do this
 /usr/lib/vmware-vmafd/bin/dir-cli trustedcert publish --cert path_to_RootCA
 
+# tar and scp to esxi
+tar -cvf e.tar ./
+tar -xvf e.tar on the esxi
+
