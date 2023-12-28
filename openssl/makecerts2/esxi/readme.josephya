@@ -1,0 +1,37 @@
+#requirements for the esxi CSR
+------------------------------
+
+Key size: 2048 bits (minimum) to 16384 bits (maximum) (PEM encoded)
+
+PEM format. VMware supports PKCS8 and PKCS1 (RSA keys). When keys are added to VECS, they are converted to PKCS8.
+x509 version 3
+
+For root certificates, the CA extension must be set to true, and the cert sign must be in the list of requirements.
+
+SubjectAltName must contain DNS Name=<machine_FQDN>.
+
+CRT format
+
+Contains the following Key Usages: Digital Signature, Key Encipherment
+
+Start time of one day before the current time.
+
+CN (and SubjectAltName) set to the host name (or IP address) that the ESXi host has in the vCenter Server inventory.
+
+vSphere does not support the following certificates.
+Certificates with wildcards.
+The algorithms md2WithRSAEncryption, md5WithRSAEncryption, RSASSA-PSS, dsaWithSHA1, ecdsa_with_SHA1, and sha1WithRSAEncryption are not supported.
+
+
+# replace rui.key and rui.crt
+
+
+ssh to esxi
+cd /etc/vmware/ssl
+replace rui.key & rui.crt
+update VECS on vcenter with the signing CA cert.
+
+
+#on the vcenter you can do this
+/usr/lib/vmware-vmafd/bin/dir-cli trustedcert publish --cert path_to_RootCA
+

@@ -14,7 +14,7 @@ stateOrProvinceName = SINGAPORE
 localityName = SINGAPORE
 0.organizationName = DUCKY
 organizationalUnitName = QUACK
-commonName = esx24.domain.com
+commonName = esx2.leafy.branch
 
 [v3_req]
 basicConstraints = CA:FALSE
@@ -24,6 +24,7 @@ subjectAltName = @alt_names
 
 [alt_names]
 DNS.1=esx24.rubber.ducky
+DNS.2=esx2.leafy.branch
 IP.1=10.149.83.24
 EOF
 
