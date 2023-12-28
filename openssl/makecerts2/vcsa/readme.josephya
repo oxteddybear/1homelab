@@ -11,3 +11,9 @@ run usr/lib/vmware-vmca/bin/certificate-manager
 
  Replace Machine SSL certificate with Custom Certificate
 
+#create tarball
+tar -cvf tarball.tar ./
+tar -czvf tarball.tar.gz ./
+
+#view cert
+openssl x509 -in vcsa1.crt -noout -text
