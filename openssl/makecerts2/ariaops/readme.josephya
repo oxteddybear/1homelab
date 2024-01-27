@@ -1,0 +1,15 @@
+#config file for aria ops is from a kb
+https://kb.vmware.com/s/article/2046591
+this v3.ext is for a standalone
+look at the kb for v3 of a aria cluster
+
+
+
+#create tarball
+tar -cvf tarball.tar ./
+tar -czvf tarball.tar.gz ./
+
+#view cert
+openssl x509 -in vcsa1.crt -noout -text
+
+##as long as the url or ip is in the SAN the cert can be used.
